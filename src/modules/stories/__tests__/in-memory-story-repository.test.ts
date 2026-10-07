@@ -38,7 +38,12 @@ describe('posting (STORY-01 AC1)', () => {
   it('saves the story to the circle for the local day and shows it in the feed', async () => {
     const { repo } = setup();
 
-    const created = await createStory(repo, 'c1', '  Li um livro no parque  ', TODAY);
+    const created = await createStory(
+      repo,
+      'c1',
+      '  Li um livro no parque  ',
+      TODAY,
+    );
 
     expect(created.ok && created.value).toMatchObject({
       circleId: 'c1',

@@ -174,9 +174,9 @@ describe('received kinds (STORY-07 AC5)', () => {
 
     for (const viewer of ['u1', 'u2']) {
       const story = await seenBy(viewer, id);
-      expect(
-        Object.values(story).filter((v) => typeof v === 'number'),
-      ).toEqual([]);
+      expect(Object.values(story).filter((v) => typeof v === 'number')).toEqual(
+        [],
+      );
     }
   });
 });

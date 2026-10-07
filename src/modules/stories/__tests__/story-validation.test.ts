@@ -37,14 +37,17 @@ describe('story body accepted (STORY-01 AC1)', () => {
     ['  x  ', 'x'],
     ['x'.repeat(280), 'x'.repeat(280)],
     [`\n ${'x'.repeat(280)} \n`, 'x'.repeat(280)],
-  ])('saves %p trimmed for the circle and the local day', async (raw, stored) => {
-    const { repo, create } = setup();
+  ])(
+    'saves %p trimmed for the circle and the local day',
+    async (raw, stored) => {
+      const { repo, create } = setup();
 
-    const result = await createStory(repo, 'c1', raw, TODAY);
+      const result = await createStory(repo, 'c1', raw, TODAY);
 
-    expect(result.ok && result.value.body).toBe(stored);
-    expect(create).toHaveBeenCalledWith('c1', stored, TODAY);
-  });
+      expect(result.ok && result.value.body).toBe(stored);
+      expect(create).toHaveBeenCalledWith('c1', stored, TODAY);
+    },
+  );
 });
 
 describe('empty story body (STORY-01 AC2)', () => {
