@@ -60,11 +60,11 @@
 
 ## Handoff
 
-- **Feature**: auth (`.specs/features/auth/`) - spec, design and tasks written (Draft), not yet approved
-- **Phase / Task**: Tasks done; waiting for user approval of design.md and tasks.md before Execute
-- **Completed**: foundation T1-T22 (verified PASS); auth: none of T1-T24
+- **Feature**: auth (`.specs/features/auth/`) - implemented T1-T24 and verified (PASS, iteration 3, see `validation.md`)
+- **Phase / Task**: Execute done; manual Supabase verification pending
+- **Completed**: foundation T1-T22; auth T1-T24 plus 3 test-fix commits
 - **In-progress** (file:line): none
-- **Next step**: User approves auth design and tasks (and the unconfirmed spec defaults: 8-char password, name 2-40); then Execute T1 (offer batch sub-agents: P1 | P2 | P3+P4 | P5). After T24: manual verification (confirm-email off, apply `supabase/migrations/0001_profiles.sql` with explicit go-ahead, walk the Independent Tests)
-- **Blockers**: none (Supabase project RODA `fsckgwcwweblvyyywvis` is empty; `.env` is filled)
-- **Uncommitted files**: `.specs/STATE.md`, `.specs/features/auth/design.md`, `.specs/features/auth/tasks.md`
+- **Next step**: With explicit go-ahead, apply `supabase/migrations/0001_profiles.sql` to project RODA (`fsckgwcwweblvyyywvis`) and run `get_advisors`; walk the spec Independent Tests on `npx expo start --web` (register, reload, sign out, wrong password, duplicate e-mail, offline retry); then Design/Tasks for `circles`
+- **Blockers**: none
+- **Uncommitted files**: none from this work (`docs/FIGMA_SCREENS.md` is the user's untracked file)
 - **Branch**: main
