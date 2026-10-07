@@ -241,13 +241,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] Tests first
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: `fix(pacts): report not_found for pacts that no longer exist`
+**Status**: Done
+**Commit**: `fix(pacts): report not_found for pacts that no longer exist` (this commit)
 
 ---
 

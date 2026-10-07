@@ -37,6 +37,8 @@ export function mapPactError(thrown: unknown): AppError {
   }
   // 42501 is a row level security refusal.
   if (code === '42501') return createAppError('unauthorized');
+  // 23514 is a check constraint (title or description bounds).
+  if (code === '23514') return createAppError('validation');
   return mapError(thrown);
 }
 
@@ -132,6 +134,17 @@ export class SupabasePactRepository implements PactRepository {
     }
   }
 
+  // Zero affected rows means either the pact is gone or RLS hid the change
+  // from a member who is not its creator; only a read can tell them apart.
+  private async missingOrForbidden(pactId: string): Promise<AppError> {
+    const { data } = await this.client
+      .from('pacts')
+      .select('id')
+      .eq('id', pactId)
+      .maybeSingle();
+    return createAppError(data ? 'unauthorized' : 'not_found');
+  }
+
   async update(pactId: string, input: PactInput): Promise<Result<Pact>> {
     try {
       const { data, error } = await this.client
@@ -141,8 +154,7 @@ export class SupabasePactRepository implements PactRepository {
         .select(columns)
         .maybeSingle();
       if (error) return err(mapPactError(error));
-      // RLS hides rows the user did not create, so no row means no permission.
-      if (!data) return err(createAppError('unauthorized'));
+      if (!data) return err(await this.missingOrForbidden(pactId));
       return ok(this.toPact(data as PactRow));
     } catch (thrown) {
       return err(mapPactError(thrown));
@@ -158,7 +170,7 @@ export class SupabasePactRepository implements PactRepository {
         .select('id');
       if (error) return err(mapPactError(error));
       if (!data || data.length === 0) {
-        return err(createAppError('unauthorized'));
+        return err(await this.missingOrForbidden(pactId));
       }
       return ok(undefined);
     } catch (thrown) {
