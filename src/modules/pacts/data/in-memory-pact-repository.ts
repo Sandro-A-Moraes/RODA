@@ -30,7 +30,18 @@ export class InMemoryPactRepository implements PactRepository {
   constructor(
     private readonly currentUserId: () => string | null,
     private readonly memberCount: (circleId: string) => number,
+    // Mirrors is_circle_member. Omitted means every user belongs to every
+    // circle, which keeps callers that do not model membership working.
+    private readonly isMember: (
+      circleId: string,
+      userId: string,
+    ) => boolean = () => true,
   ) {}
+
+  private canSee(stored: StoredPact): boolean {
+    const me = this.currentUserId();
+    return me !== null && this.isMember(stored.circleId, me);
+  }
 
   private view(stored: StoredPact, day: string): Pact {
     const me = this.currentUserId();
@@ -48,19 +59,23 @@ export class InMemoryPactRepository implements PactRepository {
   async listByCircle(circleId: string, day: string): Promise<Result<Pact[]>> {
     return ok(
       this.pacts
-        .filter((p) => p.circleId === circleId)
+        .filter((p) => p.circleId === circleId && this.canSee(p))
         .map((p) => this.view(p, day)),
     );
   }
 
   async get(pactId: string, day: string): Promise<Result<Pact>> {
     const found = this.pacts.find((p) => p.id === pactId);
-    return found ? ok(this.view(found, day)) : err(createAppError('not_found'));
+    return found && this.canSee(found)
+      ? ok(this.view(found, day))
+      : err(createAppError('not_found'));
   }
 
   async create(circleId: string, input: PactInput): Promise<Result<Pact>> {
     const me = this.currentUserId();
-    if (!me) return err(createAppError('unauthorized'));
+    if (!me || !this.isMember(circleId, me)) {
+      return err(createAppError('unauthorized'));
+    }
     this.sequence += 1;
     const stored: StoredPact = {
       id: `pact-${this.sequence}`,
@@ -98,8 +113,11 @@ export class InMemoryPactRepository implements PactRepository {
   async checkIn(pactId: string, day: string): Promise<Result<void>> {
     const me = this.currentUserId();
     if (!me) return err(createAppError('unauthorized'));
-    if (!this.pacts.some((p) => p.id === pactId)) {
-      return err(createAppError('not_found'));
+    const pact = this.pacts.find((p) => p.id === pactId);
+    if (!pact) return err(createAppError('not_found'));
+    // Same refusal as the check_ins insert policy.
+    if (!this.isMember(pact.circleId, me)) {
+      return err(createAppError('unauthorized'));
     }
     if (
       this.checkIns.some(

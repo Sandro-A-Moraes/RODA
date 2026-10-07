@@ -215,14 +215,14 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] Tests first, including a concurrent `Promise.all` double check-in keeping one record
-- [ ] Constructor stays compatible: `(currentUserId, memberCount, isMember?)`
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first, including a concurrent `Promise.all` double check-in keeping one record
+- [x] Constructor stays compatible: `(currentUserId, memberCount, isMember?)`
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: `fix(pacts): reject non-members in the in-memory repository`
+**Status**: Done
+**Commit**: `fix(pacts): reject non-members in the in-memory repository` (this commit)
 
 ---
 
