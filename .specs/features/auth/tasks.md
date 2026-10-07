@@ -256,12 +256,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: `signUp` returns the user and starts a session; duplicate e-mail returns `conflict` with "Este e-mail já está cadastrado"; `signIn` with wrong password returns `unauthorized` with "E-mail ou senha incorretos"; unknown e-mail gives the same error; `signOut` clears the session and notifies listeners with `null`; `getCurrentUser` returns the user after sign-in and `null` after sign-out; `subscribe` returns a working unsubscribe
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 7 new tests pass (no silent deletions)
+- [x] Tests first: `signUp` returns the user and starts a session; duplicate e-mail returns `conflict` with "Este e-mail já está cadastrado"; `signIn` with wrong password returns `unauthorized` with "E-mail ou senha incorretos"; unknown e-mail gives the same error; `signOut` clears the session and notifies listeners with `null`; `getCurrentUser` returns the user after sign-in and `null` after sign-out; `subscribe` returns a working unsubscribe
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 7 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add in-memory auth repository`
 
