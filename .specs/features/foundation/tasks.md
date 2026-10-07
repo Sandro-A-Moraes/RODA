@@ -175,13 +175,14 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `npm run lint` exits 0 on the clean tree
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 2 tests still pass
+- [x] `npm run lint` exits 0 on the clean tree
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 2 tests still pass
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `chore(lint): add eslint base config and lint script`
 
 ---
