@@ -337,12 +337,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: `signOutUser` ends the session; `restoreSession` returns the user when a session exists, `null` when none, and `null` when the repository returns an error (expired or invalid session)
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
-- [ ] Test count: at least 4 new tests pass (no silent deletions)
+- [x] Tests first: `signOutUser` ends the session; `restoreSession` returns the user when a session exists, `null` when none, and `null` when the repository returns an error (expired or invalid session)
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
+- [x] Test count: at least 4 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): add sign-out and restore-session use cases`
 
