@@ -382,18 +382,19 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] `new TypeError('Network request failed')`, `new TypeError('Failed to fetch')` map to `network`
-- [ ] `new Error('boom')`, a string, `null`, `undefined` and a plain object map to `unknown`
-- [ ] An existing `AppError` object passes through unchanged (same code and message)
-- [ ] A `TypeError` with an unrelated message maps to `unknown`
-- [ ] Barrel re-exports updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 7 new tests pass
+- [x] Tests first: fail, then pass
+- [x] `new TypeError('Network request failed')`, `new TypeError('Failed to fetch')` map to `network`
+- [x] `new Error('boom')`, a string, `null`, `undefined` and a plain object map to `unknown`
+- [x] An existing `AppError` object passes through unchanged (same code and message)
+- [x] A `TypeError` with an unrelated message maps to `unknown`
+- [x] Barrel re-exports updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 7 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(core): map unknown errors to AppError`
 
 ---
