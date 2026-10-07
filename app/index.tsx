@@ -1,5 +1,5 @@
-import { View } from 'react-native';
+import { Screen } from '@/shared/ui';
 
 export default function Index() {
-  return <View style={{ flex: 1 }} />;
+  return <Screen />;
 }

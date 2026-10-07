@@ -118,7 +118,7 @@ Roda needs a runnable Expo project with enforced architecture, test tooling and 
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| FND-01 | P1: Runnable project (AC 1) | Specify | Pending |
+| FND-01 | P1: Runnable project (AC 1) | Execute | Done (manual web check pending user) |
 | FND-02 | P1: Runnable project (AC 2-4) | Execute | Done |
 | FND-03 | P1: Runnable project (AC 5-6) | Execute | Done |
 | FND-04 | P1: Runnable project (AC 7) | Execute | Done |

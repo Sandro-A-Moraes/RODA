@@ -723,16 +723,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: `app/__tests__/index.test.tsx` fails, then passes
-- [ ] The route renders a screen whose background equals `lightColors.background` (`#F5EEDF`)
-- [ ] `npx expo export --platform web` succeeds
-- [ ] User check: `npx expo start --web` opens a blank cream screen with no console errors
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 1 new test passes
+- [x] Tests first: the home route test fails, then passes (file is `tooling/__tests__/home-route.test.tsx`, not `app/__tests__/`: Expo Router treats every file under `app/` as a route, so a test there would be bundled as a screen)
+- [x] The route renders a screen whose background equals `lightColors.background` (`#F5EEDF`)
+- [x] `npx expo export --platform web` succeeds
+- [ ] User check: `npx expo start --web` opens a blank cream screen with no console errors (manual web check pending user)
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 1 new test passes
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done (code); manual web check pending user
 **Commit**: `feat(app): add blank home route`
 
 ---
