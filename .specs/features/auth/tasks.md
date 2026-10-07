@@ -610,12 +610,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Only the Design list is exported; `use-auth-action`, mappers and use cases stay internal
-- [ ] Lint boundary rules still pass and a new boundary test case imports `@/modules/auth` from another module without violation
-- [ ] `npm test && npm run typecheck && npm run lint` pass
+- [x] Only the Design list is exported; `use-auth-action`, mappers and use cases stay internal
+- [x] Lint boundary rules still pass and a new boundary test case imports `@/modules/auth` from another module without violation
+- [x] `npm test && npm run typecheck && npm run lint` pass
 
 **Tests**: none
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): expose module public api`
 

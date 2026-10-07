@@ -62,6 +62,21 @@ describe('module boundary rule (no-restricted-imports)', () => {
     expect(found).toHaveLength(0);
   });
 
+  it.each(['@/modules/auth', '../../auth'])(
+    'does not report the auth public API imported from another module as %s',
+    (source) => {
+      const found = violations(
+        'src/modules/circles/presentation/x.tsx',
+        `import { useSession, type AuthUser } from '${source}';
+export { useSession };
+export type { AuthUser };
+`,
+        rule,
+      );
+      expect(found).toHaveLength(0);
+    },
+  );
+
   it('does not report a module importing its own internals through the alias', () => {
     const found = violations(
       'src/modules/auth/presentation/x.ts',
