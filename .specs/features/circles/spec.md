@@ -26,7 +26,7 @@ A circle is the closed group of at most 12 acquaintances that every other Roda f
 | Assumption / decision | Chosen default | Rationale | Confirmed? |
 | --------------------- | -------------- | --------- | ---------- |
 | Member cap | 12 including the creator | Defined in the product concept (Dunbar-inspired) | y |
-| Invite code format | 6 characters from `A-Z` and `2-9` excluding `O`, `I`, `L` | Easy to read aloud and type, collision space of 29^6 | n |
+| Invite code format | 6 characters from `A-Z` and `2-9` excluding `O`, `I`, `L` | Easy to read aloud and type, collision space of 31^6 (23 letters + 8 digits) | n |
 | Code matching | Case-insensitive, whitespace trimmed | Users will paste or type loosely | n |
 | Circle name bounds | 2 to 40 characters after trim | Fits a list row | n |
 | Creator role | Creator is a normal member with no special rights in this feature | Pact edit/delete rights are defined in `pacts` | n |
@@ -104,18 +104,18 @@ A circle is the closed group of at most 12 acquaintances that every other Roda f
 
 ## Requirement Traceability
 
-| Requirement ID | Story | Phase | Status |
+| Requirement ID | Story | Tasks | Status |
 | -------------- | ----- | ----- | ------ |
-| CIR-01 | P1: Create (AC 1, 4) | Specify | Pending |
-| CIR-02 | P1: Create (AC 2-3) | Specify | Pending |
-| CIR-03 | P1: Join (AC 1, 5, 6) | Specify | Pending |
-| CIR-04 | P1: Join (AC 2, 4) | Specify | Pending |
-| CIR-05 | P1: Join (AC 3) and edge cases | Specify | Pending |
-| CIR-06 | P1: My circles (AC 1-4) | Specify | Pending |
-| CIR-07 | P1: My circles (AC 5) | Specify | Pending |
-| CIR-08 | P1: My circles (AC 6) | Specify | Pending |
+| CIR-01 | P1: Create (AC 1, 4) | T1, T3, T4, T6, T10, T11 | Implemented |
+| CIR-02 | P1: Create (AC 2-3) | T1, T3, T4 | Implemented |
+| CIR-03 | P1: Join (AC 1, 5, 6) | T1, T3, T4, T7 | Implemented |
+| CIR-04 | P1: Join (AC 2, 4) | T1, T4, T5, T7 | Implemented |
+| CIR-05 | P1: Join (AC 3) and edge cases | T1, T4, T5, T7 | Implemented |
+| CIR-06 | P1: My circles (AC 1-4) | T2, T4, T8 | Implemented |
+| CIR-07 | P1: My circles (AC 5) | T2, T4, T9 | Implemented |
+| CIR-08 | P1: My circles (AC 6) | T1, T4, T8, T9 | Implemented |
 
-**Coverage:** 8 total, 0 mapped to tasks, 8 unmapped ⚠️
+**Coverage:** 8 total, 8 mapped to tasks, 0 unmapped. Verifier run and manual check on the real backend pending.
 
 ---
 

@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: In Progress (retroactive: the code of T1-T2 and most of T3-T9 was written before Specify/Design/Tasks; this plan brings it to spec-driven completeness)
+**Status**: Done, Verifier pending (retroactive: the code of T1-T2 and most of T3-T9 was written before Specify/Design/Tasks; this plan brings it to spec-driven completeness)
 
 ---
 
@@ -177,7 +177,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `fix(circles): show the name rule for non-string input and cover use cases`
+**Commit**: `f086248` (`fix(circles): show the name rule for non-string input and cover use cases`)
 
 ---
 
@@ -204,7 +204,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: quick
 **Status**: Done
-**Commit**: `test(circles): cover in-memory repository cap, duplicates and visibility`
+**Commit**: `7bfedea` (`test(circles): cover in-memory repository cap, duplicates and visibility`)
 
 ---
 
@@ -230,7 +230,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `fix(circles): map the duplicate membership race to the already-member message`
+**Commit**: `11ec04d` (`fix(circles): map the duplicate membership race to the already-member message`)
 
 ---
 
@@ -256,7 +256,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `test(circles): cover the new circle screen`
+**Commit**: `1bb936a` (`test(circles): cover the new circle screen`)
 
 ---
 
@@ -282,7 +282,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `test(circles): cover the join circle screen`
+**Commit**: `df58a05` (`test(circles): cover the join circle screen`)
 
 ---
 
@@ -308,7 +308,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `test(circles): cover the circles list screen states`
+**Commit**: `44e6537` (`test(circles): cover the circles list screen states`)
 
 ---
 
@@ -329,12 +329,12 @@ T10 → T11 → T12
 
 - [x] Tests first: one test per Members AC and the RLS AC (via the in-memory repository's visibility)
 - [x] Gate check passes: `npm test && npm run typecheck`
-- [x] Test count: 7 tests pass in `members-view.test.tsx` (includes the T10 share/copy presence check)
+- [x] Test count: 6 tests pass in `members-view.test.tsx` (7 after T10 adds the share/copy presence check)
 
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `test(circles): cover the members view`
+**Commit**: `1c0fef3` (`test(circles): cover the members view`)
 
 ---
 
@@ -361,7 +361,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: build
 **Status**: Done
-**Commit**: `feat(circles): share and copy the invite code`
+**Commit**: `5a6dbce` (`feat(circles): share and copy the invite code`)
 
 ---
 
@@ -388,7 +388,7 @@ T10 → T11 → T12
 **Tests**: unit
 **Gate**: build
 **Status**: Done
-**Commit**: `feat(circles): open the members tab after creating a circle`
+**Commit**: `0791656` (`feat(circles): open the members tab after creating a circle`)
 
 ---
 
@@ -414,7 +414,7 @@ T10 → T11 → T12
 **Tests**: none
 **Gate**: build
 **Status**: Done
-**Commit**: `docs(circles): map requirements to tasks and update the handoff`
+**Commit**: `docs(circles): map requirements to tasks and update the handoff` (this commit)
 
 ---
 
