@@ -285,13 +285,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `reaction-bar.test.tsx`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `reaction-bar.test.tsx`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add qualitative reaction controls to the feed
 
 ---
 

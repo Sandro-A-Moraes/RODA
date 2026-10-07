@@ -9,6 +9,7 @@ import { Avatar, EmptyState, ErrorBanner, Icon, Ring, Text } from '@/shared/ui';
 
 import { storyRepositoryToken } from '../domain/story-repository';
 import type { Story } from '../domain/story-repository';
+import { ReactionBar, ReceivedReactions } from './reaction-bar';
 
 export interface StoriesViewProps {
   circleId: string;
@@ -75,6 +76,16 @@ function StoryCard({ story, today }: { story: Story; today: string }) {
         </View>
       </View>
       <Text>{story.body}</Text>
+      {story.isMine ? (
+        <ReceivedReactions kinds={story.receivedKinds} />
+      ) : (
+        // Keyed by the loaded reaction so a reload resets the local selection.
+        <ReactionBar
+          key={`${story.id}:${story.myReaction ?? 'none'}`}
+          storyId={story.id}
+          initial={story.myReaction}
+        />
+      )}
     </View>
   );
 }
