@@ -25,12 +25,7 @@ export function Ring({
   const orbit = size * 0.38;
   const dot = size * 0.045;
   return (
-    <Svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      accessible={false}
-    >
+    <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       {Array.from({ length: DOTS }, (_, i) => {
         const angle = (i / DOTS) * Math.PI * 2 - Math.PI / 2;
         const on = i < filled;

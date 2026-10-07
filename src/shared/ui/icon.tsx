@@ -18,7 +18,7 @@ export function Icon({ name, color, size = 24 }: IconProps) {
     fill: 'none',
   };
   return (
-    <Svg width={size} height={size} viewBox="0 0 24 24" accessible={false}>
+    <Svg width={size} height={size} viewBox="0 0 24 24">
       {name === 'back' ? <Path d="M15 5l-7 7 7 7" {...stroke} /> : null}
       {name === 'plus' ? <Path d="M12 5v14M5 12h14" {...stroke} /> : null}
       {name === 'check' ? (
