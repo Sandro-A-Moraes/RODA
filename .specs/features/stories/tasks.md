@@ -136,13 +136,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `story-validation.test.ts`
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first in `story-validation.test.ts`
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): validate the story body and add createStory
 
 ---
 
