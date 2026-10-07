@@ -719,13 +719,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Layout test in `tooling/__tests__` renders the real layout with the repository token overridden by `InMemoryAuthRepository` (the layout accepts no props, so the test mocks `@/core/supabase`) and checks sign-in appears when signed out
-- [ ] `npx expo export --platform web` succeeds
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
-- [ ] Test count: at least 1 new test passes (no silent deletions)
+- [x] Layout test in `tooling/__tests__` renders the real layout with the repository token overridden by `InMemoryAuthRepository` (the layout accepts no props, so the test mocks `@/core/supabase`) and checks sign-in appears when signed out
+- [x] `npx expo export --platform web` succeeds
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
+- [x] Test count: at least 1 new test passes (no silent deletions)
 
 **Tests**: unit
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(app): wire auth providers and root navigator`
 
