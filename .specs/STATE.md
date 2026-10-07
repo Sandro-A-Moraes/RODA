@@ -61,13 +61,16 @@
 ## Handoff
 
 - **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend done
-- **Phase / Task**: circles closed (manual checks with several accounts done by the user); pacts code exists (commit 3ee4031) but has no tasks.md / validation.md yet
+- **Pacts (2026-10-07)**: done in code and Verifier PASS (`.specs/features/pacts/validation.md`, 22/23 mutants killed; the survivor is the check-in cascade, unobservable in memory); screens aligned to Figma frames 07, 11, 12, 13; 436 tests green, typecheck and lint clean
+- **Pacts pending (user)**: (1) apply `supabase/migrations/0003_pacts_trim_checks.sql` to RODA in the SQL Editor (not applied yet); (2) web check with two accounts: create/edit/delete pact, one check-in only, "X de N hoje" equal on both, delete dialog scrim, edit-load error retry
+- **Pacts open spec gap**: pact detail shows "X de N" and the ring but no "hoje" or percent text (the list card has both); amend the spec or print the percent
+- **Phase / Task**: circles closed (manual checks with several accounts done by the user); pacts closed in code
 - **Completed**: foundation T1-T22; auth T1-T24 (verified, manually tested by the user); circles T1-T12 plus Figma alignment (empty state, join, new circle, members ring) and fix for pasted invite codes with spaces; fonts Fraunces and DM Sans now load in `app/_layout.tsx` (added `expo-asset`); `ring.tsx`/`icon.tsx` no longer pass `accessible` to Svg; `0001` and `0002` migrations applied to RODA (`fsckgwcwweblvyyywvis`), 323 tests green
 - **Manually verified on the real backend (user, web)**: empty state, name validation, create circle (lands on Membros with the code), unknown code, joining own circle, list with one circle, join with a second account, several accounts in one circle, and the 13th member is rejected with "Este círculo está cheio". Circles manual check is complete
 - **Lessons**: (1) Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect. (2) Supabase Data API must stay enabled with `public` in Exposed schemas, otherwise every REST call returns 503 PGRST002 (log: `pg_pgrst_no_exposed_schemas`)
 - **Test data**: circle "ATeste Roda" (code J8FW57) exists on the remote project; delete before the demo
-- **Remaining features**: pacts (spec/tasks/Verifier), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
-- **Next step**: pacts: write tasks.md for the existing code, add tests per PACT AC, align screens to Figma frames 07, 11, 12, 13, then the Verifier
+- **Remaining features**: stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
+- **Next step**: stories: write tasks.md, tests per STORY AC, align to Figma frames 08 and 14, then the Verifier. `python3` is not installed, so the skill's Python validators cannot run
 - **Blockers**: none; the in-app browser session got signed out after a reload, sign in again to resume manual checks
 - **Uncommitted files**: `.claude/launch.json` (preview config, optional)
 - **Branch**: main (local commits ahead of origin, not pushed)
