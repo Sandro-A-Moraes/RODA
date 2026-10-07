@@ -120,13 +120,14 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `npm run typecheck` exits 0
-- [ ] `strict` is `true` in the file, not only inherited
-- [ ] The three alias entries exist and map to `./src/core/*`, `./src/shared/*`, `./src/modules/*`; runtime resolution is asserted by the config-parity test in T3
+- [x] `npm run typecheck` exits 0
+- [x] `strict` is `true` in the file, not only inherited
+- [x] The three alias entries exist and map to `./src/core/*`, `./src/shared/*`, `./src/modules/*`; runtime resolution is asserted by the config-parity test in T3
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `chore(setup): enable strict mode and add import aliases`
 
 ---
