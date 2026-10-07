@@ -108,8 +108,8 @@ Every Roda feature is scoped to a person inside a circle, so the app needs ident
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
 | AUTH-01 | P1: Register (AC 1, 6) | Specify | Pending |
-| AUTH-02 | P1: Register (AC 2-4) | Specify | Pending |
-| AUTH-03 | P1: Register (AC 5) | Specify | Pending |
+| AUTH-02 | P1: Register (AC 2-4) | Execute | Done |
+| AUTH-03 | P1: Register (AC 5) | Execute | Done (manual Supabase check pending) |
 | AUTH-04 | P1: Sign in and out (AC 1, 5) | Specify | Pending |
 | AUTH-05 | P1: Sign in and out (AC 2-3) | Execute | Done (manual Supabase check pending) |
 | AUTH-06 | P1: Sign in and out (AC 4, 6) | Execute | Done (manual Supabase check pending) |

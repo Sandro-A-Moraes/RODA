@@ -528,12 +528,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: valid submit calls the repository once with normalized values; invalid e-mail, 7-char password and 1-char name show their exact pt-BR messages on the right fields with zero repository calls; duplicate e-mail shows the banner "Este e-mail já está cadastrado"; the submit button is in loading state and ignores a second press while pending
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 6 new tests pass (no silent deletions)
+- [x] Tests first: valid submit calls the repository once with normalized values; invalid e-mail, 7-char password and 1-char name show their exact pt-BR messages on the right fields with zero repository calls; duplicate e-mail shows the banner "Este e-mail já está cadastrado"; the submit button is in loading state and ignores a second press while pending
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 6 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add register screen`
 
