@@ -202,12 +202,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Interface has `signUp`, `signIn`, `signOut`, `getCurrentUser`, `subscribe` exactly as in Design
-- [ ] File imports nothing from React, Expo or Supabase (lint domain purity passes)
-- [ ] `npm test && npm run typecheck && npm run lint` pass
+- [x] Interface has `signUp`, `signIn`, `signOut`, `getCurrentUser`, `subscribe` exactly as in Design
+- [x] File imports nothing from React, Expo or Supabase (lint domain purity passes)
+- [x] `npm test && npm run typecheck && npm run lint` pass
 
 **Tests**: none
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): define auth repository contract`
 
