@@ -60,11 +60,12 @@
 
 ## Handoff
 
-- **Feature**: auth (`.specs/features/auth/`) - implemented T1-T24 and verified (PASS, iteration 3, see `validation.md`)
-- **Phase / Task**: Execute done; manual Supabase verification pending
-- **Completed**: foundation T1-T22; auth T1-T24 plus 3 test-fix commits
-- **In-progress** (file:line): none
-- **Next step**: With explicit go-ahead, apply `supabase/migrations/0001_profiles.sql` to project RODA (`fsckgwcwweblvyyywvis`) and run `get_advisors`; walk the spec Independent Tests on `npx expo start --web` (register, reload, sign out, wrong password, duplicate e-mail, offline retry); then Design/Tasks for `circles`
+- **Feature**: auth (`.specs/features/auth/`) - verified (PASS) and restyled to the Figma frames 01 Entrar, 02 Criar conta, 16 Perfil
+- **Phase / Task**: Execute done for auth; Design/Tasks for `circles` not started
+- **Completed**: foundation T1-T22; auth T1-T24; Figma tokens (`brand`, `onBrand`, `card`, `inverse`, ... roles), fonts Fraunces/DM Sans, base UI (Text types, Button variants, TextField, Icon, Ring, Avatar, Chip, Card, Header, EmptyState, Reveal with GSAP on web); `supabase/migrations/0001_profiles.sql` applied to RODA (`fsckgwcwweblvyyywvis`), advisors clean
+- **Out-of-scope work parked**: a first pass of circles/pacts code and `0002_circles_pacts_stories.sql` is in `git stash` ("out-of-scope: circles/pacts/stories WIP"). **0002 was applied to the remote RODA project by mistake of scope** (tables circles, circle_members, pacts, check_ins, stories, story_reactions plus RPCs); decide whether to keep it or drop it before the circles spec work
+- **Remaining features**: circles, pacts, stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
+- **Next step**: walk the auth Independent Tests on `npx expo start --web`; then Design/Tasks for `circles` with subagents per the TLC skill
 - **Blockers**: none
-- **Uncommitted files**: none from this work (`docs/FIGMA_SCREENS.md` is the user's untracked file)
+- **Uncommitted files**: `docs/FIGMA_SCREENS.md` (user's)
 - **Branch**: main

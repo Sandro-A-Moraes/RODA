@@ -1,12 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Pressable, ScrollView } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import type { z } from 'zod';
 
 import { useDependency } from '@/core/di';
 import { minTouchTarget, useTheme } from '@/core/theme';
-import { Button, ErrorBanner, Screen, Text, TextField } from '@/shared/ui';
+import {
+  Button,
+  ErrorBanner,
+  Ring,
+  Screen,
+  Text,
+  TextField,
+} from '@/shared/ui';
 
 import { authRepositoryToken } from '../domain/auth-repository';
 import { signInSchema } from '../domain/auth-schemas';
@@ -22,7 +29,7 @@ export interface SignInScreenProps {
 
 export function SignInScreen({ onNavigateToRegister }: SignInScreenProps) {
   const repo = useDependency(authRepositoryToken);
-  const { colors, spacing, typography } = useTheme();
+  const { colors, spacing } = useTheme();
   const signIn = useCallback(
     (values: SignInValues) => signInUser(repo, values),
     [repo],
@@ -36,15 +43,22 @@ export function SignInScreen({ onNavigateToRegister }: SignInScreenProps) {
   return (
     <Screen>
       <ScrollView
-        contentContainerStyle={{ padding: spacing.lg, gap: spacing.md }}
+        contentContainerStyle={{
+          padding: spacing.lg,
+          paddingTop: spacing.xl,
+          gap: spacing.lg,
+        }}
         keyboardShouldPersistTaps="handled"
       >
-        <Text
-          accessibilityRole="header"
-          style={{ fontSize: typography.sizes.heading }}
-        >
-          Bem-vindo de volta
-        </Text>
+        <Ring size={96} filled={6} accentFirst sage />
+        <View style={{ gap: spacing.sm }}>
+          <Text accessibilityRole="header" type="display">
+            Bem-vindo de volta
+          </Text>
+          <Text type="bodyLg" variant="secondary">
+            Entre para voltar ao seu círculo.
+          </Text>
+        </View>
         <Controller
           control={control}
           name="email"
@@ -92,7 +106,12 @@ export function SignInScreen({ onNavigateToRegister }: SignInScreenProps) {
           onPress={onNavigateToRegister}
           style={{ minHeight: minTouchTarget, justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.accent }}>Criar conta</Text>
+          <Text
+            type="bodyStrong"
+            style={{ color: colors.accent, textAlign: 'center' }}
+          >
+            Não tem conta? Criar conta
+          </Text>
         </Pressable>
       </ScrollView>
     </Screen>

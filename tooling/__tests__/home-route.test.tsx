@@ -37,9 +37,9 @@ describe('main area route', () => {
     expect(style.backgroundColor).toBe(lightColors.background);
   });
 
-  it('greets the signed-in user by display name', async () => {
+  it('shows the signed-in display name', async () => {
     await renderSignedInMainRoute();
 
-    expect(await screen.findByText('Olá, Ana Lima')).toBeTruthy();
+    expect(await screen.findByText('Ana Lima')).toBeTruthy();
   });
 });

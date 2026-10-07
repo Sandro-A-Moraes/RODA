@@ -12,3 +12,4 @@ export { Chip } from './chip';
 export { Card } from './card';
 export { EmptyState } from './empty-state';
 export { Header } from './header';
+export { Reveal } from './reveal';

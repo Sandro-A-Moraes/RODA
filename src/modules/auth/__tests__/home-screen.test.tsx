@@ -34,10 +34,11 @@ async function renderSignedInHome() {
 }
 
 describe('HomeScreen', () => {
-  it('shows the signed-in display name', async () => {
+  it('shows the signed-in display name and e-mail', async () => {
     await renderSignedInHome();
 
-    expect(screen.getByText('Olá, Ana Lima')).toBeTruthy();
+    expect(screen.getByText('Ana Lima')).toBeTruthy();
+    expect(screen.getByText('ana@mail.com')).toBeTruthy();
   });
 
   it('signs out once when "Sair" is pressed and the session becomes signedOut', async () => {
@@ -62,6 +63,7 @@ describe('HomeScreen', () => {
       await screen.findByText(createAppError('network').message),
     ).toBeTruthy();
     expect(screen.getByTestId('status')).toHaveTextContent('signedIn');
-    expect(screen.getByText('Olá, Ana Lima')).toBeTruthy();
+    expect(screen.getByText('Ana Lima')).toBeTruthy();
+    expect(screen.getByText('ana@mail.com')).toBeTruthy();
   });
 });

@@ -1,12 +1,19 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCallback } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Pressable, ScrollView } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
 import type { z } from 'zod';
 
 import { useDependency } from '@/core/di';
 import { minTouchTarget, useTheme } from '@/core/theme';
-import { Button, ErrorBanner, Screen, Text, TextField } from '@/shared/ui';
+import {
+  Button,
+  ErrorBanner,
+  Ring,
+  Screen,
+  Text,
+  TextField,
+} from '@/shared/ui';
 
 import { authRepositoryToken } from '../domain/auth-repository';
 import { registerSchema } from '../domain/auth-schemas';
@@ -22,7 +29,7 @@ export interface RegisterScreenProps {
 
 export function RegisterScreen({ onNavigateToSignIn }: RegisterScreenProps) {
   const repo = useDependency(authRepositoryToken);
-  const { colors, spacing, typography } = useTheme();
+  const { colors, spacing } = useTheme();
   const register = useCallback(
     (values: RegisterValues) => registerUser(repo, values),
     [repo],
@@ -40,15 +47,22 @@ export function RegisterScreen({ onNavigateToSignIn }: RegisterScreenProps) {
   return (
     <Screen>
       <ScrollView
-        contentContainerStyle={{ padding: spacing.lg, gap: spacing.md }}
+        contentContainerStyle={{
+          padding: spacing.lg,
+          paddingTop: spacing.xl,
+          gap: spacing.lg,
+        }}
         keyboardShouldPersistTaps="handled"
       >
-        <Text
-          accessibilityRole="header"
-          style={{ fontSize: typography.sizes.heading }}
-        >
-          Criar sua conta
-        </Text>
+        <Ring size={96} filled={3} accentFirst sage />
+        <View style={{ gap: spacing.sm }}>
+          <Text accessibilityRole="header" type="display">
+            Criar sua conta
+          </Text>
+          <Text type="bodyLg" variant="secondary">
+            Entre no seu círculo de até 12 pessoas.
+          </Text>
+        </View>
         <Controller
           control={control}
           name="displayName"
@@ -91,6 +105,7 @@ export function RegisterScreen({ onNavigateToSignIn }: RegisterScreenProps) {
               error={fieldState.error?.message}
               autoCapitalize="none"
               autoComplete="new-password"
+              helper="Use pelo menos 8 caracteres."
               secureTextEntry
             />
           )}
@@ -111,7 +126,12 @@ export function RegisterScreen({ onNavigateToSignIn }: RegisterScreenProps) {
           onPress={onNavigateToSignIn}
           style={{ minHeight: minTouchTarget, justifyContent: 'center' }}
         >
-          <Text style={{ color: colors.accent }}>Já tenho conta</Text>
+          <Text
+            type="bodyStrong"
+            style={{ color: colors.accent, textAlign: 'center' }}
+          >
+            Já tenho conta
+          </Text>
         </Pressable>
       </ScrollView>
     </Screen>
