@@ -60,12 +60,12 @@
 
 ## Handoff
 
-- **Feature**: circles (`.specs/features/circles/`) - retro-fit done: `tasks.md` T1-T12, tests per CIR AC (88 circle tests), invite code share/copy, creator lands on the Membros tab; awaiting Verifier
-- **Phase / Task**: Verify (circles); pacts code also exists (commit 3ee4031) and is not yet specified-through-verify
+- **Feature**: circles (`.specs/features/circles/`) - retro-fit done: `tasks.md` T1-T12, tests per CIR AC (88 circle tests), invite code share/copy, creator lands on the Membros tab; Verifier PASS (`validation.md`, 18/18 mutants killed)
+- **Phase / Task**: circles done except the manual check on the real backend; pacts code also exists (commit 3ee4031) and is not yet specified-through-verify
 - **Completed**: foundation T1-T22; auth T1-T24, verified (PASS) and manually tested by the user; Figma tokens and base UI; `0001_profiles.sql` and `0002_circles_pacts_stories.sql` applied to RODA (`fsckgwcwweblvyyywvis`); 0002 is kept (decision: keep, it matches the circles/pacts/stories specs)
 - **Lesson**: Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect
-- **Remaining features**: finish circles verification, pacts (verify), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
-- **Next step**: circles Verifier run and manual check on the real backend (two accounts, 12 cap, RLS), then pacts verification
+- **Remaining features**: pacts (verify), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
+- **Next step**: user manual check of circles on the real backend (two accounts, join code, 12 cap, RLS, member names), then pacts spec/tasks/Verifier
 - **Blockers**: none
 - **Uncommitted files**: none
 - **Branch**: main

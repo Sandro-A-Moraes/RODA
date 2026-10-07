@@ -115,7 +115,7 @@ A circle is the closed group of at most 12 acquaintances that every other Roda f
 | CIR-07 | P1: My circles (AC 5) | T2, T4, T9 | Implemented |
 | CIR-08 | P1: My circles (AC 6) | T1, T4, T8, T9 | Implemented |
 
-**Coverage:** 8 total, 8 mapped to tasks, 0 unmapped. Verifier run and manual check on the real backend pending.
+**Coverage:** 8 total, 8 mapped to tasks, 0 unmapped. Verifier PASS (validation.md); manual check on the real backend pending.
 
 ---
 

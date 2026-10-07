@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done, Verifier pending (retroactive: the code of T1-T2 and most of T3-T9 was written before Specify/Design/Tasks; this plan brings it to spec-driven completeness)
+**Status**: Done, Verifier PASS (retroactive: the code of T1-T2 and most of T3-T9 was written before Specify/Design/Tasks; this plan brings it to spec-driven completeness)
 
 ---
 
@@ -407,7 +407,7 @@ T10 → T11 → T12
 
 **Done when**:
 
-- [x] Every requirement lists its tasks; status is "Implemented" (Verifier pending)
+- [x] Every requirement lists its tasks; status is "Implemented" (Verifier PASS)
 - [x] `validate_tasks.py` exits 0 on this file
 - [x] Handoff in `.specs/STATE.md` states the current step
 
