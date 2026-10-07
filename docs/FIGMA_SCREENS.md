@@ -6,7 +6,7 @@ These screens are the **visual reference for the app UI**. When implementing a s
 
 ## Status
 
-15 of the 16 planned screens are built, and all were checked visually. Only screen 15 (propose a meetup) is missing on purpose. See "Not built yet".
+All 17 screens are built and were checked visually.
 
 ## Screens
 
@@ -26,15 +26,13 @@ These screens are the **visual reference for the app UI**. When implementing a s
 | 12 | Novo pacto | `8:586` | PACT-01 | Validation error on the title |
 | 13 | Apagar pacto | `11:488` | PACT-09 | Confirmation dialog over the pact screen, "Apagar" and "Cancelar" |
 | 14 | Novo relato | `11:518` | STORY-01/02 | Composer with the "N de 280" counter, one story per day |
+| 15 | Propor encontro | `22:545` | MEET-01/02 | Title, place, date and time. Shows validation ("Hora inválida"). The creator is automatically "Eu vou" |
 | 16 | Perfil | `11:543` | AUTH | Replaces the placeholder home; user card and "Sair". Tab bar with Perfil active |
+| 17 | Círculo · Relatos (sem relato hoje) | `22:601` | STORY-01/02 | Feed state before posting: the composer prompt "Escrever relato" opens screen 14. After posting, the prompt is replaced by the notice in screen 08 |
 
 Navigation model: bottom tab bar with **Círculos** and **Perfil** on root screens only. Inside a circle, the screens are a stack with a top tab strip (Pactos · Relatos · Encontros · Membros).
 
-## Not built yet
-
-| # | Screen | Purpose |
-|---|---|---|
-| 15 | Propor encontro | Form with title, place, date and time (MEET-01/02). Skipped to save Figma MCP calls, because meetups are the first feature cut. Build it only if meetups goes ahead; reuse the TextField and Button components and the layout of screen 12 |
+Story flow: screen 17 (feed, nothing posted today) → "Escrever relato" → screen 14 (composer) → screen 08 (feed with the "Você já compartilhou hoje" notice).
 
 ## Components (page "Componentes")
 
