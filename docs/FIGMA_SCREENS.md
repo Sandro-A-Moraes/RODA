@@ -6,7 +6,7 @@ These screens are the **visual reference for the app UI**. When implementing a s
 
 ## Status
 
-All 17 screens are built and were checked visually.
+All 20 screens are built and were checked visually.
 
 ## Screens
 
@@ -29,6 +29,12 @@ All 17 screens are built and were checked visually.
 | 15 | Propor encontro | `22:545` | MEET-01/02 | Title, place, date and time. Shows validation ("Hora inválida"). The creator is automatically "Eu vou" |
 | 16 | Perfil | `11:543` | AUTH | Replaces the placeholder home; user card and "Sair". Tab bar with Perfil active |
 | 17 | Círculo · Relatos (sem relato hoje) | `22:601` | STORY-01/02 | Feed state before posting: the composer prompt "Escrever relato" opens screen 14. After posting, the prompt is replaced by the notice in screen 08 |
+
+| 18 | Círculo · Pactos (vazio) | `24:616` | PACT-02 AC6 | Empty state with "Criar pacto" |
+| 19 | Círculo · Relatos (vazio) | `24:704` | STORY-04 | "Ninguém compartilhou ainda", no end marker, "Escrever relato" |
+| 20 | Círculo · Encontros (vazio) | `24:798` | MEET-03 AC5 | Empty state with "Propor encontro" |
+
+The Membros tab has no empty state: the creator is always a member. Loading states follow the specs (a loading indicator in place of the list). The error state is the `ErrorBanner` component with a retry action, and it is not drawn on every screen.
 
 Navigation model: bottom tab bar with **Círculos** and **Perfil** on root screens only. Inside a circle, the screens are a stack with a top tab strip (Pactos · Relatos · Encontros · Membros).
 
