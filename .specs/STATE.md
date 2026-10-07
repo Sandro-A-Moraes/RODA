@@ -60,12 +60,15 @@
 
 ## Handoff
 
-- **Feature**: circles (`.specs/features/circles/`) - retro-fit done: `tasks.md` T1-T12, tests per CIR AC (88 circle tests), invite code share/copy, creator lands on the Membros tab; Verifier PASS (`validation.md`, 18/18 mutants killed)
-- **Phase / Task**: circles done except the manual check on the real backend; pacts code also exists (commit 3ee4031) and is not yet specified-through-verify
-- **Completed**: foundation T1-T22; auth T1-T24, verified (PASS) and manually tested by the user; Figma tokens and base UI; `0001_profiles.sql` and `0002_circles_pacts_stories.sql` applied to RODA (`fsckgwcwweblvyyywvis`); 0002 is kept (decision: keep, it matches the circles/pacts/stories specs)
-- **Lesson**: Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect
-- **Remaining features**: pacts (verify), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
-- **Next step**: user manual check of circles on the real backend (two accounts, join code, 12 cap, RLS, member names), then pacts spec/tasks/Verifier
-- **Blockers**: none
-- **Uncommitted files**: none
-- **Branch**: main
+- **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend partly done
+- **Phase / Task**: circles closed except the two-account manual checks; pacts code exists (commit 3ee4031) but has no tasks.md / validation.md yet
+- **Completed**: foundation T1-T22; auth T1-T24 (verified, manually tested by the user); circles T1-T12 plus Figma alignment (empty state, join, new circle, members ring) and fix for pasted invite codes with spaces; fonts Fraunces and DM Sans now load in `app/_layout.tsx` (added `expo-asset`); `ring.tsx`/`icon.tsx` no longer pass `accessible` to Svg; `0001` and `0002` migrations applied to RODA (`fsckgwcwweblvyyywvis`), 323 tests green
+- **Manually verified on web (user's account)**: empty state, name validation, create circle (lands on Membros with the code), unknown code, joining own circle ("Você já faz parte"), list with one circle
+- **Not verified (needs a second account)**: join with another user's code, member names from `profiles_select_circle_mates`, 13th member rejected, RLS isolation from a third account
+- **Lessons**: (1) Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect. (2) Supabase Data API must stay enabled with `public` in Exposed schemas, otherwise every REST call returns 503 PGRST002 (log: `pg_pgrst_no_exposed_schemas`)
+- **Test data**: circle "ATeste Roda" (code J8FW57) exists on the remote project; delete before the demo
+- **Remaining features**: pacts (spec/tasks/Verifier), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
+- **Next step**: pacts: write tasks.md for the existing code, add tests per PACT AC, align screens to Figma frames 07, 11, 12, 13, then the Verifier
+- **Blockers**: none; the in-app browser session got signed out after a reload, sign in again to resume manual checks
+- **Uncommitted files**: `.claude/launch.json` (preview config, optional)
+- **Branch**: main (local commits ahead of origin, not pushed)
