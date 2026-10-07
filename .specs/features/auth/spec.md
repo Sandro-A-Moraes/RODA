@@ -113,8 +113,8 @@ Every Roda feature is scoped to a person inside a circle, so the app needs ident
 | AUTH-04 | P1: Sign in and out (AC 1, 5) | Specify | Pending |
 | AUTH-05 | P1: Sign in and out (AC 2-3) | Execute | Done (manual Supabase check pending) |
 | AUTH-06 | P1: Sign in and out (AC 4, 6) | Execute | Done (manual Supabase check pending) |
-| AUTH-07 | P1: Session restore (AC 1-3, 6) | Specify | Pending |
-| AUTH-08 | P1: Session restore (AC 4-5) | Specify | Pending |
+| AUTH-07 | P1: Session restore (AC 1-3, 6) | Execute | Done (manual Supabase check pending) |
+| AUTH-08 | P1: Session restore (AC 4-5) | Execute | Done (manual Supabase check pending) |
 
 **Coverage:** 8 total, 0 mapped to tasks, 8 unmapped ⚠️
 

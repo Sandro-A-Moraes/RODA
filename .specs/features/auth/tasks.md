@@ -582,13 +582,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Spike first: read installed `expo-router` typings for `Stack.Protected` and `renderRouter`; if the harness cannot model protection, assert guard props instead and record the choice in the commit body
-- [ ] Tests first (inline route tree with `(auth)/sign-in`, `(auth)/register`, `(app)/index`): while loading, the indicator shows and neither protected nor sign-in content renders; signed out at `/` lands on sign-in; signed out opening the `(app)` route redirects to sign-in; signed in opening sign-in or register redirects to the main area; restored session lands in `(app)` without rendering sign-in
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 5 new tests pass (no silent deletions)
+- [x] Spike first: read installed `expo-router` typings for `Stack.Protected` and `renderRouter`; if the harness cannot model protection, assert guard props instead and record the choice in the commit body
+- [x] Tests first (inline route tree with `(auth)/sign-in`, `(auth)/register`, `(app)/index`): while loading, the indicator shows and neither protected nor sign-in content renders; signed out at `/` lands on sign-in; signed out opening the `(app)` route redirects to sign-in; signed in opening sign-in or register redirects to the main area; restored session lands in `(app)` without rendering sign-in
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 5 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add root navigator with protected routes`
 
