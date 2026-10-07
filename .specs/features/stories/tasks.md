@@ -110,14 +110,14 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Interface exposes `listByCircle`, `create`, `react`
-- [ ] `Story` has no numeric reaction field
-- [ ] `npm run typecheck` passes
+- [x] Interface exposes `listByCircle`, `create`, `react`
+- [x] `Story` has no numeric reaction field
+- [x] `npm run typecheck` passes
 
 **Tests**: none
 **Gate**: full
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add the story repository contract
 
 ---
 
