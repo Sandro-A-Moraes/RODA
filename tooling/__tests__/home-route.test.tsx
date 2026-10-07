@@ -11,7 +11,7 @@ import {
   SessionProvider,
 } from '@/modules/auth';
 
-import MainRoute from '../../app/(app)/index';
+import MainRoute from '../../app/(app)/(tabs)/profile';
 
 async function renderSignedInMainRoute() {
   const repo = new InMemoryAuthRepository();

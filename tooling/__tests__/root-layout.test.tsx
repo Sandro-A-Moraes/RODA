@@ -4,7 +4,10 @@ import { renderRouter, screen } from 'expo-router/testing-library';
 import { SupabaseAuthRepository } from '@/modules/auth';
 
 import RootLayout from '../../app/_layout';
-import MainRoute from '../../app/(app)/index';
+import AppLayout from '../../app/(app)/_layout';
+import TabsLayout from '../../app/(app)/(tabs)/_layout';
+import CirclesRoute from '../../app/(app)/(tabs)/index';
+import MainRoute from '../../app/(app)/(tabs)/profile';
 import RegisterRoute from '../../app/(auth)/register';
 import SignInRoute from '../../app/(auth)/sign-in';
 
@@ -31,7 +34,10 @@ describe('root layout', () => {
     const result = renderRouter(
       {
         _layout: RootLayout,
-        '(app)/index': MainRoute,
+        '(app)/_layout': AppLayout,
+        '(app)/(tabs)/_layout': TabsLayout,
+        '(app)/(tabs)/index': CirclesRoute,
+        '(app)/(tabs)/profile': MainRoute,
         '(auth)/sign-in': SignInRoute,
         '(auth)/register': RegisterRoute,
       },

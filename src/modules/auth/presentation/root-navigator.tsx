@@ -6,7 +6,7 @@ import { useTheme } from '@/core/theme';
 import { useSession } from './session-provider';
 
 // Screen names are the route files of the (app) and (auth) groups (AD-007).
-// The groups have no layout of their own, so each route is listed by its full name.
+// (app) has its own stack layout (tabs plus circle screens); (auth) lists each route.
 export function RootNavigator() {
   const { status } = useSession();
   const { colors } = useTheme();
@@ -33,7 +33,7 @@ export function RootNavigator() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Protected guard={status === 'signedIn'}>
-        <Stack.Screen name="(app)/index" />
+        <Stack.Screen name="(app)" />
       </Stack.Protected>
       <Stack.Protected guard={status === 'signedOut'}>
         <Stack.Screen name="(auth)/sign-in" />
