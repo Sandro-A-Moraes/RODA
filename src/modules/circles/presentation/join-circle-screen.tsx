@@ -75,7 +75,6 @@ export function JoinCircleScreen({ onBack, onJoined }: JoinCircleScreenProps) {
               }
               autoCapitalize="characters"
               autoCorrect={false}
-              maxLength={CODE_LENGTH}
               style={{
                 position: 'absolute',
                 top: 0,

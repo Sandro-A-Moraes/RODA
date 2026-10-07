@@ -41,8 +41,7 @@ export class InMemoryCircleRepository implements CircleRepository {
   private findMine(circleId: string): StoredCircle | undefined {
     const user = this.currentUser();
     return this.circles.find(
-      (c) =>
-        c.id === circleId && c.members.some((m) => m.userId === user?.id),
+      (c) => c.id === circleId && c.members.some((m) => m.userId === user?.id),
     );
   }
 
@@ -100,9 +99,7 @@ export class InMemoryCircleRepository implements CircleRepository {
       return err(createAppError('not_found', 'Código não encontrado'));
     }
     if (stored.members.some((m) => m.userId === user.id)) {
-      return err(
-        createAppError('conflict', 'Você já faz parte deste círculo'),
-      );
+      return err(createAppError('conflict', 'Você já faz parte deste círculo'));
     }
     if (stored.members.length >= MAX_CIRCLE_MEMBERS) {
       return err(createAppError('conflict', 'Este círculo está cheio'));

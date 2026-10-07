@@ -72,6 +72,15 @@ describe('JoinCircleScreen', () => {
     );
   });
 
+  it('does not cap the native input, so pasted spaces never cut the code (CIR-03)', async () => {
+    await renderScreen();
+
+    // maxLength counts the surrounding spaces: " j8fw57 " would lose "7".
+    expect(screen.getByLabelText('Código de convite').props.maxLength).toBe(
+      undefined,
+    );
+  });
+
   it('asks for the code without calling the repository when empty (CIR-03)', async () => {
     const { repo, onJoined } = await renderScreen();
     const join = jest.spyOn(repo, 'join');
