@@ -148,6 +148,26 @@ describe('StoriesView (feed)', () => {
     ]);
   });
 
+  it('shows the "Você já compartilhou hoje" notice only after I posted today (STORY-02 AC5)', async () => {
+    const { repo, as } = setup();
+    await repo.create('c1', 'Meu relato de ontem', daysAgo(1));
+    as('u2');
+    await repo.create('c1', 'Relato do Beto hoje', localDay());
+    as('u1');
+
+    await renderView(repo);
+    await screen.findByText('Relato do Beto hoje');
+    expect(screen.queryByText('Você já compartilhou hoje')).toBeNull();
+
+    await repo.create('c1', 'Meu relato de hoje', localDay());
+    await screen.unmount();
+    await renderView(repo);
+
+    expect(await screen.findByText('Você já compartilhou hoje')).toBeTruthy();
+    const texts = allTexts();
+    expect(texts[texts.length - 1]).toBe(END);
+  });
+
   it('shows no numeric counter on any story (STORY-05)', async () => {
     const { repo, as } = setup();
     as('u2');

@@ -5,7 +5,7 @@ import { useDependency } from '@/core/di';
 import { radius, useTheme } from '@/core/theme';
 import { daysAgo, localDay } from '@/shared/date/local-day';
 import { useLoad } from '@/shared/hooks/use-load';
-import { Avatar, EmptyState, ErrorBanner, Ring, Text } from '@/shared/ui';
+import { Avatar, EmptyState, ErrorBanner, Icon, Ring, Text } from '@/shared/ui';
 
 import { storyRepositoryToken } from '../domain/story-repository';
 import type { Story } from '../domain/story-repository';
@@ -21,6 +21,32 @@ export function formatStoryDay(day: string, today: string): string {
   if (day === daysAgo(1, new Date(year, month - 1, date))) return 'ontem';
   const [, mm, dd] = day.split('-');
   return `${dd}/${mm}`;
+}
+
+/** Whether the current user already has a story on `today` in this list. */
+export function sharedToday(stories: Story[], today: string): boolean {
+  return stories.some((s) => s.isMine && s.day === today);
+}
+
+/** Shown instead of the composer once the member posted today (Figma 08). */
+export function AlreadySharedNotice() {
+  const { colors, spacing } = useTheme();
+  return (
+    <View
+      accessibilityRole="text"
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: spacing.sm,
+        padding: spacing.md,
+        borderRadius: radius.md,
+        backgroundColor: colors.card,
+      }}
+    >
+      <Icon name="check" size={18} color={colors.textPrimary} />
+      <Text type="bodyStrong">Você já compartilhou hoje</Text>
+    </View>
+  );
 }
 
 function StoryCard({ story, today }: { story: Story; today: string }) {
@@ -106,6 +132,13 @@ export function StoriesView({ circleId }: StoriesViewProps) {
       keyExtractor={(story) => story.id}
       renderItem={({ item }) => <StoryCard story={item} today={today} />}
       ItemSeparatorComponent={() => <View style={{ height: spacing.md }} />}
+      ListHeaderComponent={
+        sharedToday(state.data, today) ? (
+          <View style={{ marginBottom: spacing.md }}>
+            <AlreadySharedNotice />
+          </View>
+        ) : null
+      }
       ListFooterComponent={EndMarker}
       initialNumToRender={state.data.length}
       scrollEnabled={false}
