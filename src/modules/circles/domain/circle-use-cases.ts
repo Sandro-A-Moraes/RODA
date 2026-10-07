@@ -8,7 +8,7 @@ import type { Circle, CircleRepository } from './circle-repository';
 const nameMessage = 'Nome deve ter entre 2 e 40 caracteres';
 
 export const circleNameSchema = z
-  .string()
+  .string({ error: nameMessage })
   .trim()
   .min(2, nameMessage)
   .max(40, nameMessage);
