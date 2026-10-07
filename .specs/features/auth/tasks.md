@@ -664,12 +664,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Route renders the register screen and its sign-in link navigates back (test in `tooling/__tests__`)
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 1 new test passes (no silent deletions)
+- [x] Route renders the register screen and its sign-in link navigates back (test in `tooling/__tests__`)
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 1 new test passes (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(app): add register route`
 
