@@ -474,12 +474,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: `pending` is true while the action runs and false after; two immediate `run` calls invoke the action once; an error result sets `error` and a success clears it; `retry` re-runs with the last arguments; a thrown action resolves to a mapped `AppError` rather than rejecting
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 5 new tests pass (no silent deletions)
+- [x] Tests first: `pending` is true while the action runs and false after; two immediate `run` calls invoke the action once; an error result sets `error` and a success clears it; `retry` re-runs with the last arguments; a thrown action resolves to a mapped `AppError` rather than rejecting
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 5 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add auth action hook`
 
