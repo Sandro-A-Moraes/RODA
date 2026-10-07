@@ -6,8 +6,6 @@ import { useTheme } from '@/core/theme';
 
 import { Text } from './text';
 
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
-
 export interface ProgressRingProps {
   /** 0 to 100. */
   percent: number;
@@ -22,6 +20,14 @@ export function ProgressRing({ percent, size = 112 }: ProgressRingProps) {
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const [progress] = useState(() => new Animated.Value(0));
+  const [shown, setShown] = useState(0);
+
+  // Plain state instead of an animated SVG component: the animated wrapper
+  // leaks `collapsable` to the DOM on web.
+  useEffect(() => {
+    const id = progress.addListener(({ value }) => setShown(value));
+    return () => progress.removeListener(id);
+  }, [progress]);
 
   useEffect(() => {
     Animated.timing(progress, {
@@ -57,7 +63,7 @@ export function ProgressRing({ percent, size = 112 }: ProgressRingProps) {
           strokeWidth={stroke}
           fill="none"
         />
-        <AnimatedCircle
+        <Circle
           cx={size / 2}
           cy={size / 2}
           r={radius}
@@ -66,10 +72,7 @@ export function ProgressRing({ percent, size = 112 }: ProgressRingProps) {
           strokeLinecap="round"
           fill="none"
           strokeDasharray={`${circumference} ${circumference}`}
-          strokeDashoffset={progress.interpolate({
-            inputRange: [0, 100],
-            outputRange: [circumference, 0],
-          })}
+          strokeDashoffset={circumference * (1 - shown / 100)}
         />
       </Svg>
       <Text type="h2" style={{ color: colors.onInverse }}>
