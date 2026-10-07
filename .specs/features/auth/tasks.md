@@ -447,12 +447,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first with `InMemoryAuthRepository`: status is `loading` before restore resolves; becomes `signedIn` with the user when a session exists; `signedOut` when none; `signedOut` when restore errors; switches to `signedOut` when the repository signs out and to `signedIn` on sign-in; unsubscribes on unmount
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 6 new tests pass (no silent deletions)
+- [x] Tests first with `InMemoryAuthRepository`: status is `loading` before restore resolves; becomes `signedIn` with the user when a session exists; `signedOut` when none; `signedOut` when restore errors; switches to `signedOut` when the repository signs out and to `signedIn` on sign-in; unsubscribes on unmount
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 6 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add session provider`
 
