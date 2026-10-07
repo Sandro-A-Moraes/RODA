@@ -663,19 +663,20 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Given `createAppError('network')` it shows that error's message
-- [ ] Given `null` or `undefined` it renders nothing (edge case)
-- [ ] With `onRetry` it shows "Tentar novamente" and pressing it calls `onRetry` once
-- [ ] Without `onRetry` no retry button renders
-- [ ] Background is `lightColors.accent` and text is `lightColors.onAccent`
-- [ ] Barrel updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 6 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Given `createAppError('network')` it shows that error's message
+- [x] Given `null` or `undefined` it renders nothing (edge case)
+- [x] With `onRetry` it shows "Tentar novamente" and pressing it calls `onRetry` once
+- [x] Without `onRetry` no retry button renders
+- [x] Background is `lightColors.accent` and text is `lightColors.onAccent`
+- [x] Barrel updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 6 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(ui): add ErrorBanner component`
 
 ---
