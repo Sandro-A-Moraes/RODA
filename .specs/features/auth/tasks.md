@@ -93,13 +93,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] All six packages appear in `dependencies`
-- [ ] Installed versions of `zod`, `@supabase/supabase-js` and `react-hook-form` are recorded in the commit body, with the Zod e-mail API (`z.email()` or `z.string().email()`) and the `processLock` export confirmed from installed typings
-- [ ] `npm run typecheck` and `npm run lint` pass
+- [x] All six packages appear in `dependencies`
+- [x] Installed versions of `zod`, `@supabase/supabase-js` and `react-hook-form` are recorded in the commit body, with the Zod e-mail API (`z.email()` or `z.string().email()`) and the `processLock` export confirmed from installed typings
+- [x] `npm run typecheck` and `npm run lint` pass
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `chore(auth): add supabase, zod and form dependencies`
 
 ---
