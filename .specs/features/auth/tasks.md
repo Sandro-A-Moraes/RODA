@@ -691,13 +691,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] `app/index.tsx` no longer exists and no two files resolve to `/`
-- [ ] The updated route test keeps its background-role assertion and adds one for the greeting
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: same number or more than before this task (no silent deletions)
+- [x] `app/index.tsx` no longer exists and no two files resolve to `/`
+- [x] The updated route test keeps its background-role assertion and adds one for the greeting
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: same number or more than before this task (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(app): move main area to protected route group`
 

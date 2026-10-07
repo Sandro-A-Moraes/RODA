@@ -3,15 +3,43 @@
 import { render, screen } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 
+import { DependencyProvider, provide } from '@/core/di';
 import { lightColors } from '@/core/theme';
+import {
+  authRepositoryToken,
+  InMemoryAuthRepository,
+  SessionProvider,
+} from '@/modules/auth';
 
-import Index from '../../app/index';
+import MainRoute from '../../app/(app)/index';
 
-describe('home route', () => {
+async function renderSignedInMainRoute() {
+  const repo = new InMemoryAuthRepository();
+  await repo.signUp({
+    displayName: 'Ana Lima',
+    email: 'ana@mail.com',
+    password: '12345678',
+  });
+  await render(
+    <DependencyProvider provisions={[provide(authRepositoryToken, repo)]}>
+      <SessionProvider>
+        <MainRoute />
+      </SessionProvider>
+    </DependencyProvider>,
+  );
+}
+
+describe('main area route', () => {
   it('renders a screen with the background color role', async () => {
-    await render(<Index />);
+    await renderSignedInMainRoute();
 
     const style = StyleSheet.flatten(screen.toJSON()?.props.style);
     expect(style.backgroundColor).toBe(lightColors.background);
+  });
+
+  it('greets the signed-in user by display name', async () => {
+    await renderSignedInMainRoute();
+
+    expect(await screen.findByText('Olá, Ana Lima')).toBeTruthy();
   });
 });
