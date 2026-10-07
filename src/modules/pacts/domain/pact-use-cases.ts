@@ -9,8 +9,15 @@ const titleMessage = 'Título deve ter entre 3 e 60 caracteres';
 const descriptionMessage = 'Descrição deve ter no máximo 280 caracteres';
 
 export const pactSchema = z.object({
-  title: z.string().trim().min(3, titleMessage).max(60, titleMessage),
-  description: z.string().trim().max(280, descriptionMessage),
+  title: z
+    .string({ error: titleMessage })
+    .trim()
+    .min(3, titleMessage)
+    .max(60, titleMessage),
+  description: z
+    .string({ error: descriptionMessage })
+    .trim()
+    .max(280, descriptionMessage),
 });
 
 export function progressPercent(done: number, total: number): number {
@@ -19,7 +26,8 @@ export function progressPercent(done: number, total: number): number {
 }
 
 export function validatePact(input: unknown): Result<PactInput> {
-  const parsed = pactSchema.safeParse(input);
+  // A missing object is reported as the title rule, never in English.
+  const parsed = pactSchema.safeParse(input ?? {});
   if (!parsed.success) {
     return err(createAppError('validation', parsed.error.issues[0]?.message));
   }
