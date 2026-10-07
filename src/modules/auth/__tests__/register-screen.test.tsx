@@ -109,6 +109,7 @@ describe('RegisterScreen', () => {
     expect(
       await screen.findByText('Este e-mail já está cadastrado'),
     ).toBeTruthy();
+    expect(screen.queryByText('Tentar novamente')).toBeNull();
     expect(screen.getByTestId('status')).toHaveTextContent('signedOut');
   });
 

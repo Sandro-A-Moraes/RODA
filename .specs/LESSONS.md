@@ -74,6 +74,12 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: SPEC_DEVIATION app/(auth)/register.tsx:5 (routes)
 - last seen: 2026-10-07T19:17:50Z
 
+### L-011 - When an action is shown only for some error codes, test that it is absent for another code on every screen that renders it.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `ui` · harmful: 0
+- features: auth
+- evidence: validation.md iteration 2 mutant 19 (src/modules/auth/presentation/register-screen.tsx:100) (ui)
+- last seen: 2026-10-07T19:34:44Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.
