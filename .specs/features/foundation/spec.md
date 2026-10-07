@@ -120,7 +120,7 @@ Roda needs a runnable Expo project with enforced architecture, test tooling and 
 | -------------- | ----- | ----- | ------ |
 | FND-01 | P1: Runnable project (AC 1) | Specify | Pending |
 | FND-02 | P1: Runnable project (AC 2-4) | Execute | Done |
-| FND-03 | P1: Runnable project (AC 5-6) | Specify | Pending |
+| FND-03 | P1: Runnable project (AC 5-6) | Execute | Done |
 | FND-04 | P1: Runnable project (AC 7) | Specify | Pending |
 | FND-05 | P1: Core error model and theme (AC 1-4) | Specify | Pending |
 | FND-06 | P1: Core error model and theme (AC 5-6, 8) | Specify | Pending |

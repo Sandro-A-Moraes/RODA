@@ -79,3 +79,53 @@ describe('MODULES guard', () => {
     }
   });
 });
+
+describe('domain purity rule (no-restricted-imports)', () => {
+  const rule = 'no-restricted-imports';
+  const forbidden = [
+    'react',
+    'react-native',
+    'expo',
+    'expo-router',
+    '@supabase/supabase-js',
+  ];
+
+  it.each(forbidden)('reports %s imported from a domain file', (pkg) => {
+    const found = violations(
+      'src/modules/auth/domain/x.ts',
+      `import * as dep from '${pkg}';\nexport { dep };\n`,
+      rule,
+    );
+    expect(found).toHaveLength(1);
+  });
+
+  it.each(forbidden)(
+    'does not report %s imported from a presentation file',
+    (pkg) => {
+      const found = violations(
+        'src/modules/auth/presentation/x.tsx',
+        `import * as dep from '${pkg}';\nexport { dep };\n`,
+        rule,
+      );
+      expect(found).toHaveLength(0);
+    },
+  );
+
+  it('does not report zod imported from a domain file', () => {
+    const found = violations(
+      'src/modules/auth/domain/x.ts',
+      "import { z } from 'zod';\nexport { z };\n",
+      rule,
+    );
+    expect(found).toHaveLength(0);
+  });
+
+  it('still reports a cross-module deep import from a domain file', () => {
+    const found = violations(
+      'src/modules/circles/domain/x.ts',
+      "import { User } from '@/modules/auth/domain/user';\nexport { User };\n",
+      rule,
+    );
+    expect(found).toHaveLength(1);
+  });
+});

@@ -261,16 +261,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Importing each of `react`, `react-native`, `expo`, `expo-router`, `@supabase/supabase-js` from `src/modules/auth/domain/x.ts` is reported (one assertion per package)
-- [ ] The same imports from `src/modules/auth/presentation/x.tsx` are NOT reported
-- [ ] Importing `zod` from a domain file is NOT reported
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 6 new tests pass, earlier tests intact
+- [x] Tests first: fail, then pass
+- [x] Importing each of `react`, `react-native`, `expo`, `expo-router`, `@supabase/supabase-js` from `src/modules/auth/domain/x.ts` is reported (one assertion per package)
+- [x] The same imports from `src/modules/auth/presentation/x.tsx` are NOT reported
+- [x] Importing `zod` from a domain file is NOT reported
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 6 new tests pass, earlier tests intact
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(lint): keep domain layer free of framework imports`
 
 ---
