@@ -52,11 +52,11 @@
 
 ## Handoff
 
-- **Feature**: none started (specification phase)
-- **Phase / Task**: Specify, all features drafted and adjusted to `docs/DESIGN_SYSTEM.md`, awaiting user confirmation
-- **Completed**: none
+- **Feature**: foundation (`.specs/features/foundation/`) - implemented and verified (PASS, see `validation.md`)
+- **Phase / Task**: Execute done (T1-T22 plus one test-only fix commit); next feature is `auth`
+- **Completed**: T1-T22
 - **In-progress** (file:line): none
-- **Next step**: User confirms specs under `.specs/features/`; then start `foundation` (Design → Tasks → Execute)
+- **Next step**: User runs `npx expo start --web` once to confirm the blank cream screen (T22 manual check), then Design and Tasks for `auth` (needs Supabase URL and anon key in `.env`)
 - **Blockers**: none
-- **Uncommitted files**: all (`.agents`, `.claude`, `.cursor`, `.windsurf`, `.specs`, `docs`; no commits yet)
-- **Branch**: main (no commits yet)
+- **Uncommitted files**: none after the validation commit
+- **Branch**: main
