@@ -1,6 +1,6 @@
 -- Pact title and description bounds measured after trimming, as the app does.
 -- Without this, a direct API call could store a title of only spaces.
--- NOT applied yet: run it against project RODA before relying on it.
+-- Applied to project RODA on 2026-10-07.
 
 alter table public.pacts
   drop constraint if exists pacts_title_check,

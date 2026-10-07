@@ -62,7 +62,7 @@
 
 - **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend done
 - **Pacts (2026-10-07)**: done in code and Verifier PASS (`.specs/features/pacts/validation.md`, 22/23 mutants killed; the survivor is the check-in cascade, unobservable in memory); screens aligned to Figma frames 07, 11, 12, 13; 436 tests green, typecheck and lint clean
-- **Pacts pending (user)**: (1) apply `supabase/migrations/0003_pacts_trim_checks.sql` to RODA in the SQL Editor (not applied yet); (2) web check with two accounts: create/edit/delete pact, one check-in only, "X de N hoje" equal on both, delete dialog scrim, edit-load error retry
+- **Pacts pending (user)**: web check (migration 0003 applied to RODA on 2026-10-07) with two accounts: create/edit/delete pact, one check-in only, "X de N hoje" equal on both, delete dialog scrim, edit-load error retry
 - **Pacts open spec gap**: pact detail shows "X de N" and the ring but no "hoje" or percent text (the list card has both); amend the spec or print the percent
 - **Phase / Task**: circles closed (manual checks with several accounts done by the user); pacts closed in code
 - **Completed**: foundation T1-T22; auth T1-T24 (verified, manually tested by the user); circles T1-T12 plus Figma alignment (empty state, join, new circle, members ring) and fix for pasted invite codes with spaces; fonts Fraunces and DM Sans now load in `app/_layout.tsx` (added `expo-asset`); `ring.tsx`/`icon.tsx` no longer pass `accessible` to Svg; `0001` and `0002` migrations applied to RODA (`fsckgwcwweblvyyywvis`), 323 tests green
