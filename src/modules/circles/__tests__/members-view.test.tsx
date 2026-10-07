@@ -15,6 +15,7 @@ jest.mock('expo-router', () => ({
     useEffect(effect, [effect]);
   },
 }));
+jest.mock('expo-clipboard', () => ({ setStringAsync: jest.fn() }));
 
 async function setup() {
   let current: CurrentUser = { id: 'u1', displayName: 'Ana Lima' };
@@ -52,6 +53,17 @@ describe('MembersView', () => {
       screen.getByLabelText(`Código de convite ${circle.inviteCode}`),
     ).toBeTruthy();
     expect(circle.inviteCode).toMatch(/^[A-HJKMNP-Z2-9]{6}$/);
+  });
+
+  it('offers to share and copy the invite code', async () => {
+    const { repo, circle } = await setup();
+
+    await renderMembers(repo, circle.id);
+
+    expect(
+      await screen.findByRole('button', { name: 'Compartilhar' }),
+    ).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Copiar código' })).toBeTruthy();
   });
 
   it('lists every member by display name and the count (CIR-07)', async () => {

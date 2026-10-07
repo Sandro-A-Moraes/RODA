@@ -7,8 +7,12 @@ import { useLoad } from '@/shared/hooks/use-load';
 import { Avatar, ErrorBanner, Ring, Text } from '@/shared/ui';
 import type { Result } from '@/core/errors';
 
-import { circleRepositoryToken, MAX_CIRCLE_MEMBERS } from '../domain/circle-repository';
+import {
+  circleRepositoryToken,
+  MAX_CIRCLE_MEMBERS,
+} from '../domain/circle-repository';
 import type { Circle, Member } from '../domain/circle-repository';
+import { InviteCodeActions } from './invite-code-actions';
 
 const tones = ['brand', 'accent', 'sage'] as const;
 
@@ -30,13 +34,19 @@ export function MembersView({ circleId, currentUserId }: MembersViewProps) {
       ]);
       if (!circle.ok) return circle;
       if (!members.ok) return members;
-      return { ok: true, value: { circle: circle.value, members: members.value } };
+      return {
+        ok: true,
+        value: { circle: circle.value, members: members.value },
+      };
     }, [repo, circleId]),
   );
 
   if (state.status === 'loading') {
     return (
-      <ActivityIndicator accessibilityLabel="Carregando" color={colors.accent} />
+      <ActivityIndicator
+        accessibilityLabel="Carregando"
+        color={colors.accent}
+      />
     );
   }
   if (state.status === 'error') {
@@ -73,6 +83,10 @@ export function MembersView({ circleId, currentUserId }: MembersViewProps) {
           </Text>
         </View>
       </View>
+      <InviteCodeActions
+        circleName={circle.name}
+        inviteCode={circle.inviteCode}
+      />
       <View>
         {members.map((member, index) => (
           <View
