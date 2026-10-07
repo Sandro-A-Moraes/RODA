@@ -265,14 +265,14 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] Migration written
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
-- [ ] NOT applied to the remote project (reported to the user)
+- [x] Migration written
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] NOT applied to the remote project (reported to the user)
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
-**Commit**: `fix(db): make pact title and description caps trim-aware`
+**Status**: Done
+**Commit**: `fix(db): make pact title and description caps trim-aware` (this commit)
 
 ---
 
