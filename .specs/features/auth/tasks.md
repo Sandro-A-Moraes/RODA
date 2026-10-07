@@ -392,12 +392,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: metadata name wins; missing metadata falls back to the part before `@`; missing e-mail gives an empty string rather than throwing
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 3 new tests pass (no silent deletions)
+- [x] Tests first: metadata name wins; missing metadata falls back to the part before `@`; missing e-mail gives an empty string rather than throwing
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 3 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): map supabase users to auth users`
 
