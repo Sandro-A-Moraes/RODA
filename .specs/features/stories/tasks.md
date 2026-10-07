@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Pending.
+**Status**: Done (T1-T10); pending Verifier.
 
 ---
 
@@ -333,10 +333,10 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Traceability table has no Pending rows
-- [ ] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py stories` exits 0
+- [x] Traceability table has no Pending rows
+- [x] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py stories` exits 0
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: docs(stories): mark stories implemented and update the handoff

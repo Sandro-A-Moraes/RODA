@@ -26,14 +26,14 @@ Mainstream feeds reward volume and popularity. Roda offers one short daily refle
 
 | Assumption / decision | Chosen default | Rationale | Confirmed? |
 | --------------------- | -------------- | --------- | ---------- |
-| Story text bounds | 1 to 280 characters after trim | Short reflection; matches the "short" product intent | n |
-| Day definition | Local calendar day `YYYY-MM-DD`, same as pacts | Consistent rule across the app | n |
-| Feed window | Stories from the last 7 days including today | Keeps the feed finite and the query bounded | n |
-| Feed order | Newest first | A chronological feed is read from the latest | n |
-| Reaction set | `with_you` ("Estou com você"), `inspired` ("Me inspirou") | Two qualitative kinds are enough to demo; the set is fixed | n |
-| Reaction rules | One reaction per member per story; choosing another replaces it; choosing the same removes it | Simple toggle with no counts | n |
-| Reaction visibility | A member sees which reactions they gave and which reaction kinds their own story received, never counts | Qualitative signal without a popularity metric | n |
-| Reacting to own story | Not allowed | Self-reaction carries no meaning | n |
+| Story text bounds | 1 to 280 characters after trim | Short reflection; matches the "short" product intent | y |
+| Day definition | Local calendar day `YYYY-MM-DD`, same as pacts | Consistent rule across the app | y |
+| Feed window | Stories from the last 7 days including today | Keeps the feed finite and the query bounded | y |
+| Feed order | Newest first | A chronological feed is read from the latest | y |
+| Reaction set | `with_you` ("Estou com você"), `inspired` ("Me inspirou") | Two qualitative kinds are enough to demo; the set is fixed | y |
+| Reaction rules | One reaction per member per story; choosing another replaces it; choosing the same removes it | Simple toggle with no counts | y |
+| Reaction visibility | A member sees which reactions they gave and which reaction kinds their own story received, never counts | Qualitative signal without a popularity metric | y |
+| Reacting to own story | Not allowed | Self-reaction carries no meaning | y |
 
 **Open questions:** none - all resolved or logged above.
 
@@ -110,15 +110,15 @@ Mainstream feeds reward volume and popularity. Roda offers one short daily refle
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| STORY-01 | P1: Post (AC 1-3) | Specify | Pending |
-| STORY-02 | P1: Post (AC 4-6) | Specify | Pending |
-| STORY-03 | P1: Feed (AC 1-2, 7) | Specify | Pending |
-| STORY-04 | P1: Feed (AC 3-5) | Specify | Pending |
-| STORY-05 | P1: Feed (AC 6) | Specify | Pending |
-| STORY-06 | P2: Reactions (AC 1-4) | Specify | Pending |
-| STORY-07 | P2: Reactions (AC 5-6) | Specify | Pending |
+| STORY-01 | P1: Post (AC 1-3) | Execute (T2, T3, T7, T9) | Implemented |
+| STORY-02 | P1: Post (AC 4-6) | Execute (T3, T5, T7) | Implemented |
+| STORY-03 | P1: Feed (AC 1-2, 7) | Execute (T1, T3, T5, T6, T9) | Implemented |
+| STORY-04 | P1: Feed (AC 3-5) | Execute (T6) | Implemented |
+| STORY-05 | P1: Feed (AC 6) | Execute (T1, T6) | Implemented |
+| STORY-06 | P2: Reactions (AC 1-4) | Execute (T1, T4, T5, T8) | Implemented |
+| STORY-07 | P2: Reactions (AC 5-6) | Execute (T4, T5, T8) | Implemented |
 
-**Coverage:** 7 total, 0 mapped to tasks, 7 unmapped ⚠️
+**Coverage:** 7 total, 7 mapped to tasks, 0 unmapped
 
 ---
 
