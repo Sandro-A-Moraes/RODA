@@ -50,13 +50,21 @@
 - **Date**: 2026-10-07
 - **Status**: active
 
+### AD-007
+- **Decision**: The signed-in user is read through `useSession()` exported from `@/modules/auth`; routes are protected declaratively with Expo Router `Stack.Protected` groups `(auth)` and `(app)` driven by that session. Other modules never import auth internals or call Supabase Auth directly.
+- **Reason**: One source of truth for identity and redirects; keeps module boundaries (AD-001) and avoids per-screen auth checks.
+- **Trade-off**: Route group names are coupled to the root navigator; renaming a group requires updating `RootNavigator` and its test.
+- **Scope**: `app/` routing, every feature that needs the current user id.
+- **Date**: 2026-10-07
+- **Status**: active
+
 ## Handoff
 
-- **Feature**: `foundation` is done and verified (PASS, `.specs/features/foundation/validation.md`); the user confirmed the blank cream screen on web with no console errors. `auth` is next, not started.
-- **Phase / Task**: Between features. Next: Design and Tasks for `auth` (`.specs/features/auth/spec.md` is approved).
-- **Completed**: foundation T1-T22 and the test-only fix commit. Specs for all six features approved. `.env.example` added; the user created `.env` with the Supabase URL and publishable key (variables `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY`).
+- **Feature**: auth (`.specs/features/auth/`) - spec, design and tasks written (Draft), not yet approved
+- **Phase / Task**: Tasks done; waiting for user approval of design.md and tasks.md before Execute
+- **Completed**: foundation T1-T22 (verified PASS); auth: none of T1-T24
 - **In-progress** (file:line): none
-- **Next step**: Run Design (short) and Tasks for `auth`: Supabase client in `src/core`, `AuthRepository` interface with InMemory and Supabase implementations, use cases, Zod schemas, auth provider, screens, route protection. Then execute with sub-agents (user prefers batches of ~7 tasks) and finish with the Verifier. Then `circles` and the rest per `.specs/ROADMAP.md`.
-- **Blockers**: none. The Supabase MCP connector is connected (tools `apply_migration`, `execute_sql`, `list_tables`, `get_advisors`, ...): use it to apply SQL, always also saving each migration under `supabase/migrations/`. Show the SQL summary and get the user's OK before applying structural changes; never run anything that deletes data unasked. The user still needs to disable "Confirm email" in Supabase (Authentication > Providers > Email) before `auth` can be tried end to end.
-- **Uncommitted files**: none
-- **Branch**: main (tracks origin/main; the user authorized pushing there after commits)
+- **Next step**: User approves auth design and tasks (and the unconfirmed spec defaults: 8-char password, name 2-40); then Execute T1 (offer batch sub-agents: P1 | P2 | P3+P4 | P5). After T24: manual verification (confirm-email off, apply `supabase/migrations/0001_profiles.sql` with explicit go-ahead, walk the Independent Tests)
+- **Blockers**: none (Supabase project RODA `fsckgwcwweblvyyywvis` is empty; `.env` is filled)
+- **Uncommitted files**: `.specs/STATE.md`, `.specs/features/auth/design.md`, `.specs/features/auth/tasks.md`
+- **Branch**: main

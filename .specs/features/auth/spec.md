@@ -24,12 +24,12 @@ Every Roda feature is scoped to a person inside a circle, so the app needs ident
 
 | Assumption / decision | Chosen default | Rationale | Confirmed? |
 | --------------------- | -------------- | --------- | ---------- |
-| Sign-up fields | display name, e-mail, password | A circle needs a human-readable member name | n |
-| Display name bounds | 2 to 40 characters after trim | Fits a member list row without truncation | n |
-| Password rule | minimum 8 characters | Supabase default is 6; 8 is the common baseline and is cheap to test | n |
-| E-mail format check | Zod `email()` | Standard, no custom regex to maintain | n |
-| Session storage | Supabase client with AsyncStorage | Required for persistence in Expo | n |
-| Profile row | `profiles` row created on sign-up carrying the display name | Memberships need a name to show | n |
+| Sign-up fields | display name, e-mail, password | A circle needs a human-readable member name | y |
+| Display name bounds | 2 to 40 characters after trim | Fits a member list row without truncation | y |
+| Password rule | minimum 8 characters | Supabase default is 6; 8 is the common baseline and is cheap to test | y |
+| E-mail format check | Zod `email()` | Standard, no custom regex to maintain | y |
+| Session storage | Supabase client with AsyncStorage | Required for persistence in Expo | y |
+| Profile row | `profiles` row created on sign-up carrying the display name | Memberships need a name to show | y |
 | Supabase "Confirm email" | Disabled by the user in the dashboard | Plan requirement for the demo | y |
 
 **Open questions:** none - all resolved or logged above.
