@@ -291,16 +291,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] `'#F5EEDF'`, `'#fff'`, `'#ffff'` and `'#F5EEDF80'` in `src/shared/ui/x.tsx` are reported
-- [ ] `'#hashtag'` and `'#12'` (not valid hex colors) in `src/shared/ui/x.tsx` are NOT reported
-- [ ] `'#F5EEDF'` in `src/core/theme/colors.ts` is NOT reported
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 5 new tests pass, earlier tests intact
+- [x] Tests first: fail, then pass
+- [x] `'#F5EEDF'`, `'#fff'`, `'#ffff'` and `'#F5EEDF80'` in `src/shared/ui/x.tsx` are reported
+- [x] `'#hashtag'` and `'#12'` (not valid hex colors) in `src/shared/ui/x.tsx` are NOT reported
+- [x] `'#F5EEDF'` in `src/core/theme/colors.ts` is NOT reported
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 5 new tests pass, earlier tests intact
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(lint): ban hex color literals outside the theme`
 
 ---

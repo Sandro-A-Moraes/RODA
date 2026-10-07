@@ -51,11 +51,34 @@ const domainPurity = MODULES.map((name) => ({
   },
 }));
 
+// Hex color string literals (#RGB, #RGBA, #RRGGBB, #RRGGBBAA) belong in src/core/theme only.
+const hexColorBan = [
+  {
+    files: [`src/${sourceFiles}`],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            'Literal[value=/^#([0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/]',
+          message:
+            'Hex color literal outside src/core/theme: use a semantic color role from useTheme().',
+        },
+      ],
+    },
+  },
+  {
+    files: [`src/core/theme/${sourceFiles}`],
+    rules: { 'no-restricted-syntax': 'off' },
+  },
+];
+
 module.exports = defineConfig([
   expoConfig,
   prettierConfig,
   ...moduleBoundaries,
   ...domainPurity,
+  ...hexColorBan,
   {
     ignores: ['dist/*', '.expo/*', 'node_modules/*', 'coverage/*'],
   },

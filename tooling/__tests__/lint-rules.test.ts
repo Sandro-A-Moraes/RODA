@@ -129,3 +129,27 @@ describe('domain purity rule (no-restricted-imports)', () => {
     expect(found).toHaveLength(1);
   });
 });
+
+describe('hex color ban (no-restricted-syntax)', () => {
+  const rule = 'no-restricted-syntax';
+  const lintColor = (filePath: string, literal: string) =>
+    violations(filePath, `export const color = '${literal}';\n`, rule);
+
+  it.each(['#F5EEDF', '#fff', '#ffff', '#F5EEDF80'])(
+    'reports %s in a shared ui file',
+    (literal) => {
+      expect(lintColor('src/shared/ui/x.tsx', literal)).toHaveLength(1);
+    },
+  );
+
+  it.each(['#hashtag', '#12'])(
+    'does not report %s (not a valid hex color) in a shared ui file',
+    (literal) => {
+      expect(lintColor('src/shared/ui/x.tsx', literal)).toHaveLength(0);
+    },
+  );
+
+  it('does not report a hex color in the theme folder', () => {
+    expect(lintColor('src/core/theme/colors.ts', '#F5EEDF')).toHaveLength(0);
+  });
+});
