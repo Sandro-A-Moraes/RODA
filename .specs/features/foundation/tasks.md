@@ -202,13 +202,14 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `npx prettier --check .` exits 0 after one `npm run format`
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 2 tests still pass
+- [x] `npx prettier --check .` exits 0 after one `npm run format`
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 2 tests still pass
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `chore(format): add prettier config and format script`
 
 ---

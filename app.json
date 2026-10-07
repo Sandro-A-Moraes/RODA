@@ -23,8 +23,6 @@
       "bundler": "metro"
     },
     "scheme": "roda",
-    "plugins": [
-      "expo-router"
-    ]
+    "plugins": ["expo-router"]
   }
 }
