@@ -310,12 +310,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: registered credentials return the user; wrong password returns `unauthorized` with "E-mail ou senha incorretos"; empty e-mail or empty password returns `validation` with zero repository calls; `"  ANA@mail.com "` signs in an account registered as `ana@mail.com`
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 4 new tests pass (no silent deletions)
+- [x] Tests first: registered credentials return the user; wrong password returns `unauthorized` with "E-mail ou senha incorretos"; empty e-mail or empty password returns `validation` with zero repository calls; `"  ANA@mail.com "` signs in an account registered as `ana@mail.com`
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 4 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add sign-in use case`
 
