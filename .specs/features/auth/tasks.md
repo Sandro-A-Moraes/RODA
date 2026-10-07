@@ -148,12 +148,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: returns both values when set; throws naming `EXPO_PUBLIC_SUPABASE_URL` when absent; throws naming `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` when blank or whitespace; error text never contains a value
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 4 new tests pass (no silent deletions)
+- [x] Tests first: returns both values when set; throws naming `EXPO_PUBLIC_SUPABASE_URL` when absent; throws naming `EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY` when blank or whitespace; error text never contains a value
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 4 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(core): add supabase config reader`
 
