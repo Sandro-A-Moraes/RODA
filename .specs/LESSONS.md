@@ -80,6 +80,18 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: validation.md iteration 2 mutant 19 (src/modules/auth/presentation/register-screen.tsx:100) (ui)
 - last seen: 2026-10-07T19:34:44Z
 
+### L-012 - Name the exact display format of any date or label an AC requires the UI to show.
+- signal: `spec_precision_gap` · recurrence: 1 feature(s) · scope: `spec` · harmful: 0
+- features: stories
+- evidence: STORY-03 AC7 (validation.md spec-precision gap 1) (spec)
+- last seen: 2026-10-07T23:51:42Z
+
+### L-013 - Name the error code and the user-facing message for every rejection an AC requires.
+- signal: `spec_precision_gap` · recurrence: 1 feature(s) · scope: `spec` · harmful: 0
+- features: stories
+- evidence: STORY-06 AC4 (validation.md spec-precision gap 2) (spec)
+- last seen: 2026-10-07T23:51:42Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.

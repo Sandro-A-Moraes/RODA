@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 12,
+  "next_id": 14,
   "lessons": [
     {
       "id": "L-001",
@@ -202,6 +202,42 @@
       ],
       "created": "2026-10-07T19:34:44Z",
       "last_seen": "2026-10-07T19:34:44Z"
+    },
+    {
+      "id": "L-012",
+      "key": "spec_precision_gap::name the exact display format of any date or label an ac requires the ui to show",
+      "text": "Name the exact display format of any date or label an AC requires the UI to show.",
+      "signal": "spec_precision_gap",
+      "scope": "spec",
+      "status": "candidate",
+      "features": [
+        "stories"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "STORY-03 AC7 (validation.md spec-precision gap 1) (spec)"
+      ],
+      "created": "2026-10-07T23:51:42Z",
+      "last_seen": "2026-10-07T23:51:42Z"
+    },
+    {
+      "id": "L-013",
+      "key": "spec_precision_gap::name the error code and the user facing message for every rejection an ac requires",
+      "text": "Name the error code and the user-facing message for every rejection an AC requires.",
+      "signal": "spec_precision_gap",
+      "scope": "spec",
+      "status": "candidate",
+      "features": [
+        "stories"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "STORY-06 AC4 (validation.md spec-precision gap 2) (spec)"
+      ],
+      "created": "2026-10-07T23:51:42Z",
+      "last_seen": "2026-10-07T23:51:42Z"
     }
   ]
 }
