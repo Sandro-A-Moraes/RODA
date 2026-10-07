@@ -309,13 +309,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Stories tab shows the feed; "Novo relato" opens the composer and returns on save
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Stories tab shows the feed; "Novo relato" opens the composer and returns on save (wired; device check pending, restart Metro with `--clear` for the new route)
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): wire the stories feed and composer into the circle
 
 ---
 

@@ -15,12 +15,17 @@ import {
   SupabaseCircleRepository,
 } from '@/modules/circles';
 import { pactRepositoryToken, SupabasePactRepository } from '@/modules/pacts';
+import {
+  storyRepositoryToken,
+  SupabaseStoryRepository,
+} from '@/modules/stories';
 
 // The only place that knows which repository implementation runs (design.md).
 const provisions = [
   provide(authRepositoryToken, new SupabaseAuthRepository(supabase)),
   provide(circleRepositoryToken, new SupabaseCircleRepository(supabase)),
   provide(pactRepositoryToken, new SupabasePactRepository(supabase)),
+  provide(storyRepositoryToken, new SupabaseStoryRepository(supabase)),
 ];
 
 export default function RootLayout() {

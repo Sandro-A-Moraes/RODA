@@ -5,6 +5,7 @@ import { useSession } from '@/modules/auth';
 import { CircleShell, MembersView, parseCircleTab } from '@/modules/circles';
 import type { CircleTab } from '@/modules/circles';
 import { PactsView } from '@/modules/pacts';
+import { StoriesView } from '@/modules/stories';
 import { EmptyState } from '@/shared/ui';
 
 export default function CircleRoute() {
@@ -18,6 +19,14 @@ export default function CircleRoute() {
 
   const newPact = () =>
     router.push({ pathname: '/circles/[id]/pacts/new', params: { id } });
+  const newStory = () =>
+    router.push({ pathname: '/circles/[id]/stories/new', params: { id } });
+  const addAction =
+    tab === 'pacts'
+      ? { label: 'Novo pacto', onPress: newPact }
+      : tab === 'stories'
+        ? { label: 'Novo relato', onPress: newStory }
+        : undefined;
 
   return (
     <CircleShell
@@ -25,9 +34,7 @@ export default function CircleRoute() {
       active={tab}
       onChangeTab={setTab}
       onBack={() => router.back()}
-      onAdd={
-        tab === 'pacts' ? { label: 'Novo pacto', onPress: newPact } : undefined
-      }
+      onAdd={addAction}
     >
       {tab === 'pacts' ? (
         <PactsView
@@ -44,7 +51,8 @@ export default function CircleRoute() {
       {tab === 'members' ? (
         <MembersView circleId={id} currentUserId={user?.id ?? ''} />
       ) : null}
-      {tab === 'stories' || tab === 'meetups' ? (
+      {tab === 'stories' ? <StoriesView circleId={id} /> : null}
+      {tab === 'meetups' ? (
         <EmptyState
           title="Em breve"
           body="Esta área ainda está em construção."
