@@ -283,12 +283,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: valid input returns the user; repository receives trimmed name and lowercased, trimmed e-mail; each invalid field returns `validation` and the repository spy records zero calls; duplicate e-mail returns the `conflict` error unchanged
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 5 new tests pass (no silent deletions)
+- [x] Tests first: valid input returns the user; repository receives trimmed name and lowercased, trimmed e-mail; each invalid field returns `validation` and the repository spy records zero calls; duplicate e-mail returns the `conflict` error unchanged
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 5 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add register user use case`
 
