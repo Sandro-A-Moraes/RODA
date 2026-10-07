@@ -92,14 +92,15 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `npm run typecheck` exits 0
-- [ ] `npx expo export --platform web` succeeds
-- [ ] Installed versions are recorded in the commit body (expo, react-native, typescript, eslint) because they are newer than assumed in design
-- [ ] No template demo screens or assets remain
+- [x] `npm run typecheck` exits 0
+- [x] `npx expo export --platform web` succeeds
+- [x] Installed versions are recorded in the commit body (expo, react-native, typescript, eslint) because they are newer than assumed in design
+- [x] No template demo screens or assets remain
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `chore(setup): scaffold expo project with router`
 
 ---
