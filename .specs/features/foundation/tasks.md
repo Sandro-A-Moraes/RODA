@@ -537,17 +537,18 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Default render has color `lightColors.textPrimary`
-- [ ] `variant="secondary"` has color `lightColors.textSecondary`
-- [ ] Extra `TextProps` (e.g. `accessibilityLabel`) pass through
-- [ ] `src/shared/ui/index.ts` created and exports `Text`
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 3 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Default render has color `lightColors.textPrimary`
+- [x] `variant="secondary"` has color `lightColors.textSecondary`
+- [x] Extra `TextProps` (e.g. `accessibilityLabel`) pass through
+- [x] `src/shared/ui/index.ts` created and exports `Text`
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 3 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(ui): add Text component`
 
 ---
