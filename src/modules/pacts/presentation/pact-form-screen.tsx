@@ -1,11 +1,21 @@
 import { useCallback, useEffect, useState } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { useDependency } from '@/core/di';
+import { mapError } from '@/core/errors';
+import type { AppError } from '@/core/errors';
+import { radius, useTheme } from '@/core/theme';
 import { localDay } from '@/shared/date/local-day';
-import { useTheme } from '@/core/theme';
 import { useAsyncAction } from '@/shared/hooks/use-async-action';
-import { Button, ErrorBanner, Header, Screen, TextField } from '@/shared/ui';
+import {
+  Button,
+  ErrorBanner,
+  Header,
+  Ring,
+  Screen,
+  Text,
+  TextField,
+} from '@/shared/ui';
 
 import { pactRepositoryToken } from '../domain/pact-repository';
 import { createPact, updatePact } from '../domain/pact-use-cases';
@@ -25,19 +35,34 @@ export function PactFormScreen({
   onSaved,
 }: PactFormScreenProps) {
   const repo = useDependency(pactRepositoryToken);
-  const { spacing } = useTheme();
+  const { colors, spacing } = useTheme();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [loadError, setLoadError] = useState<AppError | null>(null);
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!pactId) return;
-    void repo.get(pactId, localDay()).then((result) => {
-      if (result.ok) {
-        setTitle(result.value.title);
-        setDescription(result.value.description);
-      }
-    });
-  }, [repo, pactId]);
+    let active = true;
+    repo
+      .get(pactId, localDay())
+      .then((result) => {
+        if (!active) return;
+        if (result.ok) {
+          setLoadError(null);
+          setTitle(result.value.title);
+          setDescription(result.value.description);
+        } else {
+          setLoadError(result.error);
+        }
+      })
+      .catch((thrown: unknown) => {
+        if (active) setLoadError(mapError(thrown));
+      });
+    return () => {
+      active = false;
+    };
+  }, [repo, pactId, attempt]);
 
   const save = useCallback(async () => {
     const input = { title, description };
@@ -66,28 +91,56 @@ export function PactFormScreen({
         keyboardShouldPersistTaps="handled"
         contentContainerStyle={{ padding: spacing.md, gap: spacing.md }}
       >
-        <TextField
-          label="Título"
-          value={title}
-          onChangeText={setTitle}
-          error={titleError}
-          helper="De 3 a 60 caracteres."
-        />
-        <TextField
-          label="Descrição (opcional)"
-          value={description}
-          onChangeText={setDescription}
-          error={descriptionError}
-          helper="Até 280 caracteres."
-          multiline
-          style={{ minHeight: 96, paddingTop: 12, textAlignVertical: 'top' }}
-        />
-        <ErrorBanner error={otherError} />
-        <Button
-          label={pactId ? 'Salvar pacto' : 'Criar pacto'}
-          loading={pending}
-          onPress={() => void run()}
-        />
+        {loadError ? (
+          <ErrorBanner
+            error={loadError}
+            onRetry={() => setAttempt((n) => n + 1)}
+          />
+        ) : (
+          <>
+            <TextField
+              label="Título"
+              value={title}
+              onChangeText={setTitle}
+              error={titleError}
+              helper="De 3 a 60 caracteres."
+            />
+            <TextField
+              label="Descrição (opcional)"
+              value={description}
+              onChangeText={setDescription}
+              error={descriptionError}
+              helper={`${description.length} de 280 caracteres`}
+              multiline
+              style={{
+                minHeight: 96,
+                paddingTop: 12,
+                textAlignVertical: 'top',
+              }}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: spacing.md,
+                padding: spacing.md,
+                borderRadius: radius.lg,
+                backgroundColor: colors.card,
+              }}
+            >
+              <Ring size={64} filled={7} />
+              <Text style={{ flex: 1 }}>
+                Escolha algo que o círculo inteiro consiga cumprir todo dia.
+              </Text>
+            </View>
+            <ErrorBanner error={otherError} />
+            <Button
+              label={pactId ? 'Salvar pacto' : 'Criar pacto'}
+              loading={pending}
+              onPress={() => void run()}
+            />
+          </>
+        )}
       </ScrollView>
     </Screen>
   );
