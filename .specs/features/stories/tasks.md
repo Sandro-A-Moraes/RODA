@@ -161,14 +161,14 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `in-memory-story-repository.test.ts`
-- [ ] A seed of stories across 9 days returns only the last 7, newest first
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first in `in-memory-story-repository.test.ts`
+- [x] A seed of stories across 9 days returns only the last 7, newest first
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add the in-memory story repository with the daily rule and feed window
 
 ---
 
