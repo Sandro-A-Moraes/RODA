@@ -120,13 +120,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] File matches the Design data model: RLS enabled, display-name length check 2-40, trigger function with `set search_path = ''`, `(select auth.uid())` in policies
-- [ ] No insert or delete policy exists (trigger inserts as definer)
-- [ ] Nothing was executed against the Supabase project
-- [ ] `npm run lint` passes
+- [x] File matches the Design data model: RLS enabled, display-name length check 2-40, trigger function with `set search_path = ''`, `(select auth.uid())` in policies
+- [x] No insert or delete policy exists (trigger inserts as definer)
+- [x] Nothing was executed against the Supabase project
+- [x] `npm run lint` passes
 
 **Tests**: none
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): add profiles migration with rls and signup trigger`
 
