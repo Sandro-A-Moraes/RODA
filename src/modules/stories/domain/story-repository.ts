@@ -4,6 +4,9 @@ import type { Result } from '@/core/errors';
 
 export type ReactionKind = 'with_you' | 'inspired';
 
+/** The fixed reaction set, in display order. */
+export const REACTION_KINDS: readonly ReactionKind[] = ['with_you', 'inspired'];
+
 export interface Story {
   id: string;
   circleId: string;

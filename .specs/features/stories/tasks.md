@@ -211,13 +211,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Mapper tests first in `supabase-story-repository.test.ts`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Mapper tests first in `supabase-story-repository.test.ts`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add the supabase story repository and error mapper
 
 ---
 

@@ -1,7 +1,8 @@
 import { createAppError, err, ok } from '@/core/errors';
 import type { Result } from '@/core/errors';
-import { daysAgo } from '@/shared/date/local-day';
 
+import { oldestFeedDay } from '../domain/feed-window';
+import { REACTION_KINDS } from '../domain/story-repository';
 import type {
   ReactionKind,
   Story,
@@ -21,15 +22,6 @@ interface StoredReaction {
   storyId: string;
   userId: string;
   kind: ReactionKind;
-}
-
-const FEED_DAYS = 7;
-const KIND_ORDER: ReactionKind[] = ['with_you', 'inspired'];
-
-// Parses YYYY-MM-DD as a local date (new Date('YYYY-MM-DD') would be UTC).
-function fromLocalDay(day: string): Date {
-  const [year, month, date] = day.split('-').map(Number);
-  return new Date(year, month - 1, date);
 }
 
 // Same rules as the SQL schema, for tests and early development (AD-002).
@@ -65,7 +57,7 @@ export class InMemoryStoryRepository implements StoryRepository {
       myReaction: onStory.find((r) => r.userId === me)?.kind ?? null,
       // Kinds only, never counts, and only for the author.
       receivedKinds: isMine
-        ? KIND_ORDER.filter((k) => onStory.some((r) => r.kind === k))
+        ? REACTION_KINDS.filter((k) => onStory.some((r) => r.kind === k))
         : [],
     };
   }
@@ -76,7 +68,7 @@ export class InMemoryStoryRepository implements StoryRepository {
   ): Promise<Result<Story[]>> {
     const me = this.currentUserId();
     if (!me || !this.isMember(circleId, me)) return ok([]);
-    const oldest = daysAgo(FEED_DAYS - 1, fromLocalDay(today));
+    const oldest = oldestFeedDay(today);
     return ok(
       this.stories
         .filter((s) => s.circleId === circleId && s.day >= oldest)
