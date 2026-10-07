@@ -568,16 +568,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Renders its children
-- [ ] Background style equals `lightColors.background`
-- [ ] Barrel updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 2 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Renders its children
+- [x] Background style equals `lightColors.background`
+- [x] Barrel updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 2 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(ui): add Screen component`
 
 ---
