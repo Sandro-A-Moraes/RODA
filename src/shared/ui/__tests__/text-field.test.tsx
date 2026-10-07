@@ -33,6 +33,26 @@ describe('TextField', () => {
     );
   });
 
+  it('renders the error below the input', async () => {
+    await render(
+      <TextField
+        label="E-mail"
+        value=""
+        onChangeText={jest.fn()}
+        error="E-mail inválido"
+      />,
+    );
+
+    const root = screen.toJSON() as unknown as {
+      children: { type: string; children: string[] }[];
+    };
+    const types = root.children.map((child) => child.type);
+    const last = root.children[root.children.length - 1];
+    expect(types.indexOf('TextInput')).toBeGreaterThanOrEqual(0);
+    expect(types.indexOf('TextInput')).toBeLessThan(root.children.length - 1);
+    expect(last.children).toEqual(['E-mail inválido']);
+  });
+
   it('renders no error text without error', async () => {
     await render(
       <TextField label="E-mail" value="" onChangeText={jest.fn()} />,

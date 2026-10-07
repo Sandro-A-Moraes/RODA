@@ -61,6 +61,15 @@ describe('module boundary rule (no-restricted-imports)', () => {
     );
     expect(found).toHaveLength(0);
   });
+
+  it('does not report a module importing its own internals through the alias', () => {
+    const found = violations(
+      'src/modules/auth/presentation/x.ts',
+      "import { User } from '@/modules/auth/domain/user';\nexport { User };\n",
+      rule,
+    );
+    expect(found).toHaveLength(0);
+  });
 });
 
 describe('MODULES guard', () => {

@@ -22,7 +22,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 | Core logic (errors, DI, theme tokens and hook) | unit | All branches; 1:1 to spec ACs; every listed edge case | `src/core/**/__tests__/*.test.ts(x)` | `npm test` |
 | Shared UI components | unit (React Native Testing Library) | Render + press + state per AC (enabled, loading, disabled, error, retry) | `src/shared/ui/__tests__/*.test.tsx` | `npm test` |
 | Lint guard-rails | unit (ESLint Node API) | Violation and non-violation case for every AC and for both alias and relative forms | `tooling/__tests__/*.test.ts` | `npm test` |
-| App routes (`app/`) | unit (render) for screens; none for pure layout wiring | Screen renders with the specified background; layout verified by the web export build | `app/__tests__/*.test.tsx` | `npm test` |
+| App routes (`app/`) | unit (render) for screens; none for pure layout wiring | Screen renders with the specified background; layout verified by the web export build | `tooling/__tests__/*.test.tsx` (never under `app/`: Expo Router bundles every file there as a route) | `npm test` |
 | Tooling config (package.json, tsconfig, eslint/prettier config) | none (config consistency tests where an AC exists) | Build gate only | - | build gate |
 
 ## Gate Check Commands
