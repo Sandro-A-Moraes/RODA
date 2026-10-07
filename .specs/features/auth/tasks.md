@@ -501,12 +501,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: valid submit calls the repository once and the provider moves to signed in; wrong password shows the banner "E-mail ou senha incorretos"; empty fields show "Campo obrigatório" under each field and the repository spy has zero calls; a `network` error shows the banner with "Tentar novamente", and pressing it calls the repository again; two quick presses make one call; no rendered text contains a raw backend string; the banner renders after the form fields
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 7 new tests pass (no silent deletions)
+- [x] Tests first: valid submit calls the repository once and the provider moves to signed in; wrong password shows the banner "E-mail ou senha incorretos"; empty fields show "Campo obrigatório" under each field and the repository spy has zero calls; a `network` error shows the banner with "Tentar novamente", and pressing it calls the repository again; two quick presses make one call; no rendered text contains a raw backend string; the banner renders after the form fields
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 7 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add sign-in screen`
 
