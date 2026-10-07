@@ -351,17 +351,18 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] `ok(5)` has `ok: true` and `value: 5`; `err(error)` has `ok: false` and the same error
-- [ ] `ok(undefined)` still has `ok: true` (edge case)
-- [ ] A test narrows with `if (result.ok)` and reads `value` and `error` without type assertions (verified by `npm run typecheck`)
-- [ ] Barrel re-exports updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 3 new tests pass
+- [x] Tests first: fail, then pass
+- [x] `ok(5)` has `ok: true` and `value: 5`; `err(error)` has `ok: false` and the same error
+- [x] `ok(undefined)` still has `ok: true` (edge case)
+- [x] A test narrows with `if (result.ok)` and reads `value` and `error` without type assertions (verified by `npm run typecheck`)
+- [x] Barrel re-exports updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 3 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(core): add Result type`
 
 ---
