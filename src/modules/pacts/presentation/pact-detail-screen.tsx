@@ -160,9 +160,20 @@ export function PactDetailScreen({
             flex: 1,
             justifyContent: 'center',
             padding: spacing.xl,
-            backgroundColor: 'rgba(16, 38, 31, 0.6)',
           }}
         >
+          {/* Scrim: brand at 60% opacity, as in Figma 13. */}
+          <View
+            style={{
+              position: 'absolute',
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              backgroundColor: colors.brand,
+              opacity: 0.6,
+            }}
+          />
           <View
             accessibilityViewIsModal
             style={{

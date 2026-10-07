@@ -84,7 +84,10 @@ describe('PactsView', () => {
   it('lists only this circle pacts, oldest first (PACT-02)', async () => {
     const { repo } = setup();
     await repo.create('c1', { title: 'Primeiro pacto', description: '' });
-    await repo.create('c2', { title: 'Pacto de outro círculo', description: '' });
+    await repo.create('c2', {
+      title: 'Pacto de outro círculo',
+      description: '',
+    });
     await repo.create('c1', { title: 'Segundo pacto', description: '' });
 
     await renderView(repo);
