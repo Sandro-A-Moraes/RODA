@@ -60,12 +60,12 @@
 
 ## Handoff
 
-- **Feature**: auth (`.specs/features/auth/`) - verified (PASS) and restyled to the Figma frames 01 Entrar, 02 Criar conta, 16 Perfil
-- **Phase / Task**: Execute done for auth; Design/Tasks for `circles` not started
-- **Completed**: foundation T1-T22; auth T1-T24; Figma tokens (`brand`, `onBrand`, `card`, `inverse`, ... roles), fonts Fraunces/DM Sans, base UI (Text types, Button variants, TextField, Icon, Ring, Avatar, Chip, Card, Header, EmptyState, Reveal with GSAP on web); `supabase/migrations/0001_profiles.sql` applied to RODA (`fsckgwcwweblvyyywvis`), advisors clean
-- **Out-of-scope work parked**: a first pass of circles/pacts code and `0002_circles_pacts_stories.sql` is in `git stash` ("out-of-scope: circles/pacts/stories WIP"). **0002 was applied to the remote RODA project by mistake of scope** (tables circles, circle_members, pacts, check_ins, stories, story_reactions plus RPCs); decide whether to keep it or drop it before the circles spec work
-- **Remaining features**: circles, pacts, stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
-- **Next step**: walk the auth Independent Tests on `npx expo start --web`; then Design/Tasks for `circles` with subagents per the TLC skill
+- **Feature**: circles (`.specs/features/circles/`) - code committed (migration 0002, domain, data, presentation, routes) but built before Design/Tasks; being retro-fitted with `tasks.md`, tests per CIR AC and a Verifier run
+- **Phase / Task**: Execute (retro-fit); pacts code also exists (commit 3ee4031) and is not yet specified-through-verify
+- **Completed**: foundation T1-T22; auth T1-T24, verified (PASS) and manually tested by the user; Figma tokens and base UI; `0001_profiles.sql` and `0002_circles_pacts_stories.sql` applied to RODA (`fsckgwcwweblvyyywvis`); 0002 is kept (decision: keep, it matches the circles/pacts/stories specs)
+- **Lesson**: Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect
+- **Remaining features**: finish circles verification, pacts (verify), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
+- **Next step**: circles Verifier result, then pacts verification
 - **Blockers**: none
-- **Uncommitted files**: `docs/FIGMA_SCREENS.md` (user's)
+- **Uncommitted files**: none
 - **Branch**: main
