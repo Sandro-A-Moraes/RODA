@@ -505,18 +505,19 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] A registered instance is returned by identity (`toBe`) to a consumer inside the provider
-- [ ] Two tokens with the same name but created separately do not collide
-- [ ] Using an unregistered token throws an error whose message contains the token name
-- [ ] Using `useDependency` outside any provider throws the same named error
-- [ ] `src/core/di/index.ts` re-exports the API
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 4 new tests pass
+- [x] Tests first: fail, then pass
+- [x] A registered instance is returned by identity (`toBe`) to a consumer inside the provider
+- [x] Two tokens with the same name but created separately do not collide
+- [x] Using an unregistered token throws an error whose message contains the token name
+- [x] Using `useDependency` outside any provider throws the same named error
+- [x] `src/core/di/index.ts` re-exports the API
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 4 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(core): add dependency injection provider`
 
 ---
