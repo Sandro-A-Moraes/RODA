@@ -55,7 +55,7 @@ describe('CirclesListScreen', () => {
 
     expect(screen.getByLabelText('Carregando')).toBeTruthy();
     release(ok([]));
-    expect(await screen.findByText('Seu primeiro círculo')).toBeTruthy();
+    expect(await screen.findByText('Comece pelo seu círculo')).toBeTruthy();
     expect(screen.queryByLabelText('Carregando')).toBeNull();
   });
 
@@ -63,12 +63,14 @@ describe('CirclesListScreen', () => {
     const { repo } = newRepo();
     const { onCreate, onJoin } = await renderList(repo);
 
-    await screen.findByText('Seu primeiro círculo');
-    const create = screen
-      .getAllByRole('button', { name: 'Criar círculo' })
-      .at(-1);
-    if (!create) throw new Error('missing create action');
-    await fireEvent.press(create);
+    await screen.findByText('Comece pelo seu círculo');
+    // Figma frame 04: the empty state has no header plus, only the body button.
+    expect(
+      screen.getAllByRole('button', { name: 'Criar círculo' }),
+    ).toHaveLength(1);
+    await fireEvent.press(
+      screen.getByRole('button', { name: 'Criar círculo' }),
+    );
     await fireEvent.press(
       screen.getByRole('button', { name: 'Entrar com código' }),
     );

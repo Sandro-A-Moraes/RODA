@@ -19,7 +19,11 @@ export function SegTabs<K extends string>({
   return (
     <View
       accessibilityRole="tablist"
-      style={{ height: 48, flexDirection: 'row', paddingHorizontal: spacing.md }}
+      style={{
+        height: 48,
+        flexDirection: 'row',
+        paddingHorizontal: spacing.md,
+      }}
     >
       {tabs.map((tab) => {
         const selected = tab.key === active;

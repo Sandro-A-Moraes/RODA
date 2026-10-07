@@ -5,13 +5,20 @@ import { useTheme } from '@/core/theme';
 import { Ring } from './ring';
 import { Text } from './text';
 
-export function EmptyState({ title, body }: { title: string; body: string }) {
+export interface EmptyStateProps {
+  title: string;
+  body: string;
+  /** Dots drawn in the accent tone; the rest stay sage. */
+  accentDots?: number;
+}
+
+export function EmptyState({ title, body, accentDots = 0 }: EmptyStateProps) {
   const { spacing } = useTheme();
   return (
     <View
       style={{ alignItems: 'center', gap: spacing.sm, padding: spacing.lg }}
     >
-      <Ring size={96} filled={0} sage />
+      <Ring size={96} filled={accentDots} tone="accent" sage />
       <Text type="h2" style={{ textAlign: 'center' }}>
         {title}
       </Text>

@@ -10,6 +10,8 @@ export interface RingProps {
   accentFirst?: boolean;
   /** Unfilled dots use the sage tone instead of the track tone. */
   sage?: boolean;
+  /** Filled dot color: brand (default), accent, or sage-on-dark for inverse cards. */
+  tone?: 'brand' | 'accent' | 'inverse';
 }
 
 const DOTS = 12;
@@ -19,6 +21,7 @@ export function Ring({
   filled = DOTS,
   accentFirst = false,
   sage = false,
+  tone = 'brand',
 }: RingProps) {
   const { colors } = useTheme();
   const c = size / 2;
@@ -29,14 +32,19 @@ export function Ring({
       {Array.from({ length: DOTS }, (_, i) => {
         const angle = (i / DOTS) * Math.PI * 2 - Math.PI / 2;
         const on = i < filled;
+        const filledFill = {
+          brand: colors.brand,
+          accent: colors.accent,
+          inverse: colors.decorative,
+        }[tone];
+        const emptyFill =
+          tone === 'inverse'
+            ? colors.inverseTrack
+            : sage
+              ? colors.decorative
+              : colors.track;
         const fill =
-          accentFirst && i === 0
-            ? colors.accent
-            : on
-              ? colors.brand
-              : sage
-                ? colors.decorative
-                : colors.track;
+          accentFirst && i === 0 ? colors.accent : on ? filledFill : emptyFill;
         return (
           <Circle
             key={i}

@@ -65,7 +65,7 @@ export function MembersView({ circleId, currentUserId }: MembersViewProps) {
           backgroundColor: colors.inverse,
         }}
       >
-        <Ring size={72} filled={circle.memberCount} />
+        <Ring size={72} filled={circle.memberCount} tone="inverse" />
         <View style={{ flex: 1, gap: spacing.xs }}>
           <Text type="label" style={{ color: colors.onInverseSecondary }}>
             Código de convite

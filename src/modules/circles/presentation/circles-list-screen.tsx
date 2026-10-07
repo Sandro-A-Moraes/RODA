@@ -15,7 +15,10 @@ import {
   Text,
 } from '@/shared/ui';
 
-import { circleRepositoryToken, MAX_CIRCLE_MEMBERS } from '../domain/circle-repository';
+import {
+  circleRepositoryToken,
+  MAX_CIRCLE_MEMBERS,
+} from '../domain/circle-repository';
 import type { Circle } from '../domain/circle-repository';
 
 export interface CirclesListScreenProps {
@@ -34,13 +37,18 @@ export function CirclesListScreen({
   const repo = useDependency(circleRepositoryToken);
   const { colors, spacing } = useTheme();
   const { state, reload } = useLoad(useCallback(() => repo.listMine(), [repo]));
+  const isEmpty = state.status === 'ready' && state.data.length === 0;
   const firstName = userName.trim().split(/\s+/)[0] ?? '';
 
   return (
     <Screen>
       <Header
         title="Círculos"
-        action={{ icon: 'plus', label: 'Criar círculo', onPress: onCreate }}
+        action={
+          isEmpty
+            ? undefined
+            : { icon: 'plus', label: 'Criar círculo', onPress: onCreate }
+        }
       />
       <ScrollView
         contentContainerStyle={{ padding: spacing.md, gap: spacing.md }}
@@ -54,11 +62,12 @@ export function CirclesListScreen({
         {state.status === 'error' ? (
           <ErrorBanner error={state.error} onRetry={() => void reload()} />
         ) : null}
-        {state.status === 'ready' && state.data.length === 0 ? (
+        {isEmpty ? (
           <>
             <EmptyState
-              title="Seu primeiro círculo"
-              body="Crie um círculo ou entre com o código de quem já tem um."
+              title="Comece pelo seu círculo"
+              body="Crie um círculo ou entre com o código que um amigo te passou."
+              accentDots={5}
             />
             <Button label="Criar círculo" onPress={onCreate} />
             <Button

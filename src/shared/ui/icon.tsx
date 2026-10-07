@@ -1,7 +1,14 @@
 import Svg, { Circle, Path } from 'react-native-svg';
 
 export type IconName =
-  'back' | 'plus' | 'check' | 'chevron' | 'pencil' | 'circles' | 'user';
+  | 'back'
+  | 'plus'
+  | 'check'
+  | 'chevron'
+  | 'pencil'
+  | 'circles'
+  | 'user'
+  | 'alert';
 
 export interface IconProps {
   name: IconName;
@@ -35,6 +42,12 @@ export function Icon({ name, color, size = 24 }: IconProps) {
         <>
           <Circle cx="12" cy="12" r="9" {...stroke} />
           <Circle cx="12" cy="12" r="3.5" {...stroke} />
+        </>
+      ) : null}
+      {name === 'alert' ? (
+        <>
+          <Circle cx="12" cy="12" r="9" {...stroke} />
+          <Path d="M12 7.5v5.5M12 16.5v.01" {...stroke} />
         </>
       ) : null}
       {name === 'user' ? (

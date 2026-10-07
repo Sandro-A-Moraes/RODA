@@ -2,9 +2,9 @@ import { useCallback, useState } from 'react';
 import { View } from 'react-native';
 
 import { useDependency } from '@/core/di';
-import { useTheme } from '@/core/theme';
+import { radius, useTheme } from '@/core/theme';
 import { useAsyncAction } from '@/shared/hooks/use-async-action';
-import { Button, Header, Screen, Text, TextField } from '@/shared/ui';
+import { Button, Header, Ring, Screen, Text, TextField } from '@/shared/ui';
 
 import { circleRepositoryToken } from '../domain/circle-repository';
 import type { Circle } from '../domain/circle-repository';
@@ -17,7 +17,7 @@ export interface NewCircleScreenProps {
 
 export function NewCircleScreen({ onBack, onCreated }: NewCircleScreenProps) {
   const repo = useDependency(circleRepositoryToken);
-  const { spacing } = useTheme();
+  const { colors, spacing } = useTheme();
   const [name, setName] = useState('');
   const create = useCallback(
     async (value: string) => {
@@ -28,23 +28,18 @@ export function NewCircleScreen({ onBack, onCreated }: NewCircleScreenProps) {
     [repo, onCreated],
   );
   const { run, pending, error } = useAsyncAction(create);
-  const fieldError =
-    error?.code === 'validation' ? error.message : undefined;
+  const fieldError = error?.code === 'validation' ? error.message : undefined;
 
   return (
     <Screen>
       <Header title="Novo círculo" onBack={onBack} />
       <View style={{ padding: spacing.lg, gap: spacing.lg }}>
-        <Text type="bodyLg" variant="secondary">
-          Dê um nome ao grupo. Depois você recebe um código para convidar até 11
-          pessoas.
-        </Text>
         <TextField
           label="Nome do círculo"
           value={name}
           onChangeText={setName}
           error={fieldError}
-          helper="De 2 a 40 caracteres."
+          helper="Entre 2 e 40 caracteres"
           maxLength={60}
         />
         {error && !fieldError ? (
@@ -52,6 +47,22 @@ export function NewCircleScreen({ onBack, onCreated }: NewCircleScreenProps) {
             {error.message}
           </Text>
         ) : null}
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: spacing.md,
+            padding: spacing.md,
+            borderRadius: radius.lg,
+            backgroundColor: colors.card,
+          }}
+        >
+          <Ring size={64} filled={7} />
+          <Text style={{ flex: 1 }}>
+            Até 12 pessoas que você conhece. Depois de criar, você recebe um
+            código para convidar.
+          </Text>
+        </View>
         <Button
           label="Criar círculo"
           loading={pending}
