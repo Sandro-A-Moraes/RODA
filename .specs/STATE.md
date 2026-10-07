@@ -60,11 +60,10 @@
 
 ## Handoff
 
-- **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend partly done
-- **Phase / Task**: circles closed except the two-account manual checks; pacts code exists (commit 3ee4031) but has no tasks.md / validation.md yet
+- **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend done
+- **Phase / Task**: circles closed (manual checks with several accounts done by the user); pacts code exists (commit 3ee4031) but has no tasks.md / validation.md yet
 - **Completed**: foundation T1-T22; auth T1-T24 (verified, manually tested by the user); circles T1-T12 plus Figma alignment (empty state, join, new circle, members ring) and fix for pasted invite codes with spaces; fonts Fraunces and DM Sans now load in `app/_layout.tsx` (added `expo-asset`); `ring.tsx`/`icon.tsx` no longer pass `accessible` to Svg; `0001` and `0002` migrations applied to RODA (`fsckgwcwweblvyyywvis`), 323 tests green
-- **Manually verified on web (user's account)**: empty state, name validation, create circle (lands on Membros with the code), unknown code, joining own circle ("Você já faz parte"), list with one circle
-- **Not verified (needs a second account)**: join with another user's code, member names from `profiles_select_circle_mates`, 13th member rejected, RLS isolation from a third account
+- **Manually verified on the real backend (user, web)**: empty state, name validation, create circle (lands on Membros with the code), unknown code, joining own circle, list with one circle, join with a second account, several accounts in one circle, and the 13th member is rejected with "Este círculo está cheio". Circles manual check is complete
 - **Lessons**: (1) Metro caches the route map; after adding route files restart with `npx expo start --web --clear`, otherwise `Stack.Protected` does not cover new groups and sign-out does not redirect. (2) Supabase Data API must stay enabled with `public` in Exposed schemas, otherwise every REST call returns 503 PGRST002 (log: `pg_pgrst_no_exposed_schemas`)
 - **Test data**: circle "ATeste Roda" (code J8FW57) exists on the remote project; delete before the demo
 - **Remaining features**: pacts (spec/tasks/Verifier), stories, meetups (roadmap order); polish + demo; Figma screen 15 (propose meetup) is not drawn
