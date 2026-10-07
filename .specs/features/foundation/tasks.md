@@ -229,18 +229,19 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `tooling/__tests__/lint-rules.test.ts` fails first for the right reason (no rule yet), then passes
-- [ ] A file in `src/modules/circles/` importing `@/modules/auth/domain/user` is reported
-- [ ] A file in `src/modules/circles/` importing `../../auth/domain/user` is reported
-- [ ] A file in `src/modules/circles/` importing `@/modules/auth` is NOT reported
-- [ ] A file in `src/modules/auth/` importing its own `../domain/user` is NOT reported
-- [ ] Guard test fails when a directory exists in `src/modules/` that is absent from `MODULES` (tested with a temp directory) and passes otherwise
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 6 tests pass (no silent deletions)
+- [x] `tooling/__tests__/lint-rules.test.ts` fails first for the right reason (no rule yet), then passes
+- [x] A file in `src/modules/circles/` importing `@/modules/auth/domain/user` is reported
+- [x] A file in `src/modules/circles/` importing `../../auth/domain/user` is reported
+- [x] A file in `src/modules/circles/` importing `@/modules/auth` is NOT reported
+- [x] A file in `src/modules/auth/` importing its own `../domain/user` is NOT reported
+- [x] Guard test fails when a directory exists in `src/modules/` that is absent from `MODULES` (tested with a temp directory) and passes otherwise
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 6 tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(lint): enforce module boundaries`
 
 ---
