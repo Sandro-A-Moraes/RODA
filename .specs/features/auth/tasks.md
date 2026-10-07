@@ -364,13 +364,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: `invalid_credentials` gives `unauthorized` "E-mail ou senha incorretos"; `user_already_exists` and `email_exists` give `conflict` "Este e-mail já está cadastrado"; `weak_password` gives `validation`; `AuthRetryableFetchError` and a `network request failed` `TypeError` give `network`; unknown code and non-error values give `unknown`
-- [ ] A test feeds an error whose `message` is a distinctive raw string and asserts the result's message does not contain it, for every branch
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 8 new tests pass (no silent deletions)
+- [x] Tests first: `invalid_credentials` gives `unauthorized` "E-mail ou senha incorretos"; `user_already_exists` and `email_exists` give `conflict` "Este e-mail já está cadastrado"; `weak_password` gives `validation`; `AuthRetryableFetchError` and a `network request failed` `TypeError` give `network`; unknown code and non-error values give `unknown`
+- [x] A test feeds an error whose `message` is a distinctive raw string and asserts the result's message does not contain it, for every branch
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 8 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): translate supabase auth errors`
 
