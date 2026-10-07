@@ -631,18 +631,19 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Typing calls `onChangeText` with the typed text
-- [ ] With `error="E-mail inválido"` the message is on screen and exposed through the input's accessibility hint
-- [ ] Without `error` no error text renders
-- [ ] Input minimum height is at least 44 and the input is labelled (`accessibilityLabel` equals `label`)
-- [ ] Barrel updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 5 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Typing calls `onChangeText` with the typed text
+- [x] With `error="E-mail inválido"` the message is on screen and exposed through the input's accessibility hint
+- [x] Without `error` no error text renders
+- [x] Input minimum height is at least 44 and the input is labelled (`accessibilityLabel` equals `label`)
+- [x] Barrel updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 5 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(ui): add TextField component`
 
 ---
