@@ -147,14 +147,15 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `tooling/__tests__/smoke.test.ts` passes
-- [ ] `tooling/__tests__/aliases.test.ts` asserts that every `paths` alias in `tsconfig.json` has an equivalent `moduleNameMapper` entry in Jest and the three alias names are exactly `@/core/*`, `@/shared/*`, `@/modules/*`
-- [ ] Gate passes: `npm test && npm run typecheck`
-- [ ] Test count: ≥ 2 tests pass (no silent deletions)
+- [x] `tooling/__tests__/smoke.test.ts` passes
+- [x] `tooling/__tests__/aliases.test.ts` asserts that every `paths` alias in `tsconfig.json` has an equivalent `moduleNameMapper` entry in Jest and the three alias names are exactly `@/core/*`, `@/shared/*`, `@/modules/*`
+- [x] Gate passes: `npm test && npm run typecheck`
+- [x] Test count: ≥ 2 tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
 
+**Status**: Done
 **Commit**: `test(setup): add jest and testing library with alias parity check`
 
 ---
