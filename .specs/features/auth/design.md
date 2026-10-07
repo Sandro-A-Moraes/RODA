@@ -125,7 +125,7 @@ Chosen: **A**. `profiles` is created for `circles` memberships to join against; 
 ### Public API and routes
 
 - `src/modules/auth/index.ts` exports: `SessionProvider`, `useSession`, `RootNavigator`, `SignInScreen`, `RegisterScreen`, `HomeScreen`, `InMemoryAuthRepository`, `SupabaseAuthRepository`, `authRepositoryToken`, type `AuthUser`.
-- Routes: `app/(auth)/sign-in.tsx`, `app/(auth)/register.tsx`, `app/(app)/index.tsx` (replaces `app/index.tsx`), each a few lines rendering the screen and wiring navigation callbacks (`router.push` between the two auth screens).
+- Routes: `app/(auth)/sign-in.tsx`, `app/(auth)/register.tsx`, `app/(app)/index.tsx` (replaces `app/index.tsx`), each a few lines rendering the screen and wiring navigation callbacks (sign-in links to register with `router.push`; register returns with `router.dismissTo('/sign-in')` because sign-in is already in the stack and `push` would stack a duplicate).
 - `app/_layout.tsx` provides `authRepositoryToken` with `new SupabaseAuthRepository(supabase)`, wraps `SessionProvider`, renders `RootNavigator`.
 
 ---

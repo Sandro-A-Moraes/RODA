@@ -103,6 +103,7 @@ describe('RootNavigator', () => {
     });
 
     expect(screen.queryByText('protected content')).toBeNull();
+    expect(result.getPathname()).toBe('/register');
     expect(mainRendered).not.toHaveBeenCalled();
   });
 
