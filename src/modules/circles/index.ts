@@ -6,7 +6,8 @@ export {
 } from './domain/circle-repository';
 export type { Circle, Member } from './domain/circle-repository';
 export { CircleShell } from './presentation/circle-shell';
-export type { CircleTab } from './presentation/circle-shell';
+export { parseCircleTab } from './presentation/circle-tab';
+export type { CircleTab } from './presentation/circle-tab';
 export { CirclesListScreen } from './presentation/circles-list-screen';
 export { JoinCircleScreen } from './presentation/join-circle-screen';
 export { MembersView } from './presentation/members-view';

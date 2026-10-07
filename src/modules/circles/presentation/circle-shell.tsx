@@ -8,8 +8,7 @@ import { useLoad } from '@/shared/hooks/use-load';
 import { Header, Screen, SegTabs } from '@/shared/ui';
 
 import { circleRepositoryToken } from '../domain/circle-repository';
-
-export type CircleTab = 'pacts' | 'stories' | 'meetups' | 'members';
+import type { CircleTab } from './circle-tab';
 
 const tabs = [
   { key: 'pacts', label: 'Pactos' },
@@ -38,7 +37,9 @@ export function CircleShell({
 }: CircleShellProps) {
   const repo = useDependency(circleRepositoryToken);
   const { spacing } = useTheme();
-  const { state } = useLoad(useCallback(() => repo.get(circleId), [repo, circleId]));
+  const { state } = useLoad(
+    useCallback(() => repo.get(circleId), [repo, circleId]),
+  );
   const title = state.status === 'ready' ? state.data.name : '';
 
   return (

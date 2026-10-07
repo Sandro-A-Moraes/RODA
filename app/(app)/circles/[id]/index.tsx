@@ -2,16 +2,19 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 
 import { useSession } from '@/modules/auth';
-import { CircleShell, MembersView } from '@/modules/circles';
+import { CircleShell, MembersView, parseCircleTab } from '@/modules/circles';
 import type { CircleTab } from '@/modules/circles';
 import { PactsView } from '@/modules/pacts';
 import { EmptyState } from '@/shared/ui';
 
 export default function CircleRoute() {
-  const { id } = useLocalSearchParams<{ id: string }>();
+  const { id, tab: initialTab } = useLocalSearchParams<{
+    id: string;
+    tab?: string;
+  }>();
   const router = useRouter();
   const { user } = useSession();
-  const [tab, setTab] = useState<CircleTab>('pacts');
+  const [tab, setTab] = useState<CircleTab>(parseCircleTab(initialTab));
 
   const newPact = () =>
     router.push({ pathname: '/circles/[id]/pacts/new', params: { id } });
