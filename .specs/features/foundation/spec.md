@@ -124,10 +124,10 @@ Roda needs a runnable Expo project with enforced architecture, test tooling and 
 | FND-04 | P1: Runnable project (AC 7) | Execute | Done |
 | FND-05 | P1: Core error model and theme (AC 1-4) | Execute | Done |
 | FND-06 | P1: Core error model and theme (AC 5-6, 8) | Execute | Done |
-| FND-07 | P1: Core error model and theme (AC 9-10) | Specify | Pending |
-| FND-08 | P1: Shared UI primitives (AC 1-5) | Specify | Pending |
-| FND-09 | P1: Shared UI primitives (AC 6-7) | Specify | Pending |
-| FND-10 | P1: Core error model and theme (AC 7) and Shared UI (AC 8-9) | Specify | Pending |
+| FND-07 | P1: Core error model and theme (AC 9-10) | Execute | Done |
+| FND-08 | P1: Shared UI primitives (AC 1-5) | Execute | Done |
+| FND-09 | P1: Shared UI primitives (AC 6-7) | Execute | Done |
+| FND-10 | P1: Core error model and theme (AC 7) and Shared UI (AC 8-9) | Execute | Done |
 
 **Coverage:** 10 total, 0 mapped to tasks, 10 unmapped ⚠️
 

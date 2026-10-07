@@ -696,13 +696,14 @@ T17 → T22
 
 **Done when**:
 
-- [ ] `npx expo export --platform web` succeeds (layout is wiring only; matrix: no unit test for pure layout)
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: all earlier tests intact
+- [x] `npx expo export --platform web` succeeds (layout is wiring only; matrix: no unit test for pure layout)
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: all earlier tests intact
 
 **Tests**: none
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(app): add root layout with dependency provider`
 
 ---
