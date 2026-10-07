@@ -475,16 +475,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] `renderHook(useTheme)` returns `colors` deeply equal to `lightColors`
-- [ ] Returned `spacing` and `typography` are the token objects
-- [ ] `import { useTheme, lightColors, palette } from '@/core/theme'` works (alias resolution proven by the test import)
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 2 new tests pass
+- [x] Tests first: fail, then pass
+- [x] `renderHook(useTheme)` returns `colors` deeply equal to `lightColors`
+- [x] Returned `spacing` and `typography` are the token objects
+- [x] `import { useTheme, lightColors, palette } from '@/core/theme'` works (alias resolution proven by the test import)
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 2 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(theme): add useTheme hook`
 
 ---
