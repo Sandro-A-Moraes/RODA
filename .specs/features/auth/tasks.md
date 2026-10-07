@@ -555,12 +555,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first: shows the signed-in display name; pressing "Sair" calls `signOut` once and the session becomes `signedOut`; an error on sign-out shows the banner instead of crashing
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
-- [ ] Test count: at least 3 new tests pass (no silent deletions)
+- [x] Tests first: shows the signed-in display name; pressing "Sair" calls `signOut` once and the session becomes `signedOut`; an error on sign-out shows the banner instead of crashing
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint` (phase end)
+- [x] Test count: at least 3 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): add home screen with sign out`
 
