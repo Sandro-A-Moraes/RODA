@@ -44,6 +44,36 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: spec.md Shared UI AC5 line 100 (spec)
 - last seen: 2026-10-07T17:14:55Z
 
+### L-006 - Test a shared behavior such as network retry on every screen that offers it, not only on the first screen built.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `ui` · harmful: 0
+- features: auth
+- evidence: validation.md mutant 11 (src/modules/auth/presentation/register-screen.tsx:100) (ui)
+- last seen: 2026-10-07T19:17:49Z
+
+### L-007 - When async restore and an event subscription both set state, test an event that arrives before the restore resolves.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `session` · harmful: 0
+- features: auth
+- evidence: validation.md mutant 12 (src/modules/auth/presentation/session-provider.tsx:39) (session)
+- last seen: 2026-10-07T19:17:49Z
+
+### L-008 - Specify protected-route outcomes separately for URL entry and in-app navigation, because declarative route guards block in-app navigation instead of redirecting.
+- signal: `spec_precision_gap` · recurrence: 1 feature(s) · scope: `routes` · harmful: 0
+- features: auth
+- evidence: AUTH-08 AC4 (tooling/__tests__/root-navigator.test.tsx:93-107) (routes)
+- last seen: 2026-10-07T19:17:49Z
+
+### L-009 - Name which layer clears an invalid stored session in the AC, so the clearing is either testable or explicitly manual.
+- signal: `spec_precision_gap` · recurrence: 1 feature(s) · scope: `spec` · harmful: 0
+- features: auth
+- evidence: AUTH-07 AC6 (src/modules/auth/data/supabase-auth-repository.ts:59-66) (spec)
+- last seen: 2026-10-07T19:17:50Z
+
+### L-010 - Use router.dismissTo, not router.push, for a back link to a screen that is usually already in the stack.
+- signal: `spec_deviation` · recurrence: 1 feature(s) · scope: `routes` · harmful: 0
+- features: auth
+- evidence: SPEC_DEVIATION app/(auth)/register.tsx:5 (routes)
+- last seen: 2026-10-07T19:17:50Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.

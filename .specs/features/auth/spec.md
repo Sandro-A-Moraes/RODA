@@ -87,7 +87,7 @@ Every Roda feature is scoped to a person inside a circle, so the app needs ident
 1. WHEN the app starts with a valid stored session THEN the system SHALL go straight to the main area without showing the sign-in screen.
 2. WHEN the app starts with no stored session THEN the system SHALL show the sign-in screen.
 3. WHILE the session is being restored the system SHALL show a loading indicator and no protected content.
-4. IF a signed-out user navigates to a protected route THEN the system SHALL redirect to the sign-in screen.
+4. IF a signed-out user opens a protected route by URL THEN the system SHALL redirect to the sign-in screen; IF a signed-out user navigates to it from inside the app THEN the system SHALL stay on the current screen and SHALL NOT render protected content.
 5. IF a signed-in user navigates to the sign-in or register route THEN the system SHALL redirect to the main area.
 6. IF the stored session is expired or invalid THEN the system SHALL clear it and show the sign-in screen.
 

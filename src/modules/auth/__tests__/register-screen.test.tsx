@@ -135,6 +135,34 @@ describe('RegisterScreen', () => {
     });
   });
 
+  it('shows the network banner with "Tentar novamente" that calls signUp again', async () => {
+    const repo = new InMemoryAuthRepository();
+    const signUp = jest
+      .spyOn(repo, 'signUp')
+      .mockResolvedValueOnce(err(createAppError('network')));
+    await renderRegister(repo);
+    await fill({
+      name: '  Ana Lima ',
+      email: '  Ana@Mail.COM ',
+      password: '12345678',
+    });
+
+    await fireEvent.press(submitButton());
+
+    expect(
+      await screen.findByText(createAppError('network').message),
+    ).toBeTruthy();
+    await fireEvent.press(screen.getByText('Tentar novamente'));
+
+    expect(await screen.findByText('signedIn')).toBeTruthy();
+    expect(signUp).toHaveBeenCalledTimes(2);
+    expect(signUp).toHaveBeenNthCalledWith(2, {
+      displayName: 'Ana Lima',
+      email: 'ana@mail.com',
+      password: '12345678',
+    });
+  });
+
   it('calls onNavigateToSignIn from the sign-in link', async () => {
     const onNavigateToSignIn = jest.fn();
     await renderRegister(new InMemoryAuthRepository(), onNavigateToSignIn);

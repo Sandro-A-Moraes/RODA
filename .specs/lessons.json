@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 6,
+  "next_id": 11,
   "lessons": [
     {
       "id": "L-001",
@@ -94,6 +94,96 @@
       ],
       "created": "2026-10-07T17:14:55Z",
       "last_seen": "2026-10-07T17:14:55Z"
+    },
+    {
+      "id": "L-006",
+      "key": "surviving_mutant::test a shared behavior such as network retry on every screen that offers it not only on the first screen built",
+      "text": "Test a shared behavior such as network retry on every screen that offers it, not only on the first screen built.",
+      "signal": "surviving_mutant",
+      "scope": "ui",
+      "status": "candidate",
+      "features": [
+        "auth"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "validation.md mutant 11 (src/modules/auth/presentation/register-screen.tsx:100) (ui)"
+      ],
+      "created": "2026-10-07T19:17:49Z",
+      "last_seen": "2026-10-07T19:17:49Z"
+    },
+    {
+      "id": "L-007",
+      "key": "surviving_mutant::when async restore and an event subscription both set state test an event that arrives before the restore resolves",
+      "text": "When async restore and an event subscription both set state, test an event that arrives before the restore resolves.",
+      "signal": "surviving_mutant",
+      "scope": "session",
+      "status": "candidate",
+      "features": [
+        "auth"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "validation.md mutant 12 (src/modules/auth/presentation/session-provider.tsx:39) (session)"
+      ],
+      "created": "2026-10-07T19:17:49Z",
+      "last_seen": "2026-10-07T19:17:49Z"
+    },
+    {
+      "id": "L-008",
+      "key": "spec_precision_gap::specify protected route outcomes separately for url entry and in app navigation because declarative route guards block in app navigation instead of redirecting",
+      "text": "Specify protected-route outcomes separately for URL entry and in-app navigation, because declarative route guards block in-app navigation instead of redirecting.",
+      "signal": "spec_precision_gap",
+      "scope": "routes",
+      "status": "candidate",
+      "features": [
+        "auth"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "AUTH-08 AC4 (tooling/__tests__/root-navigator.test.tsx:93-107) (routes)"
+      ],
+      "created": "2026-10-07T19:17:49Z",
+      "last_seen": "2026-10-07T19:17:49Z"
+    },
+    {
+      "id": "L-009",
+      "key": "spec_precision_gap::name which layer clears an invalid stored session in the ac so the clearing is either testable or explicitly manual",
+      "text": "Name which layer clears an invalid stored session in the AC, so the clearing is either testable or explicitly manual.",
+      "signal": "spec_precision_gap",
+      "scope": "spec",
+      "status": "candidate",
+      "features": [
+        "auth"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "AUTH-07 AC6 (src/modules/auth/data/supabase-auth-repository.ts:59-66) (spec)"
+      ],
+      "created": "2026-10-07T19:17:50Z",
+      "last_seen": "2026-10-07T19:17:50Z"
+    },
+    {
+      "id": "L-010",
+      "key": "spec_deviation::use router dismissto not router push for a back link to a screen that is usually already in the stack",
+      "text": "Use router.dismissTo, not router.push, for a back link to a screen that is usually already in the stack.",
+      "signal": "spec_deviation",
+      "scope": "routes",
+      "status": "candidate",
+      "features": [
+        "auth"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "SPEC_DEVIATION app/(auth)/register.tsx:5 (routes)"
+      ],
+      "created": "2026-10-07T19:17:50Z",
+      "last_seen": "2026-10-07T19:17:50Z"
     }
   ]
 }
