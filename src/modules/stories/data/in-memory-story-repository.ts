@@ -17,7 +17,14 @@ interface StoredStory {
   sequence: number;
 }
 
+interface StoredReaction {
+  storyId: string;
+  userId: string;
+  kind: ReactionKind;
+}
+
 const FEED_DAYS = 7;
+const KIND_ORDER: ReactionKind[] = ['with_you', 'inspired'];
 
 // Parses YYYY-MM-DD as a local date (new Date('YYYY-MM-DD') would be UTC).
 function fromLocalDay(day: string): Date {
@@ -28,6 +35,8 @@ function fromLocalDay(day: string): Date {
 // Same rules as the SQL schema, for tests and early development (AD-002).
 export class InMemoryStoryRepository implements StoryRepository {
   private readonly stories: StoredStory[] = [];
+  // One per (story, user), like the story_reactions primary key.
+  private readonly reactions: StoredReaction[] = [];
   private sequence = 0;
 
   constructor(
@@ -43,6 +52,8 @@ export class InMemoryStoryRepository implements StoryRepository {
 
   private view(stored: StoredStory): Story {
     const me = this.currentUserId();
+    const isMine = stored.authorId === me;
+    const onStory = this.reactions.filter((r) => r.storyId === stored.id);
     return {
       id: stored.id,
       circleId: stored.circleId,
@@ -50,9 +61,12 @@ export class InMemoryStoryRepository implements StoryRepository {
       authorName: this.displayName(stored.authorId),
       body: stored.body,
       day: stored.day,
-      isMine: stored.authorId === me,
-      myReaction: null,
-      receivedKinds: [],
+      isMine,
+      myReaction: onStory.find((r) => r.userId === me)?.kind ?? null,
+      // Kinds only, never counts, and only for the author.
+      receivedKinds: isMine
+        ? KIND_ORDER.filter((k) => onStory.some((r) => r.kind === k))
+        : [],
     };
   }
 
@@ -106,11 +120,24 @@ export class InMemoryStoryRepository implements StoryRepository {
     return ok(this.view(stored));
   }
 
-  // Implemented with the reaction rules in the next task (T4).
   async react(
-    _storyId: string,
-    _kind: ReactionKind | null,
+    storyId: string,
+    kind: ReactionKind | null,
   ): Promise<Result<void>> {
-    return err(createAppError('unknown'));
+    const me = this.currentUserId();
+    if (!me) return err(createAppError('unauthorized'));
+    const story = this.stories.find((s) => s.id === storyId);
+    if (!story) return err(createAppError('not_found'));
+    // Same refusal as the reactions insert policy: members only, never
+    // on the own story.
+    if (!this.isMember(story.circleId, me) || story.authorId === me) {
+      return err(createAppError('unauthorized'));
+    }
+    const index = this.reactions.findIndex(
+      (r) => r.storyId === storyId && r.userId === me,
+    );
+    if (index >= 0) this.reactions.splice(index, 1);
+    if (kind !== null) this.reactions.push({ storyId, userId: me, kind });
+    return ok(undefined);
   }
 }

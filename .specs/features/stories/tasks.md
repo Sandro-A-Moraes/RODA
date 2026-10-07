@@ -186,13 +186,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `story-reactions.test.ts`
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first in `story-reactions.test.ts`
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add reactions to the in-memory repository
 
 ---
 
