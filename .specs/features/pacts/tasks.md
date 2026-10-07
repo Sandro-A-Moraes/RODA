@@ -190,13 +190,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] Tests first: 3 members and 2 check-ins give "2 de 3" and 67; N=0; N changes after check-ins; `Pact` has no member list
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first: 3 members and 2 check-ins give "2 de 3" and 67; N=0; N changes after check-ins; `Pact` has no member list
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: `test(pacts): cover collective progress rules`
+**Status**: Done
+**Commit**: `test(pacts): cover collective progress rules` (this commit)
 
 ---
 
