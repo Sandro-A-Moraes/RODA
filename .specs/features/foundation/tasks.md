@@ -321,16 +321,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Each of the six codes yields a non-empty default message; `unknown` is exactly "Algo deu errado. Tente novamente." and `network` is exactly "Sem conexão. Verifique sua internet e tente novamente."
-- [ ] A custom message overrides the default
-- [ ] `src/core/errors/index.ts` re-exports the symbols
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 3 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Each of the six codes yields a non-empty default message; `unknown` is exactly "Algo deu errado. Tente novamente." and `network` is exactly "Sem conexão. Verifique sua internet e tente novamente."
+- [x] A custom message overrides the default
+- [x] `src/core/errors/index.ts` re-exports the symbols
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 3 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(core): add AppError and error codes`
 
 ---
