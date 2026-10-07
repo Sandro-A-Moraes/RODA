@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: In progress (retroactive: the code of T1-T2 and the UI was written before Specify/Design/Tasks; this plan brings it to spec-driven completeness). T1-T7 are the non-UI half; T-UI-* belong to the presentation work.
+**Status**: Done, Verifier PASS (2026-10-07, see `validation.md`). Retroactive: the code of T1-T2 and the UI was written before Specify/Design/Tasks; this plan brought it to spec-driven completeness. T1-T7 are the non-UI half; T-UI-* are the presentation work.
 
 ---
 
@@ -171,7 +171,7 @@ T-UI-3 → T8
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `fix(pacts): show the Portuguese rule for non-string pact input` (this commit)
+**Commit**: `401969d` (`fix(pacts): show the Portuguese rule for non-string pact input`)
 
 ---
 
@@ -196,7 +196,7 @@ T-UI-3 → T8
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `test(pacts): cover collective progress rules` (this commit)
+**Commit**: `3d131b9` (`test(pacts): cover collective progress rules`)
 
 ---
 
@@ -222,7 +222,7 @@ T-UI-3 → T8
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `fix(pacts): reject non-members in the in-memory repository` (this commit)
+**Commit**: `b8e2bd2` (`fix(pacts): reject non-members in the in-memory repository`)
 
 ---
 
@@ -247,7 +247,7 @@ T-UI-3 → T8
 **Tests**: unit
 **Gate**: full
 **Status**: Done
-**Commit**: `fix(pacts): report not_found for pacts that no longer exist` (this commit)
+**Commit**: `eaf1e6b` (`fix(pacts): report not_found for pacts that no longer exist`)
 
 ---
 
@@ -272,7 +272,7 @@ T-UI-3 → T8
 **Tests**: none
 **Gate**: build
 **Status**: Done
-**Commit**: `fix(db): make pact title and description caps trim-aware` (this commit)
+**Commit**: `a11811d` (`fix(db): make pact title and description caps trim-aware`)
 
 ---
 
@@ -290,13 +290,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] One test per List AC (5-7) and Progress AC (1-3, 5)
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] One test per List AC (5-7) and Progress AC (1-3, 5)
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: `test(pacts): cover the pacts view`
+**Status**: Done
+**Commit**: `fd43759` (`test(pacts): cover the pact list states, ordering and progress card`)
 
 ---
 
@@ -314,13 +314,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] One test per Create AC (1-3) and Edit AC (1)
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] One test per Create AC (1-3) and Edit AC (1)
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
-**Commit**: `test(pacts): cover the pact form screen`
+**Status**: Done
+**Commit**: `b95d0a8` (`feat(pacts): match the pact form to Figma and surface edit load failures`)
 
 ---
 
@@ -338,13 +338,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] One test per Check-in AC (1-6), Progress AC (4) and Edit/delete AC (2-7)
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] One test per Check-in AC (1-6), Progress AC (4) and Edit/delete AC (2-7)
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
-**Commit**: `test(pacts): cover the pact detail screen`
+**Status**: Done
+**Commit**: `be9ac09` (`feat(pacts): test the pact detail flows and use a theme color for the scrim`)
 
 ---
 
@@ -362,13 +362,13 @@ T-UI-3 → T8
 
 **Done when**:
 
-- [ ] Every requirement lists its tasks
-- [ ] `validate_tasks.py` exits 0 on this file
+- [x] Every requirement lists its tasks
+- [x] `validate_tasks.py` exits 0 on this file
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
-**Commit**: `docs(pacts): map requirements to tasks`
+**Status**: Done
+**Commit**: `docs(pacts): add the Verifier validation report and map requirements` (this commit)
 
 ---
 

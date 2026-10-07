@@ -6,9 +6,9 @@ Commitments made to other people hold better than personal goals. A pact is a co
 
 ## Goals
 
-- [ ] Members can create, view, edit and delete pacts of their circle.
-- [ ] Each member can check in once per pact per day.
-- [ ] The pact shows collective progress with no per-person ranking.
+- [x] Members can create, view, edit and delete pacts of their circle.
+- [x] Each member can check in once per pact per day.
+- [x] The pact shows collective progress with no per-person ranking.
 
 ## Out of Scope
 
@@ -128,19 +128,19 @@ Commitments made to other people hold better than personal goals. A pact is a co
 
 ## Requirement Traceability
 
-| Requirement ID | Story | Phase | Status |
+| Requirement ID | Story | Tasks | Status |
 | -------------- | ----- | ----- | ------ |
-| PACT-01 | P1: Create and list (AC 1-3) | Specify | Pending |
-| PACT-02 | P1: Create and list (AC 4-7) | Specify | Pending |
-| PACT-03 | P1: Check in (AC 1-3) | Specify | Pending |
-| PACT-04 | P1: Check in (AC 4-5) | Specify | Pending |
-| PACT-05 | P1: Check in (AC 6) and Progress (AC 5) | Specify | Pending |
-| PACT-06 | P1: Progress (AC 1-3) | Specify | Pending |
-| PACT-07 | P1: Progress (AC 4) | Specify | Pending |
-| PACT-08 | P1: Edit and delete (AC 1-2) | Specify | Pending |
-| PACT-09 | P1: Edit and delete (AC 3-7) | Specify | Pending |
+| PACT-01 | P1: Create and list (AC 1-3) | T1, T2, T3, T7, T-UI-2 | Verified |
+| PACT-02 | P1: Create and list (AC 4-7) | T1, T2, T5, T-UI-1 | Verified |
+| PACT-03 | P1: Check in (AC 1-3) | T1, T2, T5, T-UI-3 | Verified |
+| PACT-04 | P1: Check in (AC 4-5) | T1, T5, T6, T-UI-3 | Verified |
+| PACT-05 | P1: Check in (AC 6) and Progress (AC 5) | T1, T4, T-UI-1, T-UI-3 | Verified |
+| PACT-06 | P1: Progress (AC 1-3) | T1, T2, T4, T-UI-1, T-UI-3 | Verified |
+| PACT-07 | P1: Progress (AC 4) | T4, T-UI-3 | Verified |
+| PACT-08 | P1: Edit and delete (AC 1-2) | T1, T2, T5, T-UI-2, T-UI-3 | Verified |
+| PACT-09 | P1: Edit and delete (AC 3-7) | T1, T2, T5, T6, T-UI-3 | Verified |
 
-**Coverage:** 9 total, 0 mapped to tasks, 9 unmapped ⚠️
+**Coverage:** 9 total, 9 mapped to tasks, 0 unmapped. Verifier PASS 2026-10-07 (`validation.md`); real-backend checks (Success Criteria below) remain manual.
 
 ---
 
