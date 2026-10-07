@@ -598,19 +598,20 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Pressing an enabled button calls `onPress` exactly once
-- [ ] Pressing while `loading` does not call `onPress`; pressing while `disabled` does not call `onPress`
-- [ ] Background is `lightColors.accent` and label color is `lightColors.onAccent`
-- [ ] Minimum height is at least 44
-- [ ] Exposes `accessibilityRole="button"` and `accessibilityState` reflecting disabled/busy
-- [ ] Barrel updated
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 6 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Pressing an enabled button calls `onPress` exactly once
+- [x] Pressing while `loading` does not call `onPress`; pressing while `disabled` does not call `onPress`
+- [x] Background is `lightColors.accent` and label color is `lightColors.onAccent`
+- [x] Minimum height is at least 44
+- [x] Exposes `accessibilityRole="button"` and `accessibilityState` reflecting disabled/busy
+- [x] Barrel updated
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 6 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(ui): add Button component`
 
 ---
