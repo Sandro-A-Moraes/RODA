@@ -229,12 +229,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Tests first, one per case: invalid e-mail gives "E-mail inválido"; 7-char password gives "A senha deve ter pelo menos 8 caracteres" and 8-char passes; name of 1 and 41 chars gives "Nome deve ter entre 2 e 40 caracteres" and 2 and 40 pass; whitespace-only name fails; empty sign-in e-mail or password gives "Campo obrigatório"; sign-in accepts a 3-char password; `"  Ana@Mail.COM "` parses to `ana@mail.com`
-- [ ] Gate check passes: `npm test && npm run typecheck`
-- [ ] Test count: at least 9 new tests pass (no silent deletions)
+- [x] Tests first, one per case: invalid e-mail gives "E-mail inválido"; 7-char password gives "A senha deve ter pelo menos 8 caracteres" and 8-char passes; name of 1 and 41 chars gives "Nome deve ter entre 2 e 40 caracteres" and 2 and 40 pass; whitespace-only name fails; empty sign-in e-mail or password gives "Campo obrigatório"; sign-in accepts a 3-char password; `"  Ana@Mail.COM "` parses to `ana@mail.com`
+- [x] Gate check passes: `npm test && npm run typecheck`
+- [x] Test count: at least 9 new tests pass (no silent deletions)
 
 **Tests**: unit
 **Gate**: full
+**Status**: Done
 
 **Commit**: `feat(auth): add register and sign-in schemas`
 
