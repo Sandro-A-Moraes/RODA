@@ -1,7 +1,6 @@
 import { render, screen, userEvent } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 
-import { minTouchTarget } from '@/core/theme';
 import { TextField } from '@/shared/ui';
 
 describe('TextField', () => {
@@ -73,7 +72,6 @@ describe('TextField', () => {
       screen.getByLabelText('E-mail').props.style,
     );
     expect(style.minHeight).toBeGreaterThanOrEqual(44);
-    expect(style.minHeight).toBe(minTouchTarget);
   });
 
   it('labels the input with the label text', async () => {

@@ -7,7 +7,10 @@ const emailTaken = 'Este e-mail já está cadastrado';
 // Codes from the Supabase Auth error code reference. Mapping is by code and
 // error class only: the backend `message` never reaches the user (AUTH-06).
 const byCode = new Map<string, () => AppError>([
-  ['invalid_credentials', () => createAppError('unauthorized', wrongCredentials)],
+  [
+    'invalid_credentials',
+    () => createAppError('unauthorized', wrongCredentials),
+  ],
   ['user_already_exists', () => createAppError('conflict', emailTaken)],
   ['email_exists', () => createAppError('conflict', emailTaken)],
   ['weak_password', () => createAppError('validation')],

@@ -45,7 +45,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   }, [repo]);
 
   return (
-    <SessionContext.Provider value={session}>{children}</SessionContext.Provider>
+    <SessionContext.Provider value={session}>
+      {children}
+    </SessionContext.Provider>
   );
 }
 

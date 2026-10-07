@@ -67,7 +67,11 @@ describe('RegisterScreen', () => {
 
   it.each([
     ['E-mail', { email: 'ana.mail.com' }, 'E-mail inválido'],
-    ['Senha', { password: '1234567' }, 'A senha deve ter pelo menos 8 caracteres'],
+    [
+      'Senha',
+      { password: '1234567' },
+      'A senha deve ter pelo menos 8 caracteres',
+    ],
     ['Nome', { name: 'A' }, 'Nome deve ter entre 2 e 40 caracteres'],
   ])(
     'shows the exact message on the %s field and does not call the repository',

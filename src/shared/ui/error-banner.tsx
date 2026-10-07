@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 
 import type { AppError } from '@/core/errors';
-import { useTheme } from '@/core/theme';
+import { radius, useTheme } from '@/core/theme';
 
 import { Button } from './button';
 import { Text } from './text';
@@ -23,11 +23,19 @@ export function ErrorBanner({ error, onRetry }: ErrorBannerProps) {
         backgroundColor: colors.accent,
         padding: spacing.md,
         gap: spacing.sm,
-        borderRadius: 8,
+        borderRadius: radius.md,
       }}
     >
-      <Text style={{ color: colors.onAccent }}>{error.message}</Text>
-      {onRetry ? <Button label="Tentar novamente" onPress={onRetry} /> : null}
+      <Text type="bodyStrong" style={{ color: colors.onAccent }}>
+        {error.message}
+      </Text>
+      {onRetry ? (
+        <Button
+          label="Tentar novamente"
+          variant="secondary"
+          onPress={onRetry}
+        />
+      ) : null}
     </View>
   );
 }

@@ -1,5 +1,14 @@
 export { Text } from './text';
+export type { TextType } from './text';
 export { Screen } from './screen';
 export { Button } from './button';
 export { TextField } from './text-field';
 export { ErrorBanner } from './error-banner';
+export { Icon } from './icon';
+export type { IconName } from './icon';
+export { Ring } from './ring';
+export { Avatar } from './avatar';
+export { Chip } from './chip';
+export { Card } from './card';
+export { EmptyState } from './empty-state';
+export { Header } from './header';

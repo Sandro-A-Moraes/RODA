@@ -47,7 +47,10 @@ describe('useAuthAction', () => {
   });
 
   it('sets error on an error result and clears it on a later success', async () => {
-    const failure = createAppError('unauthorized', 'E-mail ou senha incorretos');
+    const failure = createAppError(
+      'unauthorized',
+      'E-mail ou senha incorretos',
+    );
     const action = jest
       .fn<Promise<Result<string>>, []>()
       .mockResolvedValueOnce(err(failure))

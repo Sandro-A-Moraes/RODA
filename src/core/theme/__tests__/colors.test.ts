@@ -9,6 +9,14 @@ const roles = [
   'accent',
   'onAccent',
   'decorative',
+  'brand',
+  'onBrand',
+  'card',
+  'inverse',
+  'onInverse',
+  'onInverseSecondary',
+  'track',
+  'border',
 ];
 
 describe('palette', () => {
@@ -32,7 +40,7 @@ describe('palette', () => {
 });
 
 describe('lightColors', () => {
-  it('has exactly the 8 semantic roles', () => {
+  it('has exactly the 16 semantic roles', () => {
     expect(Object.keys(lightColors).sort()).toEqual([...roles].sort());
   });
 
@@ -46,12 +54,20 @@ describe('lightColors', () => {
       accent: palette.terra,
       onAccent: palette.cream,
       decorative: palette.sage,
+      brand: palette.forest,
+      onBrand: palette.cream,
+      card: palette.sand,
+      inverse: palette.forest,
+      onInverse: palette.cream,
+      onInverseSecondary: palette.sage,
+      track: palette.cream,
+      border: palette.muted,
     });
   });
 });
 
 describe('darkColors', () => {
-  it('has the same 8 role keys as lightColors', () => {
+  it('has the same 16 role keys as lightColors', () => {
     expect(Object.keys(darkColors).sort()).toEqual(
       Object.keys(lightColors).sort(),
     );
@@ -67,6 +83,14 @@ describe('darkColors', () => {
       accent: palette.glow,
       onAccent: palette.forest,
       decorative: palette.glow,
+      brand: palette.cream,
+      onBrand: palette.forest,
+      card: palette.forest2,
+      inverse: palette.forest2,
+      onInverse: palette.cream,
+      onInverseSecondary: palette.sage,
+      track: palette.forest,
+      border: palette.sage,
     });
   });
 });

@@ -19,21 +19,24 @@ export function useAuthAction<A extends unknown[], T>(
   const locked = useRef(false);
   const lastArgs = useRef<A | null>(null);
 
-  const run = useCallback(async (...args: A) => {
-    if (locked.current) return;
-    locked.current = true;
-    lastArgs.current = args;
-    setPending(true);
-    try {
-      const result = await action(...args);
-      setError(result.ok ? null : result.error);
-    } catch (thrown) {
-      setError(mapError(thrown));
-    } finally {
-      locked.current = false;
-      setPending(false);
-    }
-  }, [action]);
+  const run = useCallback(
+    async (...args: A) => {
+      if (locked.current) return;
+      locked.current = true;
+      lastArgs.current = args;
+      setPending(true);
+      try {
+        const result = await action(...args);
+        setError(result.ok ? null : result.error);
+      } catch (thrown) {
+        setError(mapError(thrown));
+      } finally {
+        locked.current = false;
+        setPending(false);
+      }
+    },
+    [action],
+  );
 
   const retry = useCallback(async () => {
     if (lastArgs.current) await run(...lastArgs.current);

@@ -1,7 +1,11 @@
 import { InMemoryAuthRepository } from '../data/in-memory-auth-repository';
 import { registerUser } from '../domain/register-user';
 
-const valid = { displayName: 'Ana', email: 'ana@mail.com', password: '12345678' };
+const valid = {
+  displayName: 'Ana',
+  email: 'ana@mail.com',
+  password: '12345678',
+};
 
 describe('registerUser', () => {
   it('returns the created user for valid input and starts a session', async () => {
@@ -11,7 +15,11 @@ describe('registerUser', () => {
 
     expect(result).toEqual({
       ok: true,
-      value: { id: expect.any(String), email: 'ana@mail.com', displayName: 'Ana' },
+      value: {
+        id: expect.any(String),
+        email: 'ana@mail.com',
+        displayName: 'Ana',
+      },
     });
     expect(await repo.getCurrentUser()).toEqual({
       ok: true,
@@ -39,8 +47,16 @@ describe('registerUser', () => {
 
   it.each([
     ['e-mail', { email: 'ana.mail.com' }, 'E-mail inválido'],
-    ['password', { password: '1234567' }, 'A senha deve ter pelo menos 8 caracteres'],
-    ['display name', { displayName: 'A' }, 'Nome deve ter entre 2 e 40 caracteres'],
+    [
+      'password',
+      { password: '1234567' },
+      'A senha deve ter pelo menos 8 caracteres',
+    ],
+    [
+      'display name',
+      { displayName: 'A' },
+      'Nome deve ter entre 2 e 40 caracteres',
+    ],
   ])(
     'returns validation for an invalid %s without calling the repository',
     async (_field, override, message) => {

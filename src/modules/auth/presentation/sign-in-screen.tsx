@@ -28,12 +28,10 @@ export function SignInScreen({ onNavigateToRegister }: SignInScreenProps) {
     [repo],
   );
   const { run, retry, pending, error } = useAuthAction(signIn);
-  const { control, handleSubmit } = useForm<SignInForm, unknown, SignInValues>(
-    {
-      resolver: zodResolver(signInSchema),
-      defaultValues: { email: '', password: '' },
-    },
-  );
+  const { control, handleSubmit } = useForm<SignInForm, unknown, SignInValues>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: { email: '', password: '' },
+  });
 
   return (
     <Screen>

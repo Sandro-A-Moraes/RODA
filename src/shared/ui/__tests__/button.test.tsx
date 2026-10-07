@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { StyleSheet } from 'react-native';
 
-import { lightColors, minTouchTarget } from '@/core/theme';
+import { lightColors } from '@/core/theme';
 import { Button } from '@/shared/ui';
 
 describe('Button', () => {
@@ -32,13 +32,13 @@ describe('Button', () => {
     expect(onPress).not.toHaveBeenCalled();
   });
 
-  it('uses accent as background and onAccent as label color', async () => {
+  it('uses brand as background and onBrand as label color', async () => {
     await render(<Button label="Entrar" onPress={jest.fn()} />);
 
     const button = StyleSheet.flatten(screen.getByRole('button').props.style);
     const label = StyleSheet.flatten(screen.getByText('Entrar').props.style);
-    expect(button.backgroundColor).toBe(lightColors.accent);
-    expect(label.color).toBe(lightColors.onAccent);
+    expect(button.backgroundColor).toBe(lightColors.brand);
+    expect(label.color).toBe(lightColors.onBrand);
   });
 
   it('has a minimum height of at least 44', async () => {
@@ -46,7 +46,6 @@ describe('Button', () => {
 
     const button = StyleSheet.flatten(screen.getByRole('button').props.style);
     expect(button.minHeight).toBeGreaterThanOrEqual(44);
-    expect(button.minHeight).toBe(minTouchTarget);
   });
 
   it('exposes the button role and the label', async () => {

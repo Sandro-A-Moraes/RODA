@@ -21,6 +21,14 @@ export const lightColors = {
   accent: palette.terra,
   onAccent: palette.cream,
   decorative: palette.sage,
+  brand: palette.forest,
+  onBrand: palette.cream,
+  card: palette.sand,
+  inverse: palette.forest,
+  onInverse: palette.cream,
+  onInverseSecondary: palette.sage,
+  track: palette.cream,
+  border: palette.muted,
 } as const;
 
 export const darkColors = {
@@ -32,6 +40,14 @@ export const darkColors = {
   accent: palette.glow,
   onAccent: palette.forest,
   decorative: palette.glow,
+  brand: palette.cream,
+  onBrand: palette.forest,
+  card: palette.forest2,
+  inverse: palette.forest2,
+  onInverse: palette.cream,
+  onInverseSecondary: palette.sage,
+  track: palette.forest,
+  border: palette.sage,
 } as const;
 
 export type ColorRole = keyof typeof lightColors;

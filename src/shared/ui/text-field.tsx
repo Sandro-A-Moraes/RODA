@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import type { TextInputProps } from 'react-native';
 
-import { minTouchTarget, useTheme } from '@/core/theme';
+import { minTouchTarget, radius, useTheme } from '@/core/theme';
 
 import { Text } from './text';
 
@@ -10,6 +10,7 @@ export interface TextFieldProps extends TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
   error?: string;
+  helper?: string;
 }
 
 export function TextField({
@@ -17,13 +18,14 @@ export function TextField({
   value,
   onChangeText,
   error,
+  helper,
   style,
   ...rest
 }: TextFieldProps) {
   const { colors, spacing, typography } = useTheme();
   return (
     <View style={{ gap: spacing.xs }}>
-      <Text variant="secondary">{label}</Text>
+      <Text type="captionStrong">{label}</Text>
       <TextInput
         accessibilityLabel={label}
         accessibilityHint={error}
@@ -33,9 +35,10 @@ export function TextField({
         style={[
           styles.input,
           {
-            backgroundColor: colors.backgroundAlt,
-            borderColor: error ? colors.accent : colors.decorative,
+            backgroundColor: colors.card,
+            borderColor: error ? colors.accent : colors.border,
             color: colors.textPrimary,
+            fontFamily: typography.fonts.body,
             fontSize: typography.sizes.body,
             paddingHorizontal: spacing.md,
           },
@@ -44,10 +47,12 @@ export function TextField({
         {...rest}
       />
       {error ? (
-        <Text
-          style={{ color: colors.accent, fontSize: typography.sizes.caption }}
-        >
+        <Text type="caption" style={{ color: colors.accent }}>
           {error}
+        </Text>
+      ) : helper ? (
+        <Text type="caption" variant="secondary">
+          {helper}
         </Text>
       ) : null}
     </View>
@@ -56,8 +61,8 @@ export function TextField({
 
 const styles = StyleSheet.create({
   input: {
-    minHeight: minTouchTarget,
+    minHeight: Math.max(52, minTouchTarget),
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: radius.md,
   },
 });
