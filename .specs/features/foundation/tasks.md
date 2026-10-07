@@ -445,16 +445,17 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] `minTouchTarget` equals 44
-- [ ] `spacing` values are strictly increasing and multiples of 4
-- [ ] `typography.sizes` includes a body size at least 16 and a heading size larger than body
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 3 new tests pass
+- [x] Tests first: fail, then pass
+- [x] `minTouchTarget` equals 44
+- [x] `spacing` values are strictly increasing and multiples of 4
+- [x] `typography.sizes` includes a body size at least 16 and a heading size larger than body
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 3 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(theme): add typography and spacing tokens`
 
 ---
