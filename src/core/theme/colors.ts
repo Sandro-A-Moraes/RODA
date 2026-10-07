@@ -27,6 +27,7 @@ export const lightColors = {
   inverse: palette.forest,
   onInverse: palette.cream,
   onInverseSecondary: palette.sage,
+  inverseTrack: palette.forest2,
   track: palette.cream,
   border: palette.muted,
 } as const;
@@ -46,6 +47,7 @@ export const darkColors = {
   inverse: palette.forest2,
   onInverse: palette.cream,
   onInverseSecondary: palette.sage,
+  inverseTrack: palette.forest,
   track: palette.forest,
   border: palette.sage,
 } as const;

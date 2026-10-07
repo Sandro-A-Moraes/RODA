@@ -15,6 +15,7 @@ const roles = [
   'inverse',
   'onInverse',
   'onInverseSecondary',
+  'inverseTrack',
   'track',
   'border',
 ];
@@ -40,7 +41,7 @@ describe('palette', () => {
 });
 
 describe('lightColors', () => {
-  it('has exactly the 16 semantic roles', () => {
+  it('has exactly the 17 semantic roles', () => {
     expect(Object.keys(lightColors).sort()).toEqual([...roles].sort());
   });
 
@@ -60,6 +61,7 @@ describe('lightColors', () => {
       inverse: palette.forest,
       onInverse: palette.cream,
       onInverseSecondary: palette.sage,
+      inverseTrack: palette.forest2,
       track: palette.cream,
       border: palette.muted,
     });
@@ -67,7 +69,7 @@ describe('lightColors', () => {
 });
 
 describe('darkColors', () => {
-  it('has the same 16 role keys as lightColors', () => {
+  it('has the same 17 role keys as lightColors', () => {
     expect(Object.keys(darkColors).sort()).toEqual(
       Object.keys(lightColors).sort(),
     );
@@ -89,6 +91,7 @@ describe('darkColors', () => {
       inverse: palette.forest2,
       onInverse: palette.cream,
       onInverseSecondary: palette.sage,
+      inverseTrack: palette.forest,
       track: palette.forest,
       border: palette.sage,
     });
