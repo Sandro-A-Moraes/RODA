@@ -419,13 +419,14 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] Implements every `AuthRepository` method; no `error.message` is returned to callers
-- [ ] Client is constructor-injected (no import of the singleton in this file)
-- [ ] `npm test && npm run typecheck && npm run lint` pass; existing test count unchanged
-- [ ] Manual coverage deferred to T24 by design (AD-002)
+- [x] Implements every `AuthRepository` method; no `error.message` is returned to callers
+- [x] Client is constructor-injected (no import of the singleton in this file)
+- [x] `npm test && npm run typecheck && npm run lint` pass; existing test count unchanged
+- [x] Manual coverage deferred to T24 by design (AD-002)
 
 **Tests**: none
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(auth): add supabase auth repository`
 
