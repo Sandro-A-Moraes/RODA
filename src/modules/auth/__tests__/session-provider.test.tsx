@@ -96,6 +96,25 @@ describe('SessionProvider', () => {
     expect(session()).toBe('signedIn:Ana');
   });
 
+  it('keeps an auth event that arrives before the restore resolves', async () => {
+    const repo = await signedInRepository();
+    await repo.signOut();
+    let resolve: (value: Result<AuthUser | null>) => void = () => undefined;
+    jest
+      .spyOn(repo, 'getCurrentUser')
+      .mockReturnValue(new Promise((r) => (resolve = r)));
+    await renderSession(repo);
+    expect(session()).toBe('loading:none');
+
+    await act(async () => {
+      await repo.signIn({ email: ana.email, password: ana.password });
+    });
+    expect(session()).toBe('signedIn:Ana');
+    await act(async () => resolve(ok(null)));
+
+    expect(session()).toBe('signedIn:Ana');
+  });
+
   it('unsubscribes from the repository on unmount', async () => {
     const repo = await signedInRepository();
     const unsubscribe = jest.fn();
