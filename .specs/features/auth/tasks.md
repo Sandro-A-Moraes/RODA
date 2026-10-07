@@ -175,12 +175,13 @@ T18 → T19 → T20 → T21 → T22 → T23 → T24
 
 **Done when**:
 
-- [ ] `src/core/supabase/index.ts` exports `supabase` and `readSupabaseConfig`
-- [ ] No hex literals, no secret key usage; only the two `EXPO_PUBLIC_` variables are read
-- [ ] `npm test && npm run typecheck && npm run lint` pass; existing test count unchanged
+- [x] `src/core/supabase/index.ts` exports `supabase` and `readSupabaseConfig`
+- [x] No hex literals, no secret key usage; only the two `EXPO_PUBLIC_` variables are read
+- [x] `npm test && npm run typecheck && npm run lint` pass; existing test count unchanged
 
 **Tests**: none
 **Gate**: build
+**Status**: Done
 
 **Commit**: `feat(core): add supabase client with persisted session`
 
