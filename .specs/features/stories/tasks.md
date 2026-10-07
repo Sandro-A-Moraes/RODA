@@ -236,14 +236,14 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `stories-view.test.tsx`
-- [ ] No hex literals; colors come from `src/core/theme`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `stories-view.test.tsx`
+- [x] No hex literals; colors come from `src/core/theme`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
-**Commit**: -
+**Status**: Done
+**Commit**: feat(stories): add the finite stories feed view
 
 ---
 
