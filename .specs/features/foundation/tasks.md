@@ -414,17 +414,18 @@ T17 → T22
 
 **Done when**:
 
-- [ ] Tests first: fail, then pass
-- [ ] Each of the 9 palette entries equals the hex in `docs/DESIGN_SYSTEM.md` (one assertion per color)
-- [ ] `lightColors` has exactly the 8 roles with the mapping from the document (e.g. `accent` is `palette.terra`, `onAccent` is `palette.cream`)
-- [ ] `darkColors` has the same 8 role keys with the dark mapping (e.g. `accent` is `palette.glow`)
-- [ ] The hex lint rule does not flag this file
-- [ ] Gate passes: `npm test && npm run typecheck && npm run lint`
-- [ ] Test count: ≥ 4 new tests pass
+- [x] Tests first: fail, then pass
+- [x] Each of the 9 palette entries equals the hex in `docs/DESIGN_SYSTEM.md` (one assertion per color)
+- [x] `lightColors` has exactly the 8 roles with the mapping from the document (e.g. `accent` is `palette.terra`, `onAccent` is `palette.cream`)
+- [x] `darkColors` has the same 8 role keys with the dark mapping (e.g. `accent` is `palette.glow`)
+- [x] The hex lint rule does not flag this file
+- [x] Gate passes: `npm test && npm run typecheck && npm run lint`
+- [x] Test count: ≥ 4 new tests pass
 
 **Tests**: unit
 **Gate**: build
 
+**Status**: Done
 **Commit**: `feat(theme): add palette and light/dark color roles`
 
 ---
