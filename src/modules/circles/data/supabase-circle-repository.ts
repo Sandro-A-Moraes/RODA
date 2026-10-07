@@ -36,7 +36,11 @@ export function mapCircleError(thrown: unknown): AppError {
   if (message.includes('circle_full')) {
     return createAppError('conflict', 'Este círculo está cheio');
   }
-  if (message.includes('already_member')) {
+  // Two simultaneous joins by the same user race past the existence check.
+  if (
+    message.includes('already_member') ||
+    message.includes('circle_members_pkey')
+  ) {
     return createAppError('conflict', 'Você já faz parte deste círculo');
   }
   if (message.includes('not_found')) {
