@@ -284,6 +284,17 @@ describe('OnboardingScreen', () => {
       expect(onExit).not.toHaveBeenCalled();
       expect(await store.hasSeen()).toBe(false);
     });
+
+    it('walks back from page 3 to page 1 and leaves no listener behind', async () => {
+      const { onExit } = await renderOnboarding();
+      await goToPage(3);
+
+      expect(await pressSystemBack()).toBe(true);
+      expect(await pressSystemBack()).toBe(true);
+      expect(await pressSystemBack()).toBe(false);
+      expect(onExit).not.toHaveBeenCalled();
+      expect(listeners).toHaveLength(0);
+    });
   });
 
   describe('exits', () => {

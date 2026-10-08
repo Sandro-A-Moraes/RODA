@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T15); T11-T15 fix Verifier iteration 1, re-verification pending
+**Status**: Done (T1-T16); T11-T16 fix Verifier iteration 1, re-verification pending
 
 ---
 
@@ -114,7 +114,7 @@ T9 → T10
 From `validation.md` iteration 1 (gaps 1-5).
 
 ```
-T10 → T11 → T12 → T13 → T14 → T15
+T10 → T11 → T12 → T13 → T14 → T15 → T16
 ```
 
 ---
@@ -490,3 +490,27 @@ T10 → T11 → T12 → T13 → T14 → T15
 **Gate**: build
 **Status**: Done
 **Commit**: feat(onboarding): go back a page on the system back
+
+---
+
+### T16: Back listener cleanup (gap 1, M32)
+
+**What**: Test in `onboarding-screen.test.tsx` (`system back`): on page 3, system back returns true twice (page 3 to 2 to 1), then false on page 1 with `onExit` not called, and no listener remains registered. Kills mutant M32 (missing `BackHandler` subscription cleanup).
+**Where**: `src/modules/onboarding/__tests__/onboarding-screen.test.tsx`
+**Depends on**: T15
+**Requirement**: ONB-03
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [x] Test added, green, and fails without the `remove()` cleanup
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Done
+**Commit**: test(onboarding): cover the back listener cleanup
