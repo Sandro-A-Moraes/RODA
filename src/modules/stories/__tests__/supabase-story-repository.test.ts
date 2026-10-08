@@ -1,3 +1,4 @@
+import { SupabaseStoryRepository } from '../data/supabase-story-repository';
 import { mapStoryError } from '../data/map-story-error';
 
 describe('mapStoryError', () => {
@@ -43,5 +44,33 @@ describe('mapStoryError', () => {
     expect(mapStoryError(new TypeError('Network request failed')).code).toBe(
       'network',
     );
+  });
+});
+
+describe('SupabaseStoryRepository author embed', () => {
+  it('names the author foreign key so the profiles embed is not ambiguous', async () => {
+    const selects: string[] = [];
+    const query: Record<string, unknown> = {
+      select: (columns: string) => {
+        selects.push(columns);
+        return query;
+      },
+      eq: () => query,
+      gte: () => query,
+      order: () => query,
+      then: (resolve: (value: unknown) => void) =>
+        resolve({ data: [], error: null }),
+    };
+    const client = {
+      auth: {
+        getSession: async () => ({ data: { session: { user: { id: 'u1' } } } }),
+      },
+      from: () => query,
+    };
+    const repo = new SupabaseStoryRepository(client as never);
+
+    await repo.listByCircle('c1', '2026-10-07');
+
+    expect(selects[0]).toContain('profiles!stories_author_id_fkey(');
   });
 });

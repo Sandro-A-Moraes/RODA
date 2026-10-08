@@ -19,7 +19,9 @@ interface StoryRow {
   author_id: string;
   body: string;
   day: string;
-  // Many-to-one embed through stories.author_id; null if RLS hides it.
+  // Many-to-one embed through stories.author_id; null if RLS hides it. The FK
+  // hint is required: profiles is also reachable through story_reactions, and
+  // an unhinted embed is ambiguous (PostgREST answers 300).
   profiles: { display_name: string } | null;
 }
 
@@ -29,7 +31,8 @@ interface ReactionRow {
   kind: ReactionKind;
 }
 
-const columns = 'id, circle_id, author_id, body, day, profiles(display_name)';
+const columns =
+  'id, circle_id, author_id, body, day, profiles!stories_author_id_fkey(display_name)';
 
 // Thin adapter, validated manually against the real project (AD-002).
 export class SupabaseStoryRepository implements StoryRepository {
