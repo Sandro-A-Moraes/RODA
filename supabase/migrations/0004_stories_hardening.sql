@@ -1,6 +1,6 @@
 -- Stories hardening (validation gaps 1-3 of .specs/features/stories/validation.md).
 -- Closes server-side holes that only a crafted API call can reach.
--- Not yet applied to project RODA.
+-- Applied to project RODA on 2026-10-08.
 
 -- 1. A reaction update must satisfy the same rules as an insert. Without this,
 -- a PATCH (or an upsert that hits a conflict) could move a reaction onto the
