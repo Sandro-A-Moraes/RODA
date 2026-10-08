@@ -1,12 +1,12 @@
 import { DMSans_400Regular, DMSans_700Bold } from '@expo-google-fonts/dm-sans';
 import { Fraunces_600SemiBold } from '@expo-google-fonts/fraunces';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 
 import { DependencyProvider, provide } from '@/core/di';
 import { supabase } from '@/core/supabase';
 import {
   authRepositoryToken,
-  RootNavigator,
   SessionProvider,
   SupabaseAuthRepository,
 } from '@/modules/auth';
@@ -14,6 +14,12 @@ import {
   circleRepositoryToken,
   SupabaseCircleRepository,
 } from '@/modules/circles';
+import {
+  AsyncStorageOnboardingStore,
+  LaunchNavigator,
+  OnboardingProvider,
+  onboardingStoreToken,
+} from '@/modules/onboarding';
 import { pactRepositoryToken, SupabasePactRepository } from '@/modules/pacts';
 import {
   storyRepositoryToken,
@@ -26,6 +32,7 @@ const provisions = [
   provide(circleRepositoryToken, new SupabaseCircleRepository(supabase)),
   provide(pactRepositoryToken, new SupabasePactRepository(supabase)),
   provide(storyRepositoryToken, new SupabaseStoryRepository(supabase)),
+  provide(onboardingStoreToken, new AsyncStorageOnboardingStore(AsyncStorage)),
 ];
 
 export default function RootLayout() {
@@ -41,7 +48,9 @@ export default function RootLayout() {
   return (
     <DependencyProvider provisions={provisions}>
       <SessionProvider>
-        <RootNavigator />
+        <OnboardingProvider>
+          <LaunchNavigator />
+        </OnboardingProvider>
       </SessionProvider>
     </DependencyProvider>
   );

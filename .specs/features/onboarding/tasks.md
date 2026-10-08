@@ -328,12 +328,12 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `tooling/__tests__/onboarding-route.test.tsx`; `root-layout.test.tsx` updated
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `tooling/__tests__/onboarding-route.test.tsx`; `root-layout.test.tsx` updated
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): wire the onboarding route and the launch flow
 
 ---

@@ -1,5 +1,6 @@
 // Lives outside `app/`: Expo Router turns every file there into a route.
-import { renderRouter, screen } from 'expo-router/testing-library';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fireEvent, renderRouter, screen } from 'expo-router/testing-library';
 
 import { SupabaseAuthRepository } from '@/modules/auth';
 
@@ -8,6 +9,7 @@ import AppLayout from '../../app/(app)/_layout';
 import TabsLayout from '../../app/(app)/(tabs)/_layout';
 import CirclesRoute from '../../app/(app)/(tabs)/index';
 import MainRoute from '../../app/(app)/(tabs)/profile';
+import OnboardingRoute from '../../app/(auth)/onboarding';
 import RegisterRoute from '../../app/(auth)/register';
 import SignInRoute from '../../app/(auth)/sign-in';
 
@@ -25,24 +27,72 @@ jest.mock('@/modules/auth', () => {
   };
 });
 
+// AsyncStorage throws at import under Jest; its official mock keeps items in memory.
+jest.mock('@react-native-async-storage/async-storage', () =>
+  jest.requireActual(
+    '@react-native-async-storage/async-storage/jest/async-storage-mock',
+  ),
+);
+
+// The layout renders LaunchNavigator without props; drop the 1200 ms minimum so
+// the test does not wait. Everything else is the real module.
+jest.mock('@/modules/onboarding', () => {
+  const actual = jest.requireActual('@/modules/onboarding');
+  const { createElement } = jest.requireActual('react');
+  return {
+    ...actual,
+    LaunchNavigator: () =>
+      createElement(actual.LaunchNavigator, { minSplashMs: 0 }),
+  };
+});
+
+beforeEach(async () => {
+  await AsyncStorage.clear();
+});
+
 afterEach(() => {
   jest.useRealTimers();
 });
 
+function renderLayout() {
+  return renderRouter(
+    {
+      _layout: RootLayout,
+      '(app)/_layout': AppLayout,
+      '(app)/(tabs)/_layout': TabsLayout,
+      '(app)/(tabs)/index': CirclesRoute,
+      '(app)/(tabs)/profile': MainRoute,
+      '(auth)/onboarding': OnboardingRoute,
+      '(auth)/sign-in': SignInRoute,
+      '(auth)/register': RegisterRoute,
+    },
+    { initialUrl: '/' },
+  );
+}
+
 describe('root layout', () => {
+  it('opens onboarding on a fresh device and stores the flag in AsyncStorage on exit', async () => {
+    const result = renderLayout();
+    await result;
+
+    expect(
+      await screen.findByText('Um círculo pequeno, de gente que você conhece.'),
+    ).toBeTruthy();
+    expect(result.getPathname()).toBe('/onboarding');
+    expect(await AsyncStorage.getItem('roda.onboarding.seen')).toBeNull();
+
+    await fireEvent.press(screen.getByRole('button', { name: 'Pular' }));
+
+    expect(
+      await screen.findByRole('button', { name: 'Criar conta' }),
+    ).toBeTruthy();
+    expect(result.getPathname()).toBe('/register');
+    expect(await AsyncStorage.getItem('roda.onboarding.seen')).toBe('true');
+  });
+
   it('provides the repository built from the supabase client and shows sign-in when signed out', async () => {
-    const result = renderRouter(
-      {
-        _layout: RootLayout,
-        '(app)/_layout': AppLayout,
-        '(app)/(tabs)/_layout': TabsLayout,
-        '(app)/(tabs)/index': CirclesRoute,
-        '(app)/(tabs)/profile': MainRoute,
-        '(auth)/sign-in': SignInRoute,
-        '(auth)/register': RegisterRoute,
-      },
-      { initialUrl: '/' },
-    );
+    await AsyncStorage.setItem('roda.onboarding.seen', 'true');
+    const result = renderLayout();
     await result;
 
     expect(SupabaseAuthRepository).toHaveBeenCalledWith({
