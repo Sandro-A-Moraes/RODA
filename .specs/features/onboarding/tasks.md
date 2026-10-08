@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T16, Verifier PASS); T17-T19 (motion, ONB-06) in progress
+**Status**: Done (T1-T16, Verifier PASS); T17-T19 (motion, ONB-06) done, Verifier not re-run for this delta
 
 ---
 
@@ -587,10 +587,10 @@ T16 → T17 → T18 → T19
 
 **Done when**:
 
-- [ ] Existing navigator and route tests green
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Existing navigator and route tests green
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(auth): fade into the sign-in and register screens

@@ -33,8 +33,9 @@ export function RootNavigator({
         <Stack.Screen name="(auth)/onboarding" />
       </Stack.Protected>
       <Stack.Protected guard={status === 'signedOut'}>
-        <Stack.Screen name="(auth)/sign-in" />
-        <Stack.Screen name="(auth)/register" />
+        {/* Fade, so the onboarding hand-off (a replace) does not slide. */}
+        <Stack.Screen name="(auth)/sign-in" options={{ animation: 'fade' }} />
+        <Stack.Screen name="(auth)/register" options={{ animation: 'fade' }} />
       </Stack.Protected>
     </Stack>
   );
