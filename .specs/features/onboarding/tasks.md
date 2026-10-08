@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: In Progress
+**Status**: Done (T1-T10); Verifier pending
 
 ---
 
@@ -352,10 +352,10 @@ T9 → T10
 
 **Done when**:
 
-- [ ] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py onboarding` passes
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py onboarding` passes
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: docs(onboarding): document the launch flow and update the handoff

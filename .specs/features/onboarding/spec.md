@@ -151,11 +151,11 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| ONB-01 | P1: Splash on every launch | Tasks | Pending |
-| ONB-02 | P1: Launch routing | Tasks | Pending |
-| ONB-03 | P1: Onboarding pages | Tasks | Pending |
-| ONB-04 | P1: Exits and the seen flag | Tasks | Pending |
-| ONB-05 | P1: Flag persistence | Tasks | Pending |
+| ONB-01 | P1: Splash on every launch | Execute | Implemented |
+| ONB-02 | P1: Launch routing | Execute | Implemented |
+| ONB-03 | P1: Onboarding pages | Execute | Implemented |
+| ONB-04 | P1: Exits and the seen flag | Execute | Implemented |
+| ONB-05 | P1: Flag persistence | Execute | Implemented |
 
 **Coverage:** 5 total, 5 mapped to tasks, 0 unmapped
 

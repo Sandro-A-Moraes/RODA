@@ -8,6 +8,7 @@ Roda é uma rede social de círculos pequenos e fechados (no máximo 12 pessoas 
 
 ## Funcionalidades implementadas
 
+- **Abertura e onboarding:** splash (anel de 12 pontos e "Roda") em toda abertura, enquanto a sessão é restaurada (no mínimo 1,2 s). Na primeira abertura sem sessão aparecem três telas de onboarding; "Pular" e "Começar" levam a Criar conta, "Já tenho conta" a Entrar. A marca "já visto" fica no aparelho (AsyncStorage, chave `roda.onboarding.seen`; no web, localStorage), então as próximas aberturas sem sessão vão direto para Entrar e sair da conta não traz o onboarding de volta. Com sessão, o app abre direto em Círculos.
 - **Autenticação:** cadastro, entrada e saída com Supabase Auth, rotas protegidas por sessão, tela de perfil.
 - **Círculos:** criar círculo, entrar por código de convite, lista de membros; limite de 12 membros garantido no banco (trigger na migration `0002`).
 - **Pactos:** CRUD completo (criar, listar, ver, editar, apagar), check-in diário (um por membro por dia) e progresso coletivo do círculo, sem ranking individual.
@@ -39,7 +40,7 @@ src/
   core/                 # theme (papéis de cor), errors (AppError/Result), supabase, di
   shared/               # ui, hooks, date
   modules/
-    auth/ circles/ pacts/ stories/
+    auth/ circles/ pacts/ stories/ onboarding/
       domain/           # entidades, interfaces de repositório, casos de uso, schemas Zod
       data/             # InMemory*Repository (testes) e Supabase*Repository (produção)
       presentation/     # telas, componentes, hooks
@@ -73,7 +74,7 @@ Os repositórios são injetados por um provider de injeção de dependência (`s
    npx expo start --web
    ```
 
-   Depois de adicionar rotas novas, reinicie com `npx expo start --web --clear` (o Metro guarda o mapa de rotas em cache). Para usar o Expo Go, rode `npx expo start` e leia o QR code no aplicativo.
+   Depois de adicionar rotas novas (como `app/(auth)/onboarding.tsx`), reinicie com `npx expo start --web --clear` (o Metro guarda o mapa de rotas em cache). Para ver o onboarding de novo no web, apague a chave `roda.onboarding.seen` do localStorage do site (ou use uma janela anônima). Para usar o Expo Go, rode `npx expo start` e leia o QR code no aplicativo.
 
 ## Como testar
 
