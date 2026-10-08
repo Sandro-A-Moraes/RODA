@@ -302,13 +302,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `launch-navigator.test.tsx` and `tooling/__tests__/onboarding-public-api.test.ts`
-- [ ] AD-008 recorded with Decision, Reason, Trade-off, Scope, Date, Status
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `launch-navigator.test.tsx` and `tooling/__tests__/onboarding-public-api.test.ts`
+- [x] AD-008 recorded with Decision, Reason, Trade-off, Scope, Date, Status
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): compose the launch flow over RootNavigator
 
 ---

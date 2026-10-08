@@ -58,6 +58,14 @@
 - **Date**: 2026-10-07
 - **Status**: active
 
+### AD-008
+- **Decision**: The launch flow lives in the `onboarding` module, which composes the auth `RootNavigator` through the auth public API (`RootNavigator`, `useSession`). `RootNavigator` takes the launch pieces as props (`splash`, `holdSplash`, `showOnboarding`) and never imports onboarding; `LaunchNavigator` (onboarding) reads the session and the device flag and renders `RootNavigator` with them. `app/_layout.tsx` renders `OnboardingProvider` + `LaunchNavigator` inside `SessionProvider`.
+- **Reason**: Dependencies point one way (onboarding -> auth index), so there is no import cycle and the module-boundary lint needs no exception; auth stays testable without onboarding, and the launch logic (minimum splash, flag, mark seen on sign-in) is testable in the module with `renderRouter`.
+- **Trade-off**: The root navigation is split across two modules; adding a signed-out route still means editing `RootNavigator`, and the onboarding route name `(auth)/onboarding` is known by auth.
+- **Scope**: `src/modules/auth/presentation/root-navigator.tsx`, `src/modules/onboarding/`, `app/_layout.tsx`.
+- **Date**: 2026-10-07
+- **Status**: active
+
 ## Handoff
 
 - **Feature**: circles (`.specs/features/circles/`) - done and Verifier PASS (`validation.md`, 18/18 mutants killed); screens aligned to Figma frames 03, 04, 05, 06, 10; manual check on the real backend done
