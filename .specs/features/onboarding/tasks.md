@@ -253,12 +253,12 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `onboarding-screen.test.tsx`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `onboarding-screen.test.tsx`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): add the three onboarding pages
 
 ---
