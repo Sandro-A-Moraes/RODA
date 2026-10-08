@@ -277,12 +277,12 @@ T9 → T10
 
 **Done when**:
 
-- [ ] `tooling/__tests__/root-navigator.test.tsx` updated test-first
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] `tooling/__tests__/root-navigator.test.tsx` updated test-first
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(auth): let RootNavigator show a splash and an onboarding route
 
 ---

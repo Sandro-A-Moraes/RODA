@@ -13,17 +13,35 @@ import { SessionProvider } from '@/modules/auth/presentation/session-provider';
 
 const ana = { displayName: 'Ana', email: 'ana@mail.com', password: '12345678' };
 
-function renderApp(repo: InMemoryAuthRepository, initialUrl: string) {
+interface LaunchProps {
+  holdSplash?: boolean;
+  showOnboarding?: boolean;
+}
+
+function renderApp(
+  repo: InMemoryAuthRepository,
+  initialUrl: string,
+  launch: LaunchProps = {},
+) {
   const signInRendered = jest.fn();
   const mainRendered = jest.fn();
+  const onboardingRendered = jest.fn();
   const routes = {
     _layout: () => (
       <DependencyProvider provisions={[provide(authRepositoryToken, repo)]}>
         <SessionProvider>
-          <RootNavigator />
+          <RootNavigator
+            splash={<Text>splash content</Text>}
+            holdSplash={launch.holdSplash}
+            showOnboarding={launch.showOnboarding}
+          />
         </SessionProvider>
       </DependencyProvider>
     ),
+    '(auth)/onboarding': () => {
+      onboardingRendered();
+      return <Text>onboarding content</Text>;
+    },
     '(auth)/sign-in': () => {
       signInRendered();
       return <Text>sign-in content</Text>;
@@ -35,7 +53,7 @@ function renderApp(repo: InMemoryAuthRepository, initialUrl: string) {
     },
   };
   const result = renderRouter(routes, { initialUrl });
-  return { result, signInRendered, mainRendered };
+  return { result, signInRendered, mainRendered, onboardingRendered };
 }
 
 async function signedInRepository() {
@@ -49,7 +67,7 @@ afterEach(() => {
 });
 
 describe('RootNavigator', () => {
-  it('shows only the loading indicator while the session restores', async () => {
+  it('shows only the given splash while the session restores', async () => {
     const repo = await signedInRepository();
     jest
       .spyOn(repo, 'getCurrentUser')
@@ -58,7 +76,8 @@ describe('RootNavigator', () => {
     const { result, signInRendered, mainRendered } = renderApp(repo, '/');
     await result;
 
-    expect(screen.getByLabelText('Carregando')).toBeTruthy();
+    expect(screen.getByText('splash content')).toBeTruthy();
+    expect(screen.queryByLabelText('Carregando')).toBeNull();
     expect(screen.queryByText('protected content')).toBeNull();
     expect(screen.queryByText('sign-in content')).toBeNull();
     expect(mainRendered).not.toHaveBeenCalled();
@@ -144,5 +163,55 @@ describe('RootNavigator', () => {
     expect(await screen.findByText('sign-in content')).toBeTruthy();
     expect(result.getPathname()).toBe('/sign-in');
     expect(screen.queryByText('protected content')).toBeNull();
+  });
+  it('keeps the splash while holdSplash is set after the session resolves', async () => {
+    const repo = new InMemoryAuthRepository();
+    const { result, signInRendered } = renderApp(repo, '/', {
+      holdSplash: true,
+    });
+    await result;
+    await act(async () => undefined);
+
+    expect(screen.getByText('splash content')).toBeTruthy();
+    expect(screen.queryByText('sign-in content')).toBeNull();
+    expect(signInRendered).not.toHaveBeenCalled();
+  });
+
+  it('lands a signed-out user at / on onboarding when showOnboarding is set', async () => {
+    const { result, signInRendered } = renderApp(
+      new InMemoryAuthRepository(),
+      '/',
+      { showOnboarding: true },
+    );
+    await result;
+
+    expect(await screen.findByText('onboarding content')).toBeTruthy();
+    expect(result.getPathname()).toBe('/onboarding');
+    expect(screen.queryByText('splash content')).toBeNull();
+    expect(signInRendered).not.toHaveBeenCalled();
+  });
+
+  it('redirects a signed-out user opening /onboarding to sign-in when showOnboarding is not set', async () => {
+    const { result, onboardingRendered } = renderApp(
+      new InMemoryAuthRepository(),
+      '/onboarding',
+    );
+    await result;
+
+    expect(await screen.findByText('sign-in content')).toBeTruthy();
+    expect(result.getPathname()).toBe('/sign-in');
+    expect(onboardingRendered).not.toHaveBeenCalled();
+  });
+
+  it('redirects a signed-in user opening /onboarding to the main area even with showOnboarding', async () => {
+    const repo = await signedInRepository();
+    const { result, onboardingRendered } = renderApp(repo, '/onboarding', {
+      showOnboarding: true,
+    });
+    await result;
+
+    expect(await screen.findByText('protected content')).toBeTruthy();
+    expect(result.getPathname()).toBe('/');
+    expect(onboardingRendered).not.toHaveBeenCalled();
   });
 });
