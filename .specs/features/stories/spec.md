@@ -55,6 +55,8 @@ Mainstream feeds reward volume and popularity. Roda offers one short daily refle
 4. IF the member already posted a story in that circle today THEN the system SHALL reject a second story with "Você já compartilhou hoje" and keep a single record.
 5. WHILE the member has already posted today the system SHALL replace the composer with a "Você já compartilhou hoje" notice.
 6. IF a user who is not a member of the circle attempts to post THEN the system SHALL reject it with an `unauthorized` error.
+7. WHILE the member has not posted today the feed SHALL show a prompt "O que você fez offline hoje?" with the action "Escrever relato" that opens the composer.
+8. IF the circle has no stories the empty state SHALL include the action "Escrever relato".
 
 **Independent Test**: Post once, see the composer replaced; try posting again via the repository and see rejection.
 
@@ -117,8 +119,9 @@ Mainstream feeds reward volume and popularity. Roda offers one short daily refle
 | STORY-05 | P1: Feed (AC 6) | Execute (T1, T6) | Implemented |
 | STORY-06 | P2: Reactions (AC 1-4) | Execute (T1, T4, T5, T8) | Implemented |
 | STORY-07 | P2: Reactions (AC 5-6) | Execute (T4, T5, T8) | Implemented |
+| STORY-08 | P1: Post (AC 7-8) | Execute (T11, T12) | Pending |
 
-**Coverage:** 7 total, 7 mapped to tasks, 0 unmapped
+**Coverage:** 8 total, 8 mapped to tasks, 0 unmapped
 
 ---
 

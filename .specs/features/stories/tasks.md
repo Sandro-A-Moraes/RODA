@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T10); pending Verifier.
+**Status**: Done (T1-T10, Verifier PASS); T11-T12 align the feed to Figma frames 17 (`22:601`) and 19 (`24:704`).
 
 ---
 
@@ -90,6 +90,12 @@ T5 → T6 → T7 → T8 → T9
 
 ```
 T9 → T10
+```
+
+### Phase 4: Figma alignment (frames 17 and 19)
+
+```
+T10 → T11 → T12
 ```
 
 ---
@@ -340,3 +346,53 @@ T9 → T10
 **Gate**: build
 **Status**: Done
 **Commit**: docs(stories): mark stories implemented and update the handoff
+
+---
+
+### T11: Write prompt and empty state action
+
+**What**: Tests first in `stories-view.test.tsx` for STORY-08: when the list is non-empty and the member has not posted today the feed starts with the prompt card "O que você fez offline hoje?", caption "Um relato por dia, até 280 caracteres." and the button "Escrever relato"; the prompt is absent once the member posted (the notice shows instead); the empty state shows "Ninguém compartilhou ainda", body "Seja o primeiro a contar o que fez fora da tela hoje." and the button "Escrever relato"; pressing either button calls `onWrite`; the end marker stays last and is absent when empty. Implement in `StoriesView` (new `onWrite: () => void` prop) per Figma 17 (`22:601`) and 19 (`24:704`).
+**Where**: `src/modules/stories/presentation/stories-view.tsx`, `src/modules/stories/__tests__/stories-view.test.tsx`
+**Depends on**: T10
+**Reuses**: `Button`, `Text`, `EmptyState` from `@/shared/ui`; the `PactsView` empty state pattern
+**Requirement**: STORY-08
+
+**Tools**:
+
+- MCP: NONE (frames read by the orchestrator)
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Tests first in `stories-view.test.tsx`; the old empty body assertion updated
+- [ ] No hex literals; colors come from `src/core/theme`
+- [ ] Gate check passes: `npm test && npm run typecheck`
+
+**Tests**: unit
+**Gate**: full
+**Status**: Pending
+**Commit**: feat(stories): add the write prompt and empty state action
+
+---
+
+### T12: Wire `onWrite`, drop the header action, check pacts empty state
+
+**What**: Pass `onWrite` (route `/circles/[id]/stories/new`) to `StoriesView` and remove the "Novo relato" header action (frames 17 and 19 show none). Compare `PactsView` empty state with Figma 18 (`24:616`) and fix only real differences, with a test.
+**Where**: `app/(app)/circles/[id]/index.tsx` (and `src/modules/pacts/presentation/pacts-view.tsx` only if frame 18 differs)
+**Depends on**: T11
+**Requirement**: STORY-08
+
+**Tools**:
+
+- MCP: Figma (frame 18, `24:616`)
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Stories tab has no header action; both "Escrever relato" buttons open the composer
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: none
+**Gate**: build
+**Status**: Pending
+**Commit**: feat(stories): open the composer from the feed and drop the header action
