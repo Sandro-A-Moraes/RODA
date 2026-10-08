@@ -177,12 +177,12 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `async-storage-onboarding-store.test.ts`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `async-storage-onboarding-store.test.ts`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): persist the onboarding flag in AsyncStorage
 
 ---
