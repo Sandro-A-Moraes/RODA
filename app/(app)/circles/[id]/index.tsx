@@ -21,12 +21,9 @@ export default function CircleRoute() {
     router.push({ pathname: '/circles/[id]/pacts/new', params: { id } });
   const newStory = () =>
     router.push({ pathname: '/circles/[id]/stories/new', params: { id } });
+  // Only pacts has a header action (Figma 07, 18); stories writes from the feed (17, 19).
   const addAction =
-    tab === 'pacts'
-      ? { label: 'Novo pacto', onPress: newPact }
-      : tab === 'stories'
-        ? { label: 'Novo relato', onPress: newStory }
-        : undefined;
+    tab === 'pacts' ? { label: 'Novo pacto', onPress: newPact } : undefined;
 
   return (
     <CircleShell

@@ -56,6 +56,12 @@ describe('PactsView', () => {
     const { onCreate } = await renderView(repo);
 
     await screen.findByText('Nenhum pacto ainda');
+    // Body copy from Figma frame 18 (24:616).
+    expect(
+      screen.getByText(
+        'Combinem algo que o círculo todo consiga cumprir, todo dia.',
+      ),
+    ).toBeTruthy();
     await fireEvent.press(screen.getByRole('button', { name: 'Criar pacto' }));
 
     expect(onCreate).toHaveBeenCalledTimes(1);

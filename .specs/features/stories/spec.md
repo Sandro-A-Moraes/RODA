@@ -119,7 +119,7 @@ Mainstream feeds reward volume and popularity. Roda offers one short daily refle
 | STORY-05 | P1: Feed (AC 6) | Execute (T1, T6) | Implemented |
 | STORY-06 | P2: Reactions (AC 1-4) | Execute (T1, T4, T5, T8) | Implemented |
 | STORY-07 | P2: Reactions (AC 5-6) | Execute (T4, T5, T8) | Implemented |
-| STORY-08 | P1: Post (AC 7-8) | Execute (T11, T12) | Pending |
+| STORY-08 | P1: Post (AC 7-8) | Execute (T11, T12) | Implemented |
 
 **Coverage:** 8 total, 8 mapped to tasks, 0 unmapped
 

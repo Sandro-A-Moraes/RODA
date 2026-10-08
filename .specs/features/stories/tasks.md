@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T10, Verifier PASS); T11-T12 align the feed to Figma frames 17 (`22:601`) and 19 (`24:704`).
+**Status**: Done (T1-T10, Verifier PASS); T11-T12 (done) align the feed to Figma frames 17 (`22:601`) and 19 (`24:704`).
 
 ---
 
@@ -377,7 +377,7 @@ T10 → T11 → T12
 
 ### T12: Wire `onWrite`, drop the header action, check pacts empty state
 
-**What**: Pass `onWrite` (route `/circles/[id]/stories/new`) to `StoriesView` and remove the "Novo relato" header action (frames 17 and 19 show none). Compare `PactsView` empty state with Figma 18 (`24:616`) and fix only real differences, with a test.
+**What**: Remove the "Novo relato" header action (frames 17 and 19 show none); `onWrite` was already wired in T11 for the typecheck. Compare `PactsView` empty state with Figma 18 (`24:616`) and fix only real differences, with a test.
 **Where**: `app/(app)/circles/[id]/index.tsx` (and `src/modules/pacts/presentation/pacts-view.tsx` only if frame 18 differs)
 **Depends on**: T11
 **Requirement**: STORY-08
@@ -389,10 +389,11 @@ T10 → T11 → T12
 
 **Done when**:
 
-- [ ] Stories tab has no header action; both "Escrever relato" buttons open the composer
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Stories tab has no header action; both "Escrever relato" buttons open the composer (wired; device check pending)
+- [x] Frame 18 checked: only the empty body text differed ("Combinem algo que o círculo todo consiga cumprir, todo dia."); fixed with an assertion in `pacts-view.test.tsx`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
-**Tests**: none
+**Tests**: unit (pacts empty body only)
 **Gate**: build
-**Status**: Pending
-**Commit**: feat(stories): open the composer from the feed and drop the header action
+**Status**: Done
+**Commit**: feat(stories): write from the feed and drop the header action

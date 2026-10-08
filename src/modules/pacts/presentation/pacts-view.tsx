@@ -28,12 +28,18 @@ export function PactsView({ circleId, onOpenPact, onCreate }: PactsViewProps) {
   const repo = useDependency(pactRepositoryToken);
   const { colors, spacing } = useTheme();
   const { state, reload } = useLoad(
-    useCallback(() => repo.listByCircle(circleId, localDay()), [repo, circleId]),
+    useCallback(
+      () => repo.listByCircle(circleId, localDay()),
+      [repo, circleId],
+    ),
   );
 
   if (state.status === 'loading') {
     return (
-      <ActivityIndicator accessibilityLabel="Carregando" color={colors.accent} />
+      <ActivityIndicator
+        accessibilityLabel="Carregando"
+        color={colors.accent}
+      />
     );
   }
   if (state.status === 'error') {
@@ -44,7 +50,7 @@ export function PactsView({ circleId, onOpenPact, onCreate }: PactsViewProps) {
       <View style={{ gap: spacing.md }}>
         <EmptyState
           title="Nenhum pacto ainda"
-          body="Um pacto é um compromisso do círculo, confirmado todo dia."
+          body="Combinem algo que o círculo todo consiga cumprir, todo dia."
         />
         <Button label="Criar pacto" onPress={onCreate} />
       </View>
@@ -91,7 +97,10 @@ export function PactsView({ circleId, onOpenPact, onCreate }: PactsViewProps) {
                     }}
                   >
                     <Icon name="check" size={14} color={colors.onBrand} />
-                    <Text type="captionStrong" style={{ color: colors.onBrand }}>
+                    <Text
+                      type="captionStrong"
+                      style={{ color: colors.onBrand }}
+                    >
                       Feito hoje
                     </Text>
                   </View>
@@ -111,7 +120,10 @@ export function PactsView({ circleId, onOpenPact, onCreate }: PactsViewProps) {
                   <Text type="captionStrong">
                     {`${pact.doneCount} de ${pact.memberCount} hoje`}
                   </Text>
-                  <Text type="caption" variant="secondary">{`${percent}%`}</Text>
+                  <Text
+                    type="caption"
+                    variant="secondary"
+                  >{`${percent}%`}</Text>
                 </View>
               </View>
             </Pressable>
