@@ -115,6 +115,23 @@ describe('onboarding route', () => {
     expect(await store.hasSeen()).toBe(true);
   });
 
+  it('"Pular" still opens register when storing the flag fails', async () => {
+    const store = new InMemoryOnboardingStore();
+    const markSeen = jest
+      .spyOn(store, 'markSeen')
+      .mockRejectedValue(new Error('storage unavailable'));
+    const result = launch(store);
+    await result;
+    expect(await screen.findByText(FIRST_TITLE)).toBeTruthy();
+
+    await press('Pular');
+
+    expect(markSeen).toHaveBeenCalled();
+    expect(await screen.findByText('register content')).toBeTruthy();
+    expect(result.getPathname()).toBe('/register');
+    expect(screen.queryByText(FIRST_TITLE)).toBeNull();
+  });
+
   it('after an exit, the next launch on the device opens sign-in', async () => {
     const store = new InMemoryOnboardingStore();
     const first = await launch(store);

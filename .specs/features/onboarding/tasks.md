@@ -458,12 +458,12 @@ T10 → T11 → T12 → T13 → T14 → T15
 
 **Done when**:
 
-- [ ] Route test added and green
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Route test added and green
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: test(onboarding): cover navigation when storing the flag fails
 
 ---
