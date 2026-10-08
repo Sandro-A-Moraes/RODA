@@ -227,13 +227,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Tests first in `splash-screen.test.tsx`
-- [ ] No hex literal; colors from roles
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `splash-screen.test.tsx`
+- [x] No hex literal; colors from roles
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): add the splash screen
 
 ---

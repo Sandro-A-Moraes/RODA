@@ -15,6 +15,7 @@ export const typography = {
     heading: 32,
     display: 40,
     numeral: 56,
+    wordmark: 64,
   },
   weights: {
     regular: '400',
