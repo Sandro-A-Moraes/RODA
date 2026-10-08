@@ -92,6 +92,18 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: STORY-06 AC4 (validation.md spec-precision gap 2) (spec)
 - last seen: 2026-10-07T23:51:42Z
 
+### L-014 - When an AC names a color role for a surface or text, assert that role with toHaveStyle, not only the texts and labels.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `ui` · harmful: 0
+- features: onboarding
+- evidence: validation.md M24, M25 (splash-screen.tsx:25,33) (ui)
+- last seen: 2026-10-08T01:57:48Z
+
+### L-015 - Specify the system back behavior for every multi-step flow so replace versus push is a testable outcome.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `spec` · harmful: 0
+- features: onboarding
+- evidence: validation.md M20 (app/(auth)/onboarding.tsx:10), gap 5 (spec)
+- last seen: 2026-10-08T01:57:48Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.

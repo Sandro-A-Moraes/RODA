@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 14,
+  "next_id": 16,
   "lessons": [
     {
       "id": "L-001",
@@ -238,6 +238,42 @@
       ],
       "created": "2026-10-07T23:51:42Z",
       "last_seen": "2026-10-07T23:51:42Z"
+    },
+    {
+      "id": "L-014",
+      "key": "surviving_mutant::when an ac names a color role for a surface or text assert that role with tohavestyle not only the texts and labels",
+      "text": "When an AC names a color role for a surface or text, assert that role with toHaveStyle, not only the texts and labels.",
+      "signal": "surviving_mutant",
+      "scope": "ui",
+      "status": "candidate",
+      "features": [
+        "onboarding"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "validation.md M24, M25 (splash-screen.tsx:25,33) (ui)"
+      ],
+      "created": "2026-10-08T01:57:48Z",
+      "last_seen": "2026-10-08T01:57:48Z"
+    },
+    {
+      "id": "L-015",
+      "key": "surviving_mutant::specify the system back behavior for every multi step flow so replace versus push is a testable outcome",
+      "text": "Specify the system back behavior for every multi-step flow so replace versus push is a testable outcome.",
+      "signal": "surviving_mutant",
+      "scope": "spec",
+      "status": "candidate",
+      "features": [
+        "onboarding"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "validation.md M20 (app/(auth)/onboarding.tsx:10), gap 5 (spec)"
+      ],
+      "created": "2026-10-08T01:57:48Z",
+      "last_seen": "2026-10-08T01:57:48Z"
     }
   ]
 }
