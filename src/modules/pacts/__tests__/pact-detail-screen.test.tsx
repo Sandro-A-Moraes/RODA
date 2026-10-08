@@ -67,7 +67,7 @@ const press = (name: string) =>
   fireEvent.press(screen.getByRole('button', { name }));
 
 describe('PactDetailScreen progress', () => {
-  it('shows the pact, "X de N" and the percentage (PACT-06)', async () => {
+  it('shows the pact, "Hoje", "X de N" and the percentage (PACT-06)', async () => {
     const { repo, pactId, as } = await setup(3);
     await repo.checkIn(pactId, localDay());
     as('u2');
@@ -79,6 +79,7 @@ describe('PactDetailScreen progress', () => {
     expect(
       screen.getByText('Guardar o celular durante almoço e jantar.'),
     ).toBeTruthy();
+    expect(screen.getByText('Hoje')).toBeTruthy();
     expect(screen.getByText('2 de 3')).toBeTruthy();
     expect(screen.getByText('fizeram o check-in')).toBeTruthy();
     expect(screen.getByRole('progressbar').props.accessibilityValue).toEqual({

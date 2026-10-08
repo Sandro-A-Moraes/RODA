@@ -30,7 +30,7 @@ Commitments made to other people hold better than personal goals. A pact is a co
 | Who may create | Any member of the circle | Pacts are collective; no admin role exists | n |
 | Who may edit or delete | Only the member who created the pact | Prevents others from erasing a commitment; simple ownership rule | n |
 | Definition of "day" | Calendar day in the device's local time, stored as `YYYY-MM-DD` | Users think in local days; avoids timezone surprises | n |
-| Collective progress | Today's progress = distinct members who checked in today divided by current member count, shown as "X de N hoje" plus a percentage | Single, ranking-free number that is easy to test | n |
+| Collective progress | Today's progress = distinct members who checked in today divided by current member count, shown as "X de N hoje" on the list card and, on the pact detail, as the label "Hoje" above "X de N" plus a percentage (Figma frame 11, `8:547`) | Single, ranking-free number that is easy to test | n |
 | Who may check in | Any member of the circle that owns the pact | Collective accountability | n |
 | Delete behavior | Deleting a pact also deletes its check-ins, after a confirmation prompt | No orphaned data; confirmation prevents accidents | n |
 | Check-in uniqueness | Enforced in domain and by a SQL unique constraint on (pact, member, day) | AD-003: must hold under retries and double taps | n |
@@ -88,13 +88,13 @@ Commitments made to other people hold better than personal goals. A pact is a co
 
 **Acceptance Criteria**:
 
-1. WHEN a member opens a pact THEN the system SHALL show today's progress as "X de N hoje", where X is the number of distinct members who checked in today and N is the circle's current member count.
+1. WHEN a member opens a pact THEN the system SHALL show today's progress as the label "Hoje" above "X de N" (the list card shows it inline as "X de N hoje"), where X is the number of distinct members who checked in today and N is the circle's current member count.
 2. The system SHALL show the progress percentage as X divided by N, rounded to the nearest whole number.
 3. IF N is zero THEN the system SHALL show 0% and not divide by zero.
 4. WHEN a new check-in is recorded THEN the system SHALL update the displayed progress without requiring the user to reopen the screen.
 5. The system SHALL NOT reveal which members have or have not checked in beyond the aggregate number.
 
-**Independent Test**: With 3 members and 2 check-ins, the pact shows "2 de 3 hoje" and 67%.
+**Independent Test**: With 3 members and 2 check-ins, the pact detail shows "Hoje", "2 de 3" and 67%; the list card shows "2 de 3 hoje".
 
 ---
 
