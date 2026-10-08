@@ -6,7 +6,7 @@ These screens are the **visual reference for the app UI**. When implementing a s
 
 ## Status
 
-All 20 screens are built and were checked visually.
+All 24 screens are built and were checked visually.
 
 ## Screens
 
@@ -33,6 +33,13 @@ All 20 screens are built and were checked visually.
 | 18 | Círculo · Pactos (vazio) | `24:616` | PACT-02 AC6 | Empty state with "Criar pacto" |
 | 19 | Círculo · Relatos (vazio) | `24:704` | STORY-04 | "Ninguém compartilhou ainda", no end marker, "Escrever relato" |
 | 20 | Círculo · Encontros (vazio) | `24:798` | MEET-03 AC5 | Empty state with "Propor encontro" |
+
+| 21 | Splash | `29:748` | — | Shown on every app launch while the session is restored. Forest background, 12-dot ring, "Roda" wordmark, no status bar |
+| 22 | Onboarding 1 | `29:765` | — | "Um círculo pequeno, de gente que você conhece." Ring of 12 dots; "Pular" and "Continuar" |
+| 23 | Onboarding 2 | `29:807` | — | "Combinem um pacto e cumpram juntos." Collective progress ring, no ranking; "Pular" and "Continuar" |
+| 24 | Onboarding 3 | `29:840` | — | "Um relato por dia. Depois, o encontro." Story card and end marker; "Começar" and "Já tenho conta" |
+
+Launch flow: **Splash** (every launch, while the session is restored) → if the user is signed in, go to Círculos. If not, and it is the first launch, show **Onboarding 1 to 3** (store a "seen" flag locally, for example in AsyncStorage) and then go to Criar conta; "Já tenho conta" and "Pular" lead to Entrar or Criar conta. If it is not the first launch and the user is signed out, go straight to Entrar. The page indicator is three dots; the active one is a longer terracotta pill.
 
 The Membros tab has no empty state: the creator is always a member. Loading states follow the specs (a loading indicator in place of the list). The error state is the `ErrorBanner` component with a retry action, and it is not drawn on every screen.
 
