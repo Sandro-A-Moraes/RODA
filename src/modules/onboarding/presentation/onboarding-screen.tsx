@@ -13,6 +13,7 @@ import { radius, useTheme } from '@/core/theme';
 import { Avatar, Button, Card, Icon, Screen, Text } from '@/shared/ui';
 
 import { DotRing } from './components/dot-ring';
+import { PageTransition } from './components/page-transition';
 import { useOnboarding } from './onboarding-provider';
 
 export type OnboardingDestination = 'register' | 'sign-in';
@@ -50,8 +51,13 @@ const PAGES: readonly Page[] = [
 export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
   const { colors, spacing } = useTheme();
   const { markSeen } = useOnboarding();
-  const [index, setIndex] = useState(0);
+  const [{ index, direction }, setPage] = useState<{
+    index: number;
+    direction: 1 | -1 | 0;
+  }>({ index: 0, direction: 0 });
   const page = PAGES[index];
+  const goTo = (next: number) =>
+    setPage({ index: next, direction: next > index ? 1 : -1 });
   const isLast = index === PAGES.length - 1;
 
   // System back (Android) on page 2 or 3 goes to the previous page; on page 1
@@ -62,11 +68,13 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
     const subscription = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
-        setIndex(index - 1);
+        goTo(index - 1);
         return true;
       },
     );
     return () => subscription.remove();
+    // goTo only depends on index, already listed.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index]);
 
   // Both calls run in one press handler, so React commits the route change
@@ -103,18 +111,24 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
             </Pressable>
           )}
         </View>
-        <View
-          testID="onboarding-illustration"
-          accessibilityElementsHidden
-          importantForAccessibility="no-hide-descendants"
-          style={styles.illustration}
+        <PageTransition
+          pageKey={index}
+          direction={direction}
+          style={{ gap: spacing.lg }}
         >
-          {page.illustration()}
-        </View>
-        <View style={{ gap: spacing.sm }}>
-          <Text type="h1">{page.title}</Text>
-          <Text variant="secondary">{page.body}</Text>
-        </View>
+          <View
+            testID="onboarding-illustration"
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+            style={styles.illustration}
+          >
+            {page.illustration()}
+          </View>
+          <View style={{ gap: spacing.sm }}>
+            <Text type="h1">{page.title}</Text>
+            <Text variant="secondary">{page.body}</Text>
+          </View>
+        </PageTransition>
         <View style={styles.spacer} />
         <PageIndicator current={index} total={PAGES.length} />
         <View style={{ gap: spacing.sm }}>
@@ -128,7 +142,7 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
               />
             </>
           ) : (
-            <Button label="Continuar" onPress={() => setIndex(index + 1)} />
+            <Button label="Continuar" onPress={() => goTo(index + 1)} />
           )}
         </View>
       </ScrollView>

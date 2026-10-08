@@ -285,6 +285,27 @@ describe('OnboardingScreen', () => {
       expect(await store.hasSeen()).toBe(false);
     });
 
+    describe('page transition', () => {
+      afterEach(() => {
+        jest.useRealTimers();
+      });
+
+      it('never blocks the actions while a transition runs', async () => {
+        jest.useFakeTimers();
+        const { onExit } = await renderOnboarding();
+
+        await press('Continuar');
+        await press('Continuar');
+        expect(
+          screen.getByText('Um relato por dia. Depois, o encontro.'),
+        ).toBeTruthy();
+        expect(await pressSystemBack()).toBe(true);
+        expect(screen.getByLabelText('Página 2 de 3')).toBeTruthy();
+        await press('Pular');
+        expect(onExit).toHaveBeenCalledWith('register');
+      });
+    });
+
     it('walks back from page 3 to page 1 and leaves no listener behind', async () => {
       const { onExit } = await renderOnboarding();
       await goToPage(3);

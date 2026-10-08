@@ -551,7 +551,7 @@ T16 → T17 → T18 → T19
 
 ### T18: Onboarding page transition
 
-**What**: Tests first in `onboarding-screen.test.tsx`: pressing "Continuar" twice in a row (no wait for the animation) reaches page 3, and system back during a transition still goes back (actions never blocked). Implement a `PageTransition` wrapper around the illustration and texts: content swaps at once, then fades in with a 24 px slide from the right going forward or from the left going back; reduce motion shows it without animation. The page indicator is not animated.
+**What**: Tests first in `onboarding-screen.test.tsx`: pressing "Continuar" twice in a row (no wait for the animation) reaches page 3, and system back during a transition still goes back (actions never blocked), under frozen fake timers. The slide direction itself is not asserted: with the native driver Jest never sees the animated values, and pixel motion is out of test scope. Implement a `PageTransition` wrapper around the illustration and texts: content swaps at once, then fades in with a 24 px slide from the right going forward or from the left going back; reduce motion shows it without animation. The page indicator is not animated.
 **Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`, `components/page-transition.tsx`
 **Depends on**: T17
 **Requirement**: ONB-06
@@ -563,12 +563,12 @@ T16 → T17 → T18 → T19
 
 **Done when**:
 
-- [ ] Tests first in `onboarding-screen.test.tsx`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `onboarding-screen.test.tsx`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): slide and fade between onboarding pages
 
 ---
