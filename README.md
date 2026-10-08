@@ -11,8 +11,8 @@ Roda é uma rede social de círculos pequenos e fechados (no máximo 12 pessoas 
 - **Autenticação:** cadastro, entrada e saída com Supabase Auth, rotas protegidas por sessão, tela de perfil.
 - **Círculos:** criar círculo, entrar por código de convite, lista de membros; limite de 12 membros garantido no banco (trigger na migration `0002`).
 - **Pactos:** CRUD completo (criar, listar, ver, editar, apagar), check-in diário (um por membro por dia) e progresso coletivo do círculo, sem ranking individual.
-- **Relatos:** um relato curto por dia (até 280 caracteres), feed cronológico finito e reações qualitativas ("Estou com você", "Me inspirou"); o autor vê quem reagiu, sem contagens.
-- **Encontros (meetups): NÃO implementados.** Existe apenas a especificação em `.specs/features/meetups/spec.md`; não há módulo em `src/modules/` nem tabelas nas migrations. O botão "preciso de apoio" também está fora do escopo.
+- **Relatos:** um relato curto por dia (até 280 caracteres), feed cronológico finito e reações qualitativas ("Estou com você", "Me inspirou"); o autor vê quais tipos de reação recebeu, sem saber quem reagiu e sem contagens.
+- **Encontros (meetups): NÃO implementados.** Existe apenas a especificação em `.specs/features/meetups/spec.md`; não há módulo em `src/modules/` nem tabelas nas migrations, e a aba Encontros do círculo mostra apenas "Em breve". O botão "preciso de apoio" também está fora do escopo.
 
 ## Requisitos da disciplina
 
@@ -63,6 +63,7 @@ Os repositórios são injetados por um provider de injeção de dependência (`s
    1. `supabase/migrations/0001_profiles.sql`
    2. `supabase/migrations/0002_circles_pacts_stories.sql`
    3. `supabase/migrations/0003_pacts_trim_checks.sql`
+   4. `supabase/migrations/0004_stories_hardening.sql`
 
    Mantenha a Data API habilitada (com `public` em Exposed schemas), senão toda chamada REST retorna 503. Em Authentication, deixe "Confirm email" desligado.
 
@@ -87,7 +88,7 @@ O backend Supabase real não é coberto por testes automatizados; foi validado m
 
 ## Processo (spec-driven)
 
-O projeto segue o fluxo Specify -> Design -> Tasks -> Execute com a skill `tlc-spec-driven`. Tudo fica em `.specs/`: decisões de arquitetura (`STATE.md`), cronograma (`ROADMAP.md`) e, por feature, `spec.md` (requisitos em EARS), `design.md`, `tasks.md` e `validation.md` (verificação independente). Testes vêm antes do código e cada tarefa vira um commit Conventional Commit. Contexto do produto em `docs/PROJECT_CONTEXT.md`, identidade visual em `docs/DESIGN_SYSTEM.md` e protótipos em `docs/FIGMA_SCREENS.md`.
+O projeto segue o fluxo Specify -> Design -> Tasks -> Execute com a skill `tlc-spec-driven`. Tudo fica em `.specs/`: decisões de arquitetura (`STATE.md`), cronograma (`ROADMAP.md`) e, por feature, `spec.md` (requisitos em EARS), `design.md` (ou uma nota de design dentro de `tasks.md`), `tasks.md` e `validation.md` (verificação independente). Testes vêm antes do código e cada tarefa vira um commit Conventional Commit. Contexto do produto em `docs/PROJECT_CONTEXT.md`, identidade visual em `docs/DESIGN_SYSTEM.md` e protótipos em `docs/FIGMA_SCREENS.md`.
 
 ## Roteiro de demonstração
 
@@ -97,6 +98,6 @@ Use dois navegadores (ou uma janela anônima) com duas contas.
 2. Conta B: cadastre-se, escolha "Entrar com código" e informe o código; B aparece nos membros.
 3. Conta A: crie um pacto e abra o detalhe.
 4. Contas A e B: faça o check-in; o progresso coletivo sobe (um check-in por dia por pessoa). Mostre também editar e apagar o pacto.
-5. Conta A: na aba Relatos, escreva o relato do dia; uma segunda tentativa no mesmo dia é recusada.
+5. Conta A: na aba Relatos, toque em "Escrever relato" e publique o relato do dia; depois disso o feed mostra "Você já compartilhou hoje" (um relato por pessoa por dia, garantido também no banco).
 6. Conta B: veja o relato no feed finito (termina em "você chegou ao fim") e reaja com "Estou com você".
 7. Conta A: o relato mostra "Recebeu: ..." sem contagens.
