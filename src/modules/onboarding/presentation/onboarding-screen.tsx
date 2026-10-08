@@ -4,7 +4,7 @@ import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
 import { radius, useTheme } from '@/core/theme';
-import { Avatar, Button, Card, Chip, Screen, Text } from '@/shared/ui';
+import { Avatar, Button, Card, Icon, Screen, Text } from '@/shared/ui';
 
 import { DotRing } from './components/dot-ring';
 import { useOnboarding } from './onboarding-provider';
@@ -83,6 +83,7 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
           )}
         </View>
         <View
+          testID="onboarding-illustration"
           accessibilityElementsHidden
           importantForAccessibility="no-hide-descendants"
           style={styles.illustration}
@@ -235,8 +236,8 @@ function StoryIllustration() {
           Jantar em família sem tela. A conversa rendeu até tarde.
         </Text>
         <View style={[styles.row, { gap: spacing.sm }]}>
-          <Chip label="Estou com você" selected />
-          <Chip label="Me inspirou" />
+          <SampleChip label="Estou com você" selected />
+          <SampleChip label="Me inspirou" />
         </View>
       </Card>
       <Text type="h3" variant="secondary" style={{ textAlign: 'center' }}>
@@ -246,10 +247,55 @@ function StoryIllustration() {
   );
 }
 
+// Looks like the shared Chip but is a plain view: the illustration offers no
+// interaction, so it must not render a focusable Pressable (ONB-03 AC8).
+function SampleChip({
+  label,
+  selected = false,
+}: {
+  label: string;
+  selected?: boolean;
+}) {
+  const { colors, spacing } = useTheme();
+  return (
+    <View
+      style={[
+        styles.sampleChip,
+        {
+          gap: spacing.sm,
+          paddingHorizontal: spacing.md,
+          backgroundColor: selected ? colors.brand : 'transparent',
+          borderWidth: selected ? 0 : 1,
+          borderColor: colors.border,
+        },
+      ]}
+    >
+      {selected ? <Icon name="check" color={colors.onBrand} size={16} /> : null}
+      <Text
+        type="captionStrong"
+        style={{ color: selected ? colors.onBrand : colors.textPrimary }}
+      >
+        {label}
+      </Text>
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   skip: { height: 44, alignItems: 'flex-end', justifyContent: 'center' },
   skipButton: { minHeight: 44, justifyContent: 'center' },
-  illustration: { height: 320, alignItems: 'center', justifyContent: 'center' },
+  illustration: {
+    height: 320,
+    alignItems: 'center',
+    justifyContent: 'center',
+    pointerEvents: 'none',
+  },
+  sampleChip: {
+    height: 40,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: radius.full,
+  },
   spacer: { flex: 1 },
   indicator: {
     flexDirection: 'row',

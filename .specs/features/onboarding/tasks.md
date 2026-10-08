@@ -433,13 +433,13 @@ T10 → T11 → T12 → T13 → T14 → T15
 
 **Done when**:
 
-- [ ] Tests first in `onboarding-screen.test.tsx`
-- [ ] `Chip` unchanged for other screens
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Tests first in `onboarding-screen.test.tsx`
+- [x] `Chip` unchanged for other screens
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: fix(onboarding): make the onboarding illustrations inert
 
 ---

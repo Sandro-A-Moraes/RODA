@@ -36,6 +36,12 @@ function buttonLabels() {
     .map((button) => button.props.accessibilityLabel as string);
 }
 
+function allButtonLabels() {
+  return screen
+    .getAllByRole('button', { includeHiddenElements: true })
+    .map((button) => button.props.accessibilityLabel as string);
+}
+
 describe('OnboardingScreen', () => {
   describe('page 1', () => {
     it('shows the small-circle title, body and ring', async () => {
@@ -186,6 +192,31 @@ describe('OnboardingScreen', () => {
       ).toBeNull();
       expect(screen.queryByRole('button', { name: 'Me inspirou' })).toBeNull();
     });
+
+    it('contain no buttons, even counting hidden elements', async () => {
+      await renderOnboarding();
+      expect(allButtonLabels()).toEqual(['Pular', 'Continuar']);
+
+      await press('Continuar');
+      expect(allButtonLabels()).toEqual(['Pular', 'Continuar']);
+
+      await press('Continuar');
+      expect(allButtonLabels()).toEqual(['Começar', 'Já tenho conta']);
+    });
+
+    it.each([1, 2, 3] as const)(
+      'on page %i ignore touches and clicks',
+      async (page) => {
+        await renderOnboarding();
+        if (page > 1) await goToPage(page as 2 | 3);
+
+        expect(
+          screen.getByTestId('onboarding-illustration', {
+            includeHiddenElements: true,
+          }),
+        ).toHaveStyle({ pointerEvents: 'none' });
+      },
+    );
   });
 
   describe('exits', () => {
