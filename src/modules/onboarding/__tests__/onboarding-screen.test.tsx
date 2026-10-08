@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
+import { BackHandler } from 'react-native';
 
 import { DependencyProvider, provide } from '@/core/di';
 import { lightColors } from '@/core/theme';
@@ -217,6 +218,72 @@ describe('OnboardingScreen', () => {
         ).toHaveStyle({ pointerEvents: 'none' });
       },
     );
+  });
+
+  describe('system back', () => {
+    type BackListener = () => boolean | null | undefined;
+    let listeners: BackListener[] = [];
+
+    beforeEach(() => {
+      listeners = [];
+      jest
+        .spyOn(BackHandler, 'addEventListener')
+        .mockImplementation((_event, listener) => {
+          listeners.push(listener as BackListener);
+          return {
+            remove: () => {
+              listeners = listeners.filter((l) => l !== listener);
+            },
+          };
+        });
+    });
+
+    afterEach(() => {
+      jest.restoreAllMocks();
+    });
+
+    // Mirrors the platform: the newest listener runs first; the first that
+    // returns true consumes the press, otherwise the default applies.
+    async function pressSystemBack() {
+      let handled = false;
+      await act(async () => {
+        for (const listener of [...listeners].reverse()) {
+          if (listener()) {
+            handled = true;
+            break;
+          }
+        }
+      });
+      return handled;
+    }
+
+    it('on page 3 shows page 2, then page 1', async () => {
+      await renderOnboarding();
+      await goToPage(3);
+
+      expect(await pressSystemBack()).toBe(true);
+      expect(
+        screen.getByText('Combinem um pacto e cumpram juntos.'),
+      ).toBeTruthy();
+      expect(screen.getByLabelText('Página 2 de 3')).toBeTruthy();
+
+      expect(await pressSystemBack()).toBe(true);
+      expect(
+        screen.getByText('Um círculo pequeno, de gente que você conhece.'),
+      ).toBeTruthy();
+      expect(screen.getByLabelText('Página 1 de 3')).toBeTruthy();
+    });
+
+    it('on page 1 is not handled and stores nothing', async () => {
+      const { store, onExit } = await renderOnboarding();
+
+      expect(await pressSystemBack()).toBe(false);
+      expect(
+        screen.getByText('Um círculo pequeno, de gente que você conhece.'),
+      ).toBeTruthy();
+      expect(onExit).not.toHaveBeenCalled();
+      expect(await store.hasSeen()).toBe(false);
+    });
   });
 
   describe('exits', () => {

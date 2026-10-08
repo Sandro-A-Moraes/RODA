@@ -39,6 +39,7 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 | Splash accessible label | "Roda. Carregando" | Says what the screen is and that it is waiting | y |
 | Splash tagline | "Menos tela. Mais roda." under the wordmark | Present in Figma 21 | y |
 | Composition | The onboarding module composes the auth `RootNavigator` (AD-008) | Keeps auth unaware of onboarding and the module-boundary lint unchanged | y |
+| System back between pages | Android back on page 2 or 3 shows the previous page (`BackHandler`); on page 1 it is not handled and the app is left. On web the browser back is not intercepted: pages are local state with no history entry, so it leaves the onboarding route like any other page | Pages are one route with a page index, not a navigation stack; `BackHandler` is a no-op on web and adding history entries per page would be a hack | y |
 
 **Open questions:** none - all resolved or logged above.
 
@@ -100,6 +101,8 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 6. The system SHALL show a page indicator of three dots in which only the current page is the longer accent pill, and SHALL expose it to screen readers as "Página N de 3" for page N.
 7. The system SHALL give every onboarding action an accessible button label equal to its visible text.
 8. The system SHALL hide the illustrations (ring, progress card, sample story) from screen readers and SHALL NOT offer any interaction inside them.
+9. WHEN the user presses the system back (Android hardware or gesture back) on page 2 or 3 THEN the system SHALL show the previous page.
+10. WHEN the user presses the system back on page 1 THEN the system SHALL NOT handle it, so the platform default applies (Android leaves the app).
 
 **Independent Test**: Render the onboarding screen, read each page's texts and indicator label, and move with "Continuar".
 

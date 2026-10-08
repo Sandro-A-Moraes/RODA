@@ -1,6 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  BackHandler,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  View,
+} from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 
 import { radius, useTheme } from '@/core/theme';
@@ -47,6 +53,21 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
   const [index, setIndex] = useState(0);
   const page = PAGES[index];
   const isLast = index === PAGES.length - 1;
+
+  // System back (Android) on page 2 or 3 goes to the previous page; on page 1
+  // nothing is registered, so the platform default leaves the app. A no-op on
+  // web (ONB-03 AC9-10).
+  useEffect(() => {
+    if (index === 0) return undefined;
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      () => {
+        setIndex(index - 1);
+        return true;
+      },
+    );
+    return () => subscription.remove();
+  }, [index]);
 
   // Both calls run in one press handler, so React commits the route change
   // and the flag's status update together: the guard that drops the

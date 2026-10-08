@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T10); Verifier fixes T11-T15 in progress
+**Status**: Done (T1-T15); T11-T15 fix Verifier iteration 1, re-verification pending
 
 ---
 
@@ -470,7 +470,7 @@ T10 → T11 → T12 → T13 → T14 → T15
 
 ### T15: System back between pages (gap 5)
 
-**What**: Spec: add ONB-03 AC9 (system back on page 2 or 3 shows the previous page; on page 1 it is not handled, so the system leaves the app) and the web assumption. Tests first in `onboarding-screen.test.tsx` with `BackHandler.addEventListener` spied: back on page 3 shows page 2, on page 2 shows page 1, on page 1 is not consumed. Implement with `BackHandler` from `react-native` in `onboarding-screen.tsx`. Update the onboarding Handoff line in `.specs/STATE.md`.
+**What**: Spec: add ONB-03 AC9 (system back on page 2 or 3 shows the previous page) and AC10 (on page 1 it is not handled, so the platform default leaves the app), plus the assumption row for web (browser back is not intercepted). Tests first in `onboarding-screen.test.tsx` with `BackHandler.addEventListener` spied: back on page 3 shows page 2, on page 2 shows page 1, on page 1 is not consumed. Implement with `BackHandler` from `react-native` in `onboarding-screen.tsx`. Update the onboarding Handoff line in `.specs/STATE.md`.
 **Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`
 **Depends on**: T14
 **Requirement**: ONB-03
@@ -482,11 +482,11 @@ T10 → T11 → T12 → T13 → T14 → T15
 
 **Done when**:
 
-- [ ] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py onboarding` passes
-- [ ] Tests first in `onboarding-screen.test.tsx`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py onboarding` passes
+- [x] Tests first in `onboarding-screen.test.tsx`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: unit
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): go back a page on the system back
