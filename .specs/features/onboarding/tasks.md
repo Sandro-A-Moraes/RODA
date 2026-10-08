@@ -51,7 +51,7 @@ The store takes the storage as a constructor argument because `@react-native-asy
 | Concern | Where |
 | ------- | ----- |
 | Read failure -> seen; write failure ignored | `OnboardingProvider` |
-| Exit stores the flag after asking the route to navigate | `OnboardingScreen` calls `onExit(destination)` then `markSeen()` |
+| Exit navigates and stores the flag in one press | `OnboardingScreen` calls `onExit(destination)` and `markSeen()` in one handler; React commits both together, so their order is not observable |
 | Destination routes | `app/(auth)/onboarding.tsx`: `router.replace('/register' or '/sign-in')` |
 | Illustrations hidden from screen readers | `importantForAccessibility="no-hide-descendants"` + `accessibilityElementsHidden` |
 | Splash colors | existing roles `inverse`, `onInverse`, `onInverseSecondary`, `inverseTrack`, `accent`; no new theme role |
@@ -409,12 +409,12 @@ T10 → T11 → T12 → T13 → T14 → T15
 
 **Done when**:
 
-- [ ] Comment no longer claims an ordering guarantee
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Comment no longer claims an ordering guarantee
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: docs(onboarding): correct the exit order comment
 
 ---

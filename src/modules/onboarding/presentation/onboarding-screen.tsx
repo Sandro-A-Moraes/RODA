@@ -12,7 +12,7 @@ import { useOnboarding } from './onboarding-provider';
 export type OnboardingDestination = 'register' | 'sign-in';
 
 export interface OnboardingScreenProps {
-  /** Called on "Pular", "Começar" or "Já tenho conta"; the flag is stored right after. */
+  /** Called on "Pular", "Começar" or "Já tenho conta"; the same press stores the flag. */
   onExit: (destination: OnboardingDestination) => void;
 }
 
@@ -48,8 +48,10 @@ export function OnboardingScreen({ onExit }: OnboardingScreenProps) {
   const page = PAGES[index];
   const isLast = index === PAGES.length - 1;
 
-  // Navigate first, then store the flag: the guard drops the onboarding route
-  // as soon as the flag is set, and the destination must already be chosen.
+  // Both calls run in one press handler, so React commits the route change
+  // and the flag's status update together: the guard that drops the
+  // onboarding route never renders before the destination is chosen. The
+  // order of the two calls is not observable.
   const exit = (destination: OnboardingDestination) => {
     onExit(destination);
     markSeen();
