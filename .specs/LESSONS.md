@@ -104,6 +104,12 @@ Seen once or not yet corroborated. Tracked, not trusted.
 - evidence: validation.md M20 (app/(auth)/onboarding.tsx:10), gap 5 (spec)
 - last seen: 2026-10-08T01:57:48Z
 
+### L-016 - When a component registers a global listener per state, test that after moving through states and back no listener is left that changes the default outcome.
+- signal: `surviving_mutant` · recurrence: 1 feature(s) · scope: `ui` · harmful: 0
+- features: onboarding
+- evidence: M32 src/modules/onboarding/presentation/onboarding-screen.tsx:69 (ui)
+- last seen: 2026-10-08T02:25:22Z
+
 ## Quarantined (failed when applied - ignore)
 
 A confirmed lesson that recurred alongside failure. Kept for the maintainer to review.

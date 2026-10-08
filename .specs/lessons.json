@@ -3,7 +3,7 @@
   "promote_threshold": 2,
   "window_days": 45,
   "quarantine_threshold": 2,
-  "next_id": 16,
+  "next_id": 17,
   "lessons": [
     {
       "id": "L-001",
@@ -274,6 +274,24 @@
       ],
       "created": "2026-10-08T01:57:48Z",
       "last_seen": "2026-10-08T01:57:48Z"
+    },
+    {
+      "id": "L-016",
+      "key": "surviving_mutant::when a component registers a global listener per state test that after moving through states and back no listener is left that changes the default outcome",
+      "text": "When a component registers a global listener per state, test that after moving through states and back no listener is left that changes the default outcome.",
+      "signal": "surviving_mutant",
+      "scope": "ui",
+      "status": "candidate",
+      "features": [
+        "onboarding"
+      ],
+      "recurrence": 1,
+      "harmful": 0,
+      "evidence": [
+        "M32 src/modules/onboarding/presentation/onboarding-screen.tsx:69 (ui)"
+      ],
+      "created": "2026-10-08T02:25:22Z",
+      "last_seen": "2026-10-08T02:25:22Z"
     }
   ]
 }
