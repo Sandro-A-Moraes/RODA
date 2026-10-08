@@ -12,13 +12,21 @@ export interface EmptyStateProps {
   accentDots?: number;
 }
 
+const RING_SIZE = 140;
+
 export function EmptyState({ title, body, accentDots = 0 }: EmptyStateProps) {
   const { spacing } = useTheme();
+  // Figma component EmptyState (3:120): ring 140, gap 16, vertical padding 32.
   return (
     <View
-      style={{ alignItems: 'center', gap: spacing.sm, padding: spacing.lg }}
+      testID="empty-state"
+      style={{
+        alignItems: 'center',
+        gap: spacing.md,
+        paddingVertical: spacing.xl,
+      }}
     >
-      <Ring size={96} filled={accentDots} tone="accent" sage />
+      <Ring size={RING_SIZE} filled={accentDots} tone="accent" sage />
       <Text type="h2" style={{ textAlign: 'center' }}>
         {title}
       </Text>
