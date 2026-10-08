@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { View } from 'react-native';
 
 import { useDependency } from '@/core/di';
@@ -30,8 +30,13 @@ export function ReactionBar({ storyId, initial }: ReactionBarProps) {
   const { spacing } = useTheme();
   const [selected, setSelected] = useState<ReactionKind | null>(initial);
   const [error, setError] = useState<AppError | null>(null);
+  // Taps while a call is in flight are ignored, so upsert/delete calls never
+  // race and the server always ends with the chip shown on screen.
+  const pending = useRef(false);
 
   const press = async (kind: ReactionKind) => {
+    if (pending.current) return;
+    pending.current = true;
     const previous = selected;
     const next = previous === kind ? null : kind;
     setSelected(next);
@@ -45,6 +50,8 @@ export function ReactionBar({ storyId, initial }: ReactionBarProps) {
     } catch (thrown) {
       setSelected(previous);
       setError(mapError(thrown));
+    } finally {
+      pending.current = false;
     }
   };
 

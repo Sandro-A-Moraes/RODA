@@ -10,6 +10,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
 **Status**: Done (T1-T10, Verifier PASS); T11-T12 (done) align the feed to Figma frames 17 (`22:601`) and 19 (`24:704`).
+**Validation gaps** (`validation.md` Ranked Gaps): 1-3 closed by migration `0004_stories_hardening.sql` and the `day <= today` feed filter; 6 closed by T13 (reaction pending guard); 4, 5 and 7 open (minor, not reachable through the app); 8 manual; 9 spec wording.
 
 ---
 
@@ -96,6 +97,12 @@ T9 → T10
 
 ```
 T10 → T11 → T12
+```
+
+### Phase 5: Hardening
+
+```
+T12 → T13
 ```
 
 ---
@@ -397,3 +404,27 @@ T10 → T11 → T12
 **Gate**: build
 **Status**: Done
 **Commit**: feat(stories): write from the feed and drop the header action
+
+---
+
+### T13: Reaction pending guard
+
+**What**: Tests first in `reaction-bar.test.tsx` for validation gap 6: while a `react` call is unresolved, further chip presses are ignored (one repository call for a double tap and for a tap on the other kind); after it resolves a new tap calls `react` again; a failed guarded call still shows the error and restores the previous selection. Implement the guard in `ReactionBar` with a ref, released in `finally`.
+**Where**: `src/modules/stories/presentation/reaction-bar.tsx`, `src/modules/stories/__tests__/reaction-bar.test.tsx`
+**Depends on**: T12
+**Requirement**: STORY-06, STORY-07
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [x] Tests first in `reaction-bar.test.tsx` (failed before the guard: 3 and 2 calls)
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Done
+**Commit**: fix(stories): ignore reaction taps while a call is pending

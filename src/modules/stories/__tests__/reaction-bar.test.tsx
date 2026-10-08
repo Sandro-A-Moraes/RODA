@@ -1,7 +1,8 @@
-import { fireEvent, render, screen } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 
 import { DependencyProvider, provide } from '@/core/di';
-import { createAppError, err } from '@/core/errors';
+import { createAppError, err, ok } from '@/core/errors';
+import type { Result } from '@/core/errors';
 import { localDay } from '@/shared/date/local-day';
 
 import { InMemoryStoryRepository } from '../data/in-memory-story-repository';
@@ -159,6 +160,65 @@ describe('Reaction controls', () => {
     await renderView(repo);
 
     await fireEvent.press(chip(INSPIRED));
+
+    expect(
+      await screen.findByText(
+        'Sem conexão. Verifique sua internet e tente novamente.',
+      ),
+    ).toBeTruthy();
+    expect(isSelected(WITH_YOU)).toBe(true);
+    expect(isSelected(INSPIRED)).toBe(false);
+    expect(await myReaction(repo)).toBe('with_you');
+  });
+
+  it('ignores taps while a reaction call is pending (validation gap 6)', async () => {
+    const { repo } = await seed();
+    let resolveFirst: (value: Result<void>) => void = () => {};
+    const spy = jest.spyOn(repo, 'react').mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          resolveFirst = resolve;
+        }),
+    );
+    await renderView(repo);
+
+    await fireEvent.press(chip(WITH_YOU));
+    await fireEvent.press(chip(WITH_YOU));
+    await fireEvent.press(chip(INSPIRED));
+
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(isSelected(WITH_YOU)).toBe(true);
+
+    await act(async () => {
+      resolveFirst(ok(undefined));
+    });
+
+    await fireEvent.press(chip(INSPIRED));
+
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenLastCalledWith(expect.any(String), 'inspired');
+    expect(isSelected(INSPIRED)).toBe(true);
+  });
+
+  it('restores the previous selection when a guarded call fails (validation gap 6)', async () => {
+    const { repo, storyId } = await seed();
+    await repo.react(storyId, 'with_you');
+    let resolveFirst: (value: Result<void>) => void = () => {};
+    const spy = jest.spyOn(repo, 'react').mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          resolveFirst = resolve;
+        }),
+    );
+    await renderView(repo);
+
+    await fireEvent.press(chip(INSPIRED));
+    await fireEvent.press(chip(INSPIRED));
+    expect(spy).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      resolveFirst(err(createAppError('network')));
+    });
 
     expect(
       await screen.findByText(
