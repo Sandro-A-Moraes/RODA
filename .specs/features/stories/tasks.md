@@ -352,7 +352,7 @@ T10 → T11 → T12
 ### T11: Write prompt and empty state action
 
 **What**: Tests first in `stories-view.test.tsx` for STORY-08: when the list is non-empty and the member has not posted today the feed starts with the prompt card "O que você fez offline hoje?", caption "Um relato por dia, até 280 caracteres." and the button "Escrever relato"; the prompt is absent once the member posted (the notice shows instead); the empty state shows "Ninguém compartilhou ainda", body "Seja o primeiro a contar o que fez fora da tela hoje." and the button "Escrever relato"; pressing either button calls `onWrite`; the end marker stays last and is absent when empty. Implement in `StoriesView` (new `onWrite: () => void` prop) per Figma 17 (`22:601`) and 19 (`24:704`).
-**Where**: `src/modules/stories/presentation/stories-view.tsx`, `src/modules/stories/__tests__/stories-view.test.tsx`
+**Where**: `src/modules/stories/presentation/stories-view.tsx`, `src/modules/stories/__tests__/stories-view.test.tsx` (plus `onWrite` passed in `reaction-bar.test.tsx` and `app/(app)/circles/[id]/index.tsx` so the required prop typechecks)
 **Depends on**: T10
 **Reuses**: `Button`, `Text`, `EmptyState` from `@/shared/ui`; the `PactsView` empty state pattern
 **Requirement**: STORY-08
@@ -364,13 +364,13 @@ T10 → T11 → T12
 
 **Done when**:
 
-- [ ] Tests first in `stories-view.test.tsx`; the old empty body assertion updated
-- [ ] No hex literals; colors come from `src/core/theme`
-- [ ] Gate check passes: `npm test && npm run typecheck`
+- [x] Tests first in `stories-view.test.tsx`; the old empty body assertion updated
+- [x] No hex literals; colors come from `src/core/theme`
+- [x] Gate check passes: `npm test && npm run typecheck`
 
 **Tests**: unit
 **Gate**: full
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(stories): add the write prompt and empty state action
 
 ---

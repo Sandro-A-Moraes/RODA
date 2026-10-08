@@ -5,7 +5,15 @@ import { useDependency } from '@/core/di';
 import { radius, useTheme } from '@/core/theme';
 import { daysAgo, localDay } from '@/shared/date/local-day';
 import { useLoad } from '@/shared/hooks/use-load';
-import { Avatar, EmptyState, ErrorBanner, Icon, Ring, Text } from '@/shared/ui';
+import {
+  Avatar,
+  Button,
+  EmptyState,
+  ErrorBanner,
+  Icon,
+  Ring,
+  Text,
+} from '@/shared/ui';
 
 import { storyRepositoryToken } from '../domain/story-repository';
 import type { Story } from '../domain/story-repository';
@@ -13,6 +21,8 @@ import { ReactionBar, ReceivedReactions } from './reaction-bar';
 
 export interface StoriesViewProps {
   circleId: string;
+  /** Opens the composer (Figma 14). */
+  onWrite: () => void;
 }
 
 /** "hoje", "ontem" or DD/MM, all in the device's local calendar. */
@@ -46,6 +56,31 @@ export function AlreadySharedNotice() {
     >
       <Icon name="check" size={18} color={colors.textPrimary} />
       <Text type="bodyStrong">Você já compartilhou hoje</Text>
+    </View>
+  );
+}
+
+const WRITE_LABEL = 'Escrever relato';
+
+/** Invites the member to post while they have not posted today (Figma 17). */
+function WritePrompt({ onWrite }: { onWrite: () => void }) {
+  const { colors, spacing } = useTheme();
+  return (
+    <View
+      style={{
+        gap: spacing.sm,
+        padding: spacing.md,
+        borderRadius: radius.lg,
+        borderWidth: 2,
+        borderColor: colors.brand,
+        backgroundColor: colors.card,
+      }}
+    >
+      <Text type="h3">O que você fez offline hoje?</Text>
+      <Text type="caption" variant="secondary">
+        Um relato por dia, até 280 caracteres.
+      </Text>
+      <Button label={WRITE_LABEL} onPress={onWrite} />
     </View>
   );
 }
@@ -94,9 +129,13 @@ function EndMarker() {
   const { spacing } = useTheme();
   return (
     <View
-      style={{ alignItems: 'center', gap: spacing.sm, paddingTop: spacing.lg }}
+      style={{
+        alignItems: 'center',
+        gap: spacing.sm,
+        paddingVertical: spacing.md,
+      }}
     >
-      <Ring size={40} filled={0} sage />
+      <Ring size={32} filled={0} sage />
       <Text type="h3" variant="secondary">
         você chegou ao fim
       </Text>
@@ -106,7 +145,7 @@ function EndMarker() {
 
 // Finite feed (AD-005): the window is bounded, so every item renders at once
 // and the list always ends with the end marker. No counters anywhere.
-export function StoriesView({ circleId }: StoriesViewProps) {
+export function StoriesView({ circleId, onWrite }: StoriesViewProps) {
   const repo = useDependency(storyRepositoryToken);
   const { colors, spacing } = useTheme();
   const { state, reload } = useLoad(
@@ -128,11 +167,15 @@ export function StoriesView({ circleId }: StoriesViewProps) {
     return <ErrorBanner error={state.error} onRetry={() => void reload()} />;
   }
   if (state.data.length === 0) {
+    // Figma 19: empty state plus the write action, no end marker.
     return (
-      <EmptyState
-        title="Ninguém compartilhou ainda"
-        body="Conte ao seu círculo o que você fez offline hoje."
-      />
+      <View style={{ gap: spacing.md }}>
+        <EmptyState
+          title="Ninguém compartilhou ainda"
+          body="Seja o primeiro a contar o que fez fora da tela hoje."
+        />
+        <Button label={WRITE_LABEL} onPress={onWrite} />
+      </View>
     );
   }
   const today = localDay();
@@ -144,11 +187,13 @@ export function StoriesView({ circleId }: StoriesViewProps) {
       renderItem={({ item }) => <StoryCard story={item} today={today} />}
       ItemSeparatorComponent={() => <View style={{ height: spacing.md }} />}
       ListHeaderComponent={
-        sharedToday(state.data, today) ? (
-          <View style={{ marginBottom: spacing.md }}>
+        <View style={{ marginBottom: spacing.md }}>
+          {sharedToday(state.data, today) ? (
             <AlreadySharedNotice />
-          </View>
-        ) : null
+          ) : (
+            <WritePrompt onWrite={onWrite} />
+          )}
+        </View>
       }
       ListFooterComponent={EndMarker}
       initialNumToRender={state.data.length}

@@ -51,7 +51,9 @@ export default function CircleRoute() {
       {tab === 'members' ? (
         <MembersView circleId={id} currentUserId={user?.id ?? ''} />
       ) : null}
-      {tab === 'stories' ? <StoriesView circleId={id} /> : null}
+      {tab === 'stories' ? (
+        <StoriesView circleId={id} onWrite={newStory} />
+      ) : null}
       {tab === 'meetups' ? (
         <EmptyState
           title="Em breve"

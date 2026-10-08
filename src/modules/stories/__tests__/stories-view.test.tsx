@@ -17,6 +17,9 @@ jest.mock('expo-router', () => ({
 }));
 
 const END = 'você chegou ao fim';
+const PROMPT = 'O que você fez offline hoje?';
+const PROMPT_CAPTION = 'Um relato por dia, até 280 caracteres.';
+const WRITE = 'Escrever relato';
 const names: Record<string, string> = {
   u1: 'Ana Souza',
   u2: 'Beto Lima',
@@ -37,10 +40,13 @@ function setup() {
   };
 }
 
-async function renderView(repo: InMemoryStoryRepository) {
+async function renderView(
+  repo: InMemoryStoryRepository,
+  onWrite: () => void = () => {},
+) {
   await render(
     <DependencyProvider provisions={[provide(storyRepositoryToken, repo)]}>
-      <StoriesView circleId="c1" />
+      <StoriesView circleId="c1" onWrite={onWrite} />
     </DependencyProvider>,
   );
 }
@@ -68,7 +74,60 @@ describe('StoriesView (feed)', () => {
     await renderView(repo);
 
     expect(await screen.findByText('Ninguém compartilhou ainda')).toBeTruthy();
+    expect(
+      screen.getByText('Seja o primeiro a contar o que fez fora da tela hoje.'),
+    ).toBeTruthy();
     expect(screen.queryByText(END)).toBeNull();
+  });
+
+  it('offers "Escrever relato" in the empty state and calls onWrite (STORY-08 AC8)', async () => {
+    const { repo } = setup();
+    const onWrite = jest.fn();
+
+    await renderView(repo, onWrite);
+    await screen.findByText('Ninguém compartilhou ainda');
+    expect(screen.queryByText(PROMPT)).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: WRITE }));
+
+    expect(onWrite).toHaveBeenCalledTimes(1);
+  });
+
+  it('starts the feed with the write prompt while I have not posted today (STORY-08 AC7)', async () => {
+    const { repo, as } = setup();
+    await repo.create('c1', 'Meu relato de ontem', daysAgo(1));
+    as('u2');
+    await repo.create('c1', 'Relato do Beto hoje', localDay());
+    as('u1');
+    const onWrite = jest.fn();
+
+    await renderView(repo, onWrite);
+    await screen.findByText('Relato do Beto hoje');
+
+    const texts = allTexts();
+    expect(texts.slice(0, 3)).toEqual([PROMPT, PROMPT_CAPTION, WRITE]);
+    expect(texts.indexOf(PROMPT)).toBeLessThan(
+      texts.indexOf('Relato do Beto hoje'),
+    );
+    expect(texts[texts.length - 1]).toBe(END);
+    expect(screen.queryByText('Você já compartilhou hoje')).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: WRITE }));
+    expect(onWrite).toHaveBeenCalledTimes(1);
+  });
+
+  it('replaces the write prompt with the notice once I posted today (STORY-08 AC7)', async () => {
+    const { repo, as } = setup();
+    await repo.create('c1', 'Meu relato de hoje', localDay());
+    as('u2');
+    await repo.create('c1', 'Relato do Beto hoje', localDay());
+    as('u1');
+
+    await renderView(repo);
+
+    expect(await screen.findByText('Você já compartilhou hoje')).toBeTruthy();
+    expect(screen.queryByText(PROMPT)).toBeNull();
+    expect(screen.queryByRole('button', { name: WRITE })).toBeNull();
+    const texts = allTexts();
+    expect(texts[texts.length - 1]).toBe(END);
   });
 
   it('shows an error banner and reloads on retry (STORY-04 AC5)', async () => {
@@ -179,6 +238,7 @@ describe('StoriesView (feed)', () => {
     await renderView(repo);
 
     await screen.findByText('Caminhei sem celular');
-    expect(screen.queryByText(/\d/)).toBeNull();
+    // The write prompt caption states the 280 limit; nothing else has digits.
+    expect(allTexts().filter((t) => /\d/.test(t))).toEqual([PROMPT_CAPTION]);
   });
 });

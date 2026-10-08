@@ -48,7 +48,7 @@ async function seed(viewer = 'u1') {
 async function renderView(repo: InMemoryStoryRepository) {
   await render(
     <DependencyProvider provisions={[provide(storyRepositoryToken, repo)]}>
-      <StoriesView circleId="c1" />
+      <StoriesView circleId="c1" onWrite={() => {}} />
     </DependencyProvider>,
   );
   await screen.findByText(BODY);
