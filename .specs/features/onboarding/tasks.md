@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T10); Verifier pending
+**Status**: Done (T1-T10); Verifier fixes T11-T15 in progress
 
 ---
 
@@ -107,6 +107,14 @@ T6 → T7 → T8 → T9
 
 ```
 T9 → T10
+```
+
+### Phase 5: Verifier fixes
+
+From `validation.md` iteration 1 (gaps 1-5).
+
+```
+T10 → T11 → T12 → T13 → T14 → T15
 ```
 
 ---
@@ -359,3 +367,126 @@ T9 → T10
 **Gate**: build
 **Status**: Done
 **Commit**: docs(onboarding): document the launch flow and update the handoff
+
+---
+
+### T11: Assert the splash colors (gap 1)
+
+**What**: Tests first in `splash-screen.test.tsx`: the view labelled "Roda. Carregando" has background `lightColors.inverse`, the "Roda" wordmark color `lightColors.onInverse`, the tagline color `lightColors.onInverseSecondary` (ONB-01 AC1). Kill M24 (background -> `background`) and M25 (wordmark -> `textPrimary`) by hand; mutants are not committed. No product change.
+**Where**: `src/modules/onboarding/__tests__/splash-screen.test.tsx`
+**Depends on**: T10
+**Requirement**: ONB-01
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [x] Color test added and green
+- [x] M24 and M25 make it fail, then reverted
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Done
+**Commit**: test(onboarding): assert the splash background and text colors
+
+---
+
+### T12: Correct the exit-order comment (gap 2)
+
+**What**: The order of `onExit` and `markSeen` in one press handler is not observable (React batches the status update with the navigation), so no test can enforce it. Replace the "navigate first" comment in `onboarding-screen.tsx` with the real reason; no behavior change. Update the Design note row that repeats the claim.
+**Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`
+**Depends on**: T11
+**Requirement**: ONB-04
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Comment no longer claims an ordering guarantee
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: none
+**Gate**: build
+**Status**: Pending
+**Commit**: docs(onboarding): correct the exit order comment
+
+---
+
+### T13: Make the illustrations inert (gap 3)
+
+**What**: Tests first in `onboarding-screen.test.tsx`: counting hidden elements too, page 1 and 2 offer only "Pular" and "Continuar" as buttons and page 3 only "Começar" and "Já tenho conta"; the illustration container has `pointerEvents` `none` (ONB-03 AC8). Implement `pointerEvents="none"` on the illustration container and draw the sample reaction chips as static views in the illustration; `src/shared/ui/chip.tsx` is unchanged.
+**Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`
+**Depends on**: T12
+**Requirement**: ONB-03
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Tests first in `onboarding-screen.test.tsx`
+- [ ] `Chip` unchanged for other screens
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Pending
+**Commit**: fix(onboarding): make the onboarding illustrations inert
+
+---
+
+### T14: Failed write still navigates (gap 4)
+
+**What**: Route test in `tooling/__tests__/onboarding-route.test.tsx`: with `markSeen` rejecting, "Pular" still lands on `/register` and the onboarding title is gone (ONB-05 AC3, edge case "writing the flag fails").
+**Where**: `tooling/__tests__/onboarding-route.test.tsx`
+**Depends on**: T13
+**Requirement**: ONB-05
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Route test added and green
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Pending
+**Commit**: test(onboarding): cover navigation when storing the flag fails
+
+---
+
+### T15: System back between pages (gap 5)
+
+**What**: Spec: add ONB-03 AC9 (system back on page 2 or 3 shows the previous page; on page 1 it is not handled, so the system leaves the app) and the web assumption. Tests first in `onboarding-screen.test.tsx` with `BackHandler.addEventListener` spied: back on page 3 shows page 2, on page 2 shows page 1, on page 1 is not consumed. Implement with `BackHandler` from `react-native` in `onboarding-screen.tsx`. Update the onboarding Handoff line in `.specs/STATE.md`.
+**Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`
+**Depends on**: T14
+**Requirement**: ONB-03
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] `python .claude/skills/tlc-spec-driven/scripts/validate_spec.py onboarding` passes
+- [ ] Tests first in `onboarding-screen.test.tsx`
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Pending
+**Commit**: feat(onboarding): go back a page on the system back

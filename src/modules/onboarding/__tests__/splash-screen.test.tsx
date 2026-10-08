@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react-native';
 
+import { lightColors } from '@/core/theme';
+
 import { SplashScreen } from '../presentation/splash-screen';
 
 const mockStatusBar = jest.fn();
@@ -22,6 +24,20 @@ describe('SplashScreen', () => {
     await render(<SplashScreen />);
 
     expect(screen.getByLabelText('Roda. Carregando')).toBeTruthy();
+  });
+
+  it('paints the forest background with on-inverse text', async () => {
+    await render(<SplashScreen />);
+
+    expect(screen.getByLabelText('Roda. Carregando')).toHaveStyle({
+      backgroundColor: lightColors.inverse,
+    });
+    expect(screen.getByText('Roda')).toHaveStyle({
+      color: lightColors.onInverse,
+    });
+    expect(screen.getByText('Menos tela. Mais roda.')).toHaveStyle({
+      color: lightColors.onInverseSecondary,
+    });
   });
 
   it('draws the ring with 12 dots', async () => {
