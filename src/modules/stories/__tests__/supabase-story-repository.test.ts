@@ -57,6 +57,7 @@ describe('SupabaseStoryRepository author embed', () => {
       },
       eq: () => query,
       gte: () => query,
+      lte: () => query,
       order: () => query,
       then: (resolve: (value: unknown) => void) =>
         resolve({ data: [], error: null }),

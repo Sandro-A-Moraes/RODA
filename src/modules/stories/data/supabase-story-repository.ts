@@ -75,6 +75,7 @@ export class SupabaseStoryRepository implements StoryRepository {
         .select(columns)
         .eq('circle_id', circleId)
         .gte('day', oldestFeedDay(today))
+        .lte('day', today)
         .order('day', { ascending: false })
         .order('created_at', { ascending: false });
       if (stories.error) return err(mapStoryError(stories.error));

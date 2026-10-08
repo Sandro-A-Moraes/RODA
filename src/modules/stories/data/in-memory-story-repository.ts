@@ -71,7 +71,9 @@ export class InMemoryStoryRepository implements StoryRepository {
     const oldest = oldestFeedDay(today);
     return ok(
       this.stories
-        .filter((s) => s.circleId === circleId && s.day >= oldest)
+        .filter(
+          (s) => s.circleId === circleId && s.day >= oldest && s.day <= today,
+        )
         .sort((a, b) =>
           a.day === b.day
             ? b.sequence - a.sequence

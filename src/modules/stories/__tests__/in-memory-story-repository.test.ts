@@ -164,6 +164,18 @@ describe('feed window and order (STORY-03 AC1, AC7)', () => {
     expect(listed.ok && listed.value.map((s) => s.body)).toEqual(['Seis dias']);
   });
 
+  it('does not list a story dated in the future (tomorrow)', async () => {
+    const { repo, as } = setup();
+    await repo.create('c1', 'Hoje', TODAY);
+    as('u2');
+    await repo.create('c1', 'Amanhã', daysAgo(-1, NOW));
+    as('u1');
+
+    const listed = await repo.listByCircle('c1', TODAY);
+
+    expect(listed.ok && listed.value.map((s) => s.body)).toEqual(['Hoje']);
+  });
+
   it('orders stories of the same day newest first', async () => {
     const { repo, as } = setup();
     await repo.create('c1', 'Primeira', TODAY);
