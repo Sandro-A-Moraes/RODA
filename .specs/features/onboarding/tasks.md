@@ -128,13 +128,13 @@ T9 → T10
 
 **Done when**:
 
-- [ ] Interface exposes `hasSeen` and `markSeen`
-- [ ] `onboarding` listed in `MODULES`
-- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+- [x] Interface exposes `hasSeen` and `markSeen`
+- [x] `onboarding` listed in `MODULES`
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(onboarding): add the onboarding store contract
 
 ---

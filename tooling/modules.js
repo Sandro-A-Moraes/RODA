@@ -3,7 +3,14 @@ const path = require('node:path');
 
 // Single list of feature modules. Adding a directory under src/modules/
 // without listing it here fails the guard test in tooling/__tests__.
-const MODULES = ['auth', 'circles', 'pacts', 'stories', 'meetups'];
+const MODULES = [
+  'auth',
+  'circles',
+  'pacts',
+  'stories',
+  'meetups',
+  'onboarding',
+];
 
 function findUnlistedModules(root) {
   const dir = path.join(root, 'src', 'modules');
