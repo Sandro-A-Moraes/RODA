@@ -1,6 +1,6 @@
 import { act } from '@testing-library/react-native';
 import { renderRouter, screen } from 'expo-router/testing-library';
-import { Text } from 'react-native';
+import { AccessibilityInfo, Text } from 'react-native';
 
 import { DependencyProvider, provide } from '@/core/di';
 import {
@@ -11,7 +11,10 @@ import {
 
 import { InMemoryOnboardingStore } from '../data/in-memory-onboarding-store';
 import { onboardingStoreToken } from '../domain/onboarding-store';
-import { LaunchNavigator } from '../presentation/launch-navigator';
+import {
+  LaunchNavigator,
+  SPLASH_EXIT_MS,
+} from '../presentation/launch-navigator';
 import { OnboardingProvider } from '../presentation/onboarding-provider';
 
 const ana = { displayName: 'Ana', email: 'ana@mail.com', password: '12345678' };
@@ -85,6 +88,7 @@ function expectNoRouteContent() {
 
 afterEach(() => {
   jest.useRealTimers();
+  jest.restoreAllMocks();
 });
 
 describe('LaunchNavigator', () => {
@@ -145,6 +149,60 @@ describe('LaunchNavigator', () => {
         jest.advanceTimersByTime(1);
       });
       expect(screen.getByText('sign-in content')).toBeTruthy();
+    });
+
+    it('mounts the landing route under the splash, then fades the splash out and unmounts it', async () => {
+      jest.useFakeTimers();
+      const { result } = renderLaunch({
+        auth: new InMemoryAuthRepository(),
+        store: new InMemoryOnboardingStore(true),
+        minSplashMs: 'default',
+      });
+      await result;
+
+      await act(async () => {
+        jest.advanceTimersByTime(1200);
+      });
+      expect(screen.getByText('sign-in content')).toBeTruthy();
+      expect(screen.getByText(TAGLINE)).toBeTruthy();
+
+      await act(async () => {
+        jest.advanceTimersByTime(SPLASH_EXIT_MS + 50);
+      });
+      expect(screen.getByText('sign-in content')).toBeTruthy();
+      expect(screen.queryByText(TAGLINE)).toBeNull();
+    });
+
+    it('lets touches through to the landing route while the splash fades out', async () => {
+      jest.useFakeTimers();
+      const { result } = renderLaunch({
+        auth: new InMemoryAuthRepository(),
+        store: new InMemoryOnboardingStore(true),
+        minSplashMs: 'default',
+      });
+      await result;
+      const overlay = () =>
+        screen.getByTestId('splash-overlay', { includeHiddenElements: true });
+      expect(overlay()).not.toHaveStyle({ pointerEvents: 'none' });
+
+      await act(async () => {
+        jest.advanceTimersByTime(1200);
+      });
+      expect(overlay()).toHaveStyle({ pointerEvents: 'none' });
+    });
+
+    it('drops the splash at once when reduce motion is on', async () => {
+      jest
+        .spyOn(AccessibilityInfo, 'isReduceMotionEnabled')
+        .mockResolvedValue(true);
+      const { result } = renderLaunch({
+        auth: new InMemoryAuthRepository(),
+        store: new InMemoryOnboardingStore(true),
+      });
+      await result;
+
+      expect(await screen.findByText('sign-in content')).toBeTruthy();
+      await act(async () => undefined);
       expect(screen.queryByText(TAGLINE)).toBeNull();
     });
 

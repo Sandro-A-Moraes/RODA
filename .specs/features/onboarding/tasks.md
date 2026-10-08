@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: Done (T1-T16); T11-T16 fix Verifier iteration 1, re-verification pending
+**Status**: Done (T1-T16, Verifier PASS); T17-T19 (motion, ONB-06) in progress
 
 ---
 
@@ -115,6 +115,14 @@ From `validation.md` iteration 1 (gaps 1-5).
 
 ```
 T10 → T11 → T12 → T13 → T14 → T15 → T16
+```
+
+### Phase 6: Motion (ONB-06)
+
+RN `Animated` only (works on web through react-native-web, native driver off on web); no new dependency. Reduce motion read once with `AccessibilityInfo.isReduceMotionEnabled` (`use-reduced-motion.ts`).
+
+```
+T16 → T17 → T18 → T19
 ```
 
 ---
@@ -514,3 +522,75 @@ T10 → T11 → T12 → T13 → T14 → T15 → T16
 **Gate**: build
 **Status**: Done
 **Commit**: test(onboarding): cover the back listener cleanup
+
+---
+
+### T17: Splash entrance and fade-out overlay
+
+**What**: Tests first in `launch-navigator.test.tsx`: with fake timers, at the minimum duration the landing route is rendered and the splash is still up; 280 ms later the splash is unmounted; with reduce motion on, the splash is gone as soon as the launch completes. Implement: `LaunchNavigator` renders the splash itself as an absolute overlay above `RootNavigator` (no `splash` prop any more, so one splash instance lives through the whole launch), holds the navigator until session, flag and minimum are ready, then fades the overlay out (`pointerEvents` none while leaving) and unmounts it. `SplashScreen` fades and scales the ring in and fades and rises the words in. `RootNavigator` unchanged (AD-008).
+**Where**: `src/modules/onboarding/presentation/launch-navigator.tsx`, `splash-screen.tsx`, `use-reduced-motion.ts`
+**Depends on**: T16
+**Requirement**: ONB-06
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [x] Tests first in `launch-navigator.test.tsx`; existing launch tests unchanged in meaning
+- [x] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Done
+**Commit**: feat(onboarding): animate the splash in and fade it out
+
+---
+
+### T18: Onboarding page transition
+
+**What**: Tests first in `onboarding-screen.test.tsx`: pressing "Continuar" twice in a row (no wait for the animation) reaches page 3, and system back during a transition still goes back (actions never blocked). Implement a `PageTransition` wrapper around the illustration and texts: content swaps at once, then fades in with a 24 px slide from the right going forward or from the left going back; reduce motion shows it without animation. The page indicator is not animated.
+**Where**: `src/modules/onboarding/presentation/onboarding-screen.tsx`, `components/page-transition.tsx`
+**Depends on**: T17
+**Requirement**: ONB-06
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Tests first in `onboarding-screen.test.tsx`
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: unit
+**Gate**: build
+**Status**: Pending
+**Commit**: feat(onboarding): slide and fade between onboarding pages
+
+---
+
+### T19: Fade into Criar conta and Entrar
+
+**What**: `options={{ animation: 'fade' }}` on the `(auth)/sign-in` and `(auth)/register` screens in `RootNavigator`, so the onboarding hand-off (`router.replace`) fades; every other route keeps the default stack animation. Pure configuration, covered by the existing route tests.
+**Where**: `src/modules/auth/presentation/root-navigator.tsx`
+**Depends on**: T18
+**Requirement**: ONB-06
+
+**Tools**:
+
+- MCP: NONE
+- Skill: NONE
+
+**Done when**:
+
+- [ ] Existing navigator and route tests green
+- [ ] Gate check passes: `npm test && npm run typecheck && npm run lint`
+
+**Tests**: none
+**Gate**: build
+**Status**: Pending
+**Commit**: feat(auth): fade into the sign-in and register screens

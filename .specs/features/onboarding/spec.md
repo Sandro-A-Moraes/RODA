@@ -18,7 +18,8 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 | A "Voltar" action between pages | Not in Figma 22-24 |
 | Resetting the flag from the app (e.g. on the profile screen) | Not requested; clearing the app data resets it |
 | Syncing the flag to the account (Supabase) | The flag is per device by decision |
-| Animated splash or native splash configuration (`app.json`) | Expo Go keeps its own native splash; this is the in-app splash only |
+| Native splash configuration (`app.json`) | Expo Go keeps its own native splash; this is the in-app splash only (its animations are ONB-06) |
+| Animating the page indicator pill | Width is not animatable with the native driver; the pill switches at once |
 | Meetups | Continued later by the user |
 
 ---
@@ -142,6 +143,26 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 
 ---
 
+### P2: Launch and onboarding motion
+
+**User Story**: As anyone opening Roda, I want the splash and the onboarding pages to move gently so that the launch feels finished instead of cutting between screens.
+
+**Why P2**: Polish on top of the P1 flow; no behavior depends on it.
+
+**Acceptance Criteria**:
+
+1. WHEN the splash mounts THEN the system SHALL fade and scale in the ring and fade and rise in the wordmark and tagline.
+2. WHEN the session and the flag are known and the minimum duration has passed THEN the system SHALL mount the landing route under the splash and fade the splash out over 280 ms, then unmount it.
+3. WHILE the splash fades out the system SHALL let touches through to the landing route.
+4. WHEN the onboarding page changes by "Continuar" or by the system back THEN the system SHALL show the new page at once and fade it in with a short horizontal slide, from the right going forward and from the left going back.
+5. WHILE a page transition runs the system SHALL keep every onboarding action pressable.
+6. WHERE the device has reduce motion enabled the system SHALL skip these animations: the splash leaves at once and pages appear without sliding.
+7. WHEN onboarding hands off to Criar conta or Entrar THEN the system SHALL use a fade screen transition; other routes keep the default stack transition.
+
+**Independent Test**: With fake timers, launch and see the landing route under the splash, then the splash gone after 280 ms; with reduce motion mocked on, the splash is gone as soon as the launch completes; press "Continuar" during a transition and reach page 3.
+
+---
+
 ## Edge Cases
 
 - IF reading the flag fails THEN the system SHALL open Entrar for a signed-out user (ONB-05 AC2).
@@ -159,8 +180,9 @@ The app opens on a bare loading spinner and drops a new visitor straight on the 
 | ONB-03 | P1: Onboarding pages | Execute | Implemented |
 | ONB-04 | P1: Exits and the seen flag | Execute | Implemented |
 | ONB-05 | P1: Flag persistence | Execute | Implemented |
+| ONB-06 | P2: Launch and onboarding motion | Execute | Implemented |
 
-**Coverage:** 5 total, 5 mapped to tasks, 0 unmapped
+**Coverage:** 6 total, 6 mapped to tasks, 0 unmapped
 
 ---
 
