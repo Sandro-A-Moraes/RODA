@@ -122,12 +122,12 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Each validation AC has a test asserting the exact message
-- [ ] `createMeetup` forwards trimmed values and a local-time `Date`
+- [x] Each validation AC has a test asserting the exact message
+- [x] `createMeetup` forwards trimmed values and a local-time `Date`
 
 **Tests**: unit
 **Gate**: quick
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): validate and create meetups
 
 ---
