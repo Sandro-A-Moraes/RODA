@@ -13,7 +13,7 @@ Roda é uma rede social de círculos pequenos e fechados (no máximo 12 pessoas 
 - **Círculos:** criar círculo, entrar por código de convite, lista de membros; limite de 12 membros garantido no banco (trigger na migration `0002`).
 - **Pactos:** CRUD completo (criar, listar, ver, editar, apagar), check-in diário (um por membro por dia) e progresso coletivo do círculo, sem ranking individual.
 - **Relatos:** um relato curto por dia (até 280 caracteres), feed cronológico finito e reações qualitativas ("Estou com você", "Me inspirou"); o autor vê quais tipos de reação recebeu, sem saber quem reagiu e sem contagens.
-- **Encontros (meetups): NÃO implementados.** Existe apenas a especificação em `.specs/features/meetups/spec.md`; não há módulo em `src/modules/` nem tabelas nas migrations, e a aba Encontros do círculo mostra apenas "Em breve". O botão "preciso de apoio" também está fora do escopo.
+- **Encontros:** qualquer membro propõe um encontro (título, local, data e hora no futuro) e todos respondem "Eu vou" ou "Não vou"; quem propõe entra como "Eu vou". Lista só os próximos, do mais cedo ao mais tarde. O botão "preciso de apoio" está fora do escopo.
 
 ## Requisitos da disciplina
 
@@ -65,6 +65,7 @@ Os repositórios são injetados por um provider de injeção de dependência (`s
    2. `supabase/migrations/0002_circles_pacts_stories.sql`
    3. `supabase/migrations/0003_pacts_trim_checks.sql`
    4. `supabase/migrations/0004_stories_hardening.sql`
+   5. `supabase/migrations/0005_meetups.sql`
 
    Mantenha a Data API habilitada (com `public` em Exposed schemas), senão toda chamada REST retorna 503. Em Authentication, deixe "Confirm email" desligado.
 

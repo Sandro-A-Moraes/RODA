@@ -237,10 +237,10 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Migration applied and policies visible in `pg_policies`
-- [ ] README no longer says meetups are not implemented
+- [x] Migration applied and policies visible in `pg_policies`
+- [x] README no longer says meetups are not implemented
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): add the meetups migration
