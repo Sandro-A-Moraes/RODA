@@ -8,7 +8,9 @@ export type IconName =
   | 'pencil'
   | 'circles'
   | 'user'
-  | 'alert';
+  | 'alert'
+  | 'eye'
+  | 'eye-off';
 
 export interface IconProps {
   name: IconName;
@@ -50,6 +52,16 @@ export function Icon({ name, color, size = 24 }: IconProps) {
           <Path d="M12 7.5v5.5M12 16.5v.01" {...stroke} />
         </>
       ) : null}
+      {name === 'eye' || name === 'eye-off' ? (
+        <>
+          <Path
+            d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"
+            {...stroke}
+          />
+          <Circle cx="12" cy="12" r="3" {...stroke} />
+        </>
+      ) : null}
+      {name === 'eye-off' ? <Path d="M4 4l16 16" {...stroke} /> : null}
       {name === 'user' ? (
         <>
           <Circle cx="12" cy="8" r="4" {...stroke} />

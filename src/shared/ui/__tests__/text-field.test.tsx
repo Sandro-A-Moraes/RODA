@@ -43,12 +43,14 @@ describe('TextField', () => {
     );
 
     const root = screen.toJSON() as unknown as {
-      children: { type: string; children: string[] }[];
+      children: { type: string; children: unknown[] }[];
     };
-    const types = root.children.map((child) => child.type);
+    const inputIndex = root.children.findIndex((child) =>
+      JSON.stringify(child).includes('"type":"TextInput"'),
+    );
     const last = root.children[root.children.length - 1];
-    expect(types.indexOf('TextInput')).toBeGreaterThanOrEqual(0);
-    expect(types.indexOf('TextInput')).toBeLessThan(root.children.length - 1);
+    expect(inputIndex).toBeGreaterThanOrEqual(0);
+    expect(inputIndex).toBeLessThan(root.children.length - 1);
     expect(last.children).toEqual(['E-mail inválido']);
   });
 
@@ -94,5 +96,63 @@ describe('TextField', () => {
     );
 
     expect(screen.getByPlaceholderText('voce@exemplo.com')).toBeTruthy();
+  });
+
+  describe('secureTextEntry', () => {
+    it('hides the text and offers "Mostrar senha"', async () => {
+      await render(
+        <TextField
+          label="Senha"
+          value="segredo1"
+          onChangeText={jest.fn()}
+          secureTextEntry
+        />,
+      );
+
+      expect(screen.getByLabelText('Senha').props.secureTextEntry).toBe(true);
+      expect(screen.getByLabelText('Mostrar senha')).toBeTruthy();
+    });
+
+    it('reveals the text on press and offers "Ocultar senha"', async () => {
+      await render(
+        <TextField
+          label="Senha"
+          value="segredo1"
+          onChangeText={jest.fn()}
+          secureTextEntry
+        />,
+      );
+
+      const user = userEvent.setup();
+      await user.press(screen.getByLabelText('Mostrar senha'));
+
+      expect(screen.getByLabelText('Senha').props.secureTextEntry).toBe(false);
+      expect(screen.getByLabelText('Ocultar senha')).toBeTruthy();
+    });
+
+    it('hides the text again on a second press', async () => {
+      await render(
+        <TextField
+          label="Senha"
+          value="segredo1"
+          onChangeText={jest.fn()}
+          secureTextEntry
+        />,
+      );
+
+      const user = userEvent.setup();
+      await user.press(screen.getByLabelText('Mostrar senha'));
+      await user.press(screen.getByLabelText('Ocultar senha'));
+
+      expect(screen.getByLabelText('Senha').props.secureTextEntry).toBe(true);
+    });
+
+    it('renders no toggle for a plain field', async () => {
+      await render(
+        <TextField label="E-mail" value="" onChangeText={jest.fn()} />,
+      );
+
+      expect(screen.queryByLabelText('Mostrar senha')).toBeNull();
+    });
   });
 });
