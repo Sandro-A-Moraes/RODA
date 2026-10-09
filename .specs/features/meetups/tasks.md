@@ -141,13 +141,13 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Upcoming only, soonest first; a meetup whose time passed disappears
-- [ ] Creator is going; the same RSVP twice keeps one record; changing replaces
-- [ ] Non-member create and RSVP return `unauthorized`
+- [x] Upcoming only, soonest first; a meetup whose time passed disappears
+- [x] Creator is going; the same RSVP twice keeps one record; changing replaces
+- [x] Non-member create and RSVP return `unauthorized`
 
 **Tests**: unit
 **Gate**: quick
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): add the in-memory meetup repository
 
 ---
