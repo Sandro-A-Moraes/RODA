@@ -52,9 +52,9 @@ export class InMemoryMeetupRepository implements MeetupRepository {
       place: stored.place,
       startsAt: stored.startsAt,
       createdBy: stored.createdBy,
-      goingNames: answers
+      going: answers
         .filter((r) => r.rsvp === 'going')
-        .map((r) => this.displayName(r.userId)),
+        .map((r) => ({ userId: r.userId, name: this.displayName(r.userId) })),
       myRsvp: answers.find((r) => r.userId === me)?.rsvp ?? null,
     };
   }

@@ -58,7 +58,17 @@ export default function CircleRoute() {
         <StoriesView circleId={id} onWrite={newStory} />
       ) : null}
       {tab === 'meetups' ? (
-        <MeetupsView circleId={id} onPropose={newMeetup} />
+        <MeetupsView
+          circleId={id}
+          currentUserId={user?.id ?? ''}
+          onPropose={newMeetup}
+          onOpen={(meetupId) =>
+            router.push({
+              pathname: '/circles/[id]/meetups/[meetupId]',
+              params: { id, meetupId },
+            })
+          }
+        />
       ) : null}
     </CircleShell>
   );

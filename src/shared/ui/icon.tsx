@@ -10,7 +10,10 @@ export type IconName =
   | 'user'
   | 'alert'
   | 'eye'
-  | 'eye-off';
+  | 'eye-off'
+  | 'pin'
+  | 'calendar'
+  | 'people';
 
 export interface IconProps {
   name: IconName;
@@ -62,6 +65,30 @@ export function Icon({ name, color, size = 24 }: IconProps) {
         </>
       ) : null}
       {name === 'eye-off' ? <Path d="M4 4l16 16" {...stroke} /> : null}
+      {name === 'pin' ? (
+        <>
+          <Path
+            d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0113 0c0 5.4-6.5 11-6.5 11z"
+            {...stroke}
+          />
+          <Circle cx="12" cy="10" r="2.2" {...stroke} />
+        </>
+      ) : null}
+      {name === 'calendar' ? (
+        <>
+          <Path d="M4 6.5h16v13H4zM4 10.5h16M8.5 4v4M15.5 4v4" {...stroke} />
+        </>
+      ) : null}
+      {name === 'people' ? (
+        <>
+          <Circle cx="9" cy="8.5" r="3.2" {...stroke} />
+          <Path d="M3 20c0-3.4 2.7-5.5 6-5.5s6 2.1 6 5.5" {...stroke} />
+          <Path
+            d="M16 5.6a3.2 3.2 0 010 5.8M18 14.8c1.8.6 3 2.2 3 5.2"
+            {...stroke}
+          />
+        </>
+      ) : null}
       {name === 'user' ? (
         <>
           <Circle cx="12" cy="8" r="4" {...stroke} />

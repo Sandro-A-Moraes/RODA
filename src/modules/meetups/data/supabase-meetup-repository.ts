@@ -52,10 +52,13 @@ export class SupabaseMeetupRepository implements MeetupRepository {
       place: row.place,
       startsAt: new Date(row.starts_at),
       createdBy: row.created_by,
-      goingNames: answers
+      going: answers
         .filter((r) => r.status === 'going')
-        .map((r) => r.profiles?.display_name ?? '')
-        .sort((a, b) => a.localeCompare(b)),
+        .map((r) => ({
+          userId: r.user_id,
+          name: r.profiles?.display_name ?? '',
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name)),
       myRsvp: answers.find((r) => r.user_id === uid)?.status ?? null,
     };
   }

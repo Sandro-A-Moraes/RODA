@@ -2,9 +2,17 @@ import { useCallback, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { useDependency } from '@/core/di';
-import { useTheme } from '@/core/theme';
+import { radius, useTheme } from '@/core/theme';
 import { useAsyncAction } from '@/shared/hooks/use-async-action';
-import { Button, ErrorBanner, Header, Screen, TextField } from '@/shared/ui';
+import {
+  Button,
+  ErrorBanner,
+  Header,
+  Ring,
+  Screen,
+  Text,
+  TextField,
+} from '@/shared/ui';
 
 import { meetupRepositoryToken } from '../domain/meetup-repository';
 import { createMeetup } from '../domain/meetup-use-cases';
@@ -23,7 +31,7 @@ export function MeetupFormScreen({
   onSaved,
 }: MeetupFormScreenProps) {
   const repo = useDependency(meetupRepositoryToken);
-  const { spacing } = useTheme();
+  const { colors, spacing } = useTheme();
   const [title, setTitle] = useState('');
   const [place, setPlace] = useState('');
   const [date, setDate] = useState('');
@@ -92,6 +100,21 @@ export function MeetupFormScreen({
               maxLength={5}
             />
           </View>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: spacing.md,
+            padding: spacing.md,
+            borderRadius: radius.lg,
+            backgroundColor: colors.card,
+          }}
+        >
+          <Ring size={64} filled={1} accentFirst sage />
+          <Text style={{ flex: 1 }}>
+            Você entra automaticamente como “Eu vou”.
+          </Text>
         </View>
         <ErrorBanner error={otherError} />
         <Button

@@ -45,7 +45,7 @@ describe('InMemoryMeetupRepository', () => {
       place: 'Praça',
       startsAt: at(10),
       createdBy: 'u1',
-      goingNames: ['Ana Souza'],
+      going: [{ userId: 'u1', name: 'Ana Souza' }],
       myRsvp: 'going',
     });
   });
@@ -78,13 +78,16 @@ describe('InMemoryMeetupRepository', () => {
 
     const mine = await repo.listUpcoming('c1', NOW);
     if (!mine.ok) throw new Error('list failed');
-    expect(mine.value[0].goingNames).toEqual(['Ana Souza', 'Beto Lima']);
+    expect(mine.value[0].going.map((a) => a.name)).toEqual([
+      'Ana Souza',
+      'Beto Lima',
+    ]);
     expect(mine.value[0].myRsvp).toBe('going');
 
     as('u1');
     const theirs = await repo.listUpcoming('c1', NOW);
     if (!theirs.ok) throw new Error('list failed');
-    expect(theirs.value[0].goingNames).toEqual(['Ana Souza', 'Beto Lima']);
+    expect(theirs.value[0].going.map((a) => a.userId)).toEqual(['u1', 'u2']);
   });
 
   it('replaces an earlier RSVP by the same member (MEET-04 AC2)', async () => {
@@ -96,7 +99,7 @@ describe('InMemoryMeetupRepository', () => {
 
     const listed = await repo.listUpcoming('c1', NOW);
     if (!listed.ok) throw new Error('list failed');
-    expect(listed.value[0].goingNames).toEqual([]);
+    expect(listed.value[0].going).toEqual([]);
     expect(listed.value[0].myRsvp).toBe('not_going');
   });
 
@@ -111,7 +114,10 @@ describe('InMemoryMeetupRepository', () => {
 
     const listed = await repo.listUpcoming('c1', NOW);
     if (!listed.ok) throw new Error('list failed');
-    expect(listed.value[0].goingNames).toEqual(['Ana Souza', 'Beto Lima']);
+    expect(listed.value[0].going.map((a) => a.name)).toEqual([
+      'Ana Souza',
+      'Beto Lima',
+    ]);
   });
 
   it('has no answer for a member who has not answered', async () => {

@@ -5,7 +5,8 @@ import { createAppError, err } from '@/core/errors';
 
 import { InMemoryMeetupRepository } from '../data/in-memory-meetup-repository';
 import { meetupRepositoryToken } from '../domain/meetup-repository';
-import { formatMeetupMoment, MeetupsView } from '../presentation/meetups-view';
+import { weekdayTime } from '../domain/meetup-format';
+import { MeetupsView } from '../presentation/meetups-view';
 
 // useLoad refreshes on navigation focus; outside a navigator, mount is enough.
 jest.mock('expo-router', () => ({
@@ -38,21 +39,20 @@ const tomorrow = (extraDays = 0) =>
 async function renderView(
   repo: InMemoryMeetupRepository,
   onPropose: () => void = () => {},
+  onOpen: (meetupId: string) => void = () => {},
+  currentUserId = 'u1',
 ) {
   await render(
     <DependencyProvider provisions={[provide(meetupRepositoryToken, repo)]}>
-      <MeetupsView circleId="c1" onPropose={onPropose} />
+      <MeetupsView
+        circleId="c1"
+        currentUserId={currentUserId}
+        onPropose={onPropose}
+        onOpen={onOpen}
+      />
     </DependencyProvider>,
   );
 }
-
-describe('formatMeetupMoment', () => {
-  it('formats the local date and time as DD/MM/AAAA às HH:MM', () => {
-    expect(formatMeetupMoment(new Date(2026, 9, 5, 9, 5))).toBe(
-      '05/10/2026 às 09:05',
-    );
-  });
-});
 
 describe('MeetupsView', () => {
   it('shows a loading indicator while the list loads (MEET-03 AC4)', async () => {
@@ -93,7 +93,37 @@ describe('MeetupsView', () => {
     const titles = await screen.findAllByText(/^(Antes|Depois)$/);
     expect(titles.map((t) => t.props.children)).toEqual(['Antes', 'Depois']);
     expect(screen.getByText('Praça')).toBeTruthy();
-    expect(screen.getByText(formatMeetupMoment(tomorrow()))).toBeTruthy();
+    expect(screen.getByText(weekdayTime(tomorrow()))).toBeTruthy();
+  });
+
+  it('shows the calendar badge with the day and month', async () => {
+    const { repo } = setup();
+    await repo.create('c1', {
+      title: 'Piquenique',
+      place: 'Praça',
+      startsAt: new Date(2030, 9, 12, 17, 0),
+    });
+
+    await renderView(repo);
+
+    expect(await screen.findByText('12')).toBeTruthy();
+    expect(screen.getByText('OUT')).toBeTruthy();
+  });
+
+  it('opens the meetup when its card is pressed (MEET-04 AC3)', async () => {
+    const { repo } = setup();
+    const created = await repo.create('c1', {
+      title: 'Piquenique',
+      place: 'Praça',
+      startsAt: tomorrow(),
+    });
+    if (!created.ok) throw new Error('create failed');
+    const onOpen = jest.fn();
+
+    await renderView(repo, undefined, onOpen);
+    await fireEvent.press(await screen.findByLabelText('Abrir Piquenique'));
+
+    expect(onOpen).toHaveBeenCalledWith(created.value.id);
   });
 
   it('shows who is going and how many (MEET-04 AC3)', async () => {
@@ -107,10 +137,9 @@ describe('MeetupsView', () => {
     as('u2');
     await repo.setRsvp(created.value.id, 'going');
 
-    await renderView(repo);
+    await renderView(repo, undefined, undefined, 'u9');
 
-    expect(await screen.findByText('2 vão')).toBeTruthy();
-    expect(screen.getByText('Ana Souza, Beto Lima')).toBeTruthy();
+    expect(await screen.findByText('2 vão: Ana e Beto')).toBeTruthy();
   });
 
   it('says nobody confirmed when the only answer is not going', async () => {
@@ -137,10 +166,10 @@ describe('MeetupsView', () => {
     });
     as('u2');
 
-    await renderView(repo);
+    await renderView(repo, undefined, undefined, 'u2');
     await fireEvent.press(await screen.findByLabelText('Eu vou'));
 
-    expect(await screen.findByText('2 vão')).toBeTruthy();
+    expect(await screen.findByText('2 vão: Ana e você')).toBeTruthy();
     expect(screen.getByLabelText('Eu vou').props.accessibilityState).toEqual(
       expect.objectContaining({ selected: true }),
     );
@@ -196,7 +225,7 @@ describe('MeetupsView', () => {
       .spyOn(repo, 'setRsvp')
       .mockResolvedValueOnce(err(createAppError('network')));
 
-    await renderView(repo);
+    await renderView(repo, undefined, undefined, 'u2');
     await fireEvent.press(await screen.findByLabelText('Eu vou'));
 
     expect(
@@ -205,6 +234,6 @@ describe('MeetupsView', () => {
       ),
     ).toBeTruthy();
     await fireEvent.press(screen.getByLabelText('Tentar novamente'));
-    expect(await screen.findByText('2 vão')).toBeTruthy();
+    expect(await screen.findByText('2 vão: Ana e você')).toBeTruthy();
   });
 });

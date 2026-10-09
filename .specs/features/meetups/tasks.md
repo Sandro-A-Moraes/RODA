@@ -9,7 +9,7 @@ Implement these tasks with the `tlc-spec-driven` skill: **activate it by name an
 ---
 
 **Design**: inline in this file (see "Design note"); no separate `design.md`.
-**Status**: In progress
+**Status**: Done (T1-T8); T9 aligns the screens to Figma frames 09 (`8:358`), 15 (`22:545`), 25 (`37:794`).
 
 ---
 
@@ -88,6 +88,12 @@ T4 → T5 → T6 → T7
 
 ```
 T7 → T8
+```
+
+### Phase 4: Figma alignment (frames 09, 15, 25)
+
+```
+T8 → T9
 ```
 
 ---
@@ -244,3 +250,22 @@ T7 → T8
 **Gate**: build
 **Status**: Done
 **Commit**: feat(meetups): add the meetups migration
+
+---
+
+### T9: Figma alignment and meetup detail
+
+**What**: `Meetup.going` becomes `Attendee[]` (id and name). Card per Figma 09: calendar badge, pin and calendar rows, "N vão: Ana, Beto e você". Detail screen per Figma 25 (`MeetupDetailScreen`, route `circles/[id]/meetups/[meetupId]`) with the going list, "Você" pill and the RSVP buttons (MEET-04 AC3). Form per Figma 15 gets the "Você entra automaticamente como “Eu vou”." note; the date/time message stays "Data ou hora inválida" as the spec says.
+**Where**: `src/modules/meetups/domain/meetup-format.ts`, `src/modules/meetups/presentation/*`, `app/(app)/circles/[id]/meetups/[meetupId].tsx`, `src/shared/ui/icon.tsx`
+**Depends on**: T8
+**Requirement**: MEET-03, MEET-04
+
+**Done when**:
+
+- [x] Card, detail and form match the frames
+- [x] Detail has loading, not found, error with retry and RSVP tests
+
+**Tests**: unit (RNTL)
+**Gate**: build
+**Status**: Done
+**Commit**: feat(meetups): align the screens to Figma and add the meetup detail

@@ -6,7 +6,7 @@ These screens are the **visual reference for the app UI**. When implementing a s
 
 ## Status
 
-All 24 screens are built and were checked visually.
+All 25 screens are built and were checked visually.
 
 ## Screens
 
@@ -38,6 +38,8 @@ All 24 screens are built and were checked visually.
 | 22 | Onboarding 1 | `29:765` | — | "Um círculo pequeno, de gente que você conhece." Ring of 12 dots; "Pular" and "Continuar" |
 | 23 | Onboarding 2 | `29:807` | — | "Combinem um pacto e cumpram juntos." Collective progress ring, no ranking; "Pular" and "Continuar" |
 | 24 | Onboarding 3 | `29:840` | — | "Um relato por dia. Depois, o encontro." Story card and end marker; "Começar" and "Já tenho conta" |
+
+| 25 | Encontro (detalhe) | `37:794` | MEET-04 AC3 | Opens from a meetup card: date, title and place, names of who is going with the count, "Eu vou" and "Não vou" |
 
 Launch flow: **Splash** (every launch, while the session is restored) → if the user is signed in, go to Círculos. If not, and it is the first launch, show **Onboarding 1 to 3** (store a "seen" flag locally, for example in AsyncStorage) and then go to Criar conta; "Já tenho conta" and "Pular" lead to Entrar or Criar conta. If it is not the first launch and the user is signed out, go straight to Entrar. The page indicator is three dots; the active one is a longer terracotta pill.
 

@@ -1,41 +1,42 @@
 import { useCallback } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, Pressable, View } from 'react-native';
 
 import { useDependency } from '@/core/di';
 import { radius, useTheme } from '@/core/theme';
 import { useAsyncAction } from '@/shared/hooks/use-async-action';
 import { useLoad } from '@/shared/hooks/use-load';
-import { Button, Chip, EmptyState, ErrorBanner, Text } from '@/shared/ui';
+import { Button, Chip, EmptyState, ErrorBanner, Icon, Text } from '@/shared/ui';
 
+import { dayBadge, goingSummary, weekdayTime } from '../domain/meetup-format';
 import { meetupRepositoryToken } from '../domain/meetup-repository';
 import type { Meetup, Rsvp } from '../domain/meetup-repository';
 
 export interface MeetupsViewProps {
   circleId: string;
+  currentUserId: string;
   /** Opens the propose form. */
   onPropose: () => void;
+  /** Opens the detail of a meetup (Figma 25). */
+  onOpen: (meetupId: string) => void;
 }
 
 const PROPOSE_LABEL = 'Propor encontro';
 
-const pad = (n: number) => String(n).padStart(2, '0');
-
-/** DD/MM/AAAA às HH:MM in the device's local time. */
-export function formatMeetupMoment(date: Date): string {
-  return (
-    `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}` +
-    ` às ${pad(date.getHours())}:${pad(date.getMinutes())}`
-  );
-}
-
 interface MeetupCardProps {
   meetup: Meetup;
+  currentUserId: string;
+  onOpen: (meetupId: string) => void;
   onAnswer: (meetupId: string, rsvp: Rsvp) => void;
 }
 
-function MeetupCard({ meetup, onAnswer }: MeetupCardProps) {
+function MeetupCard({
+  meetup,
+  currentUserId,
+  onOpen,
+  onAnswer,
+}: MeetupCardProps) {
   const { colors, spacing } = useTheme();
-  const going = meetup.goingNames.length;
+  const badge = dayBadge(meetup.startsAt);
   return (
     <View
       style={{
@@ -45,23 +46,49 @@ function MeetupCard({ meetup, onAnswer }: MeetupCardProps) {
         backgroundColor: colors.card,
       }}
     >
-      <View style={{ gap: spacing.xs }}>
-        <Text type="h3">{meetup.title}</Text>
-        <Text type="bodyStrong">{formatMeetupMoment(meetup.startsAt)}</Text>
-        <Text type="caption" variant="secondary">
-          {meetup.place}
-        </Text>
-      </View>
-      <View style={{ gap: spacing.xs }}>
-        <Text type="captionStrong" style={{ color: colors.accent }}>
-          {going > 0 ? `${going} vão` : 'Ninguém confirmou ainda'}
-        </Text>
-        {going > 0 ? (
-          <Text type="caption" variant="secondary">
-            {meetup.goingNames.join(', ')}
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`Abrir ${meetup.title}`}
+        onPress={() => onOpen(meetup.id)}
+        style={{ gap: spacing.md }}
+      >
+        <View style={{ flexDirection: 'row', gap: spacing.md }}>
+          <View
+            style={{
+              width: 60,
+              height: 60,
+              borderRadius: radius.md,
+              backgroundColor: colors.brand,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text type="h2" style={{ color: colors.onBrand }}>
+              {badge.day}
+            </Text>
+            <Text type="label" style={{ color: colors.onBrand }}>
+              {badge.month}
+            </Text>
+          </View>
+          <View style={{ flex: 1, gap: spacing.xs }}>
+            <Text type="h3">{meetup.title}</Text>
+            <Detail icon="pin" text={meetup.place} />
+            <Detail icon="calendar" text={weekdayTime(meetup.startsAt)} />
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: spacing.sm,
+          }}
+        >
+          <Icon name="people" size={18} color={colors.accent} />
+          <Text type="captionStrong" style={{ flex: 1 }}>
+            {goingSummary(meetup.going, currentUserId)}
           </Text>
-        ) : null}
-      </View>
+        </View>
+      </Pressable>
       <View style={{ flexDirection: 'row', gap: spacing.sm }}>
         <Chip
           label="Eu vou"
@@ -78,9 +105,28 @@ function MeetupCard({ meetup, onAnswer }: MeetupCardProps) {
   );
 }
 
+function Detail({ icon, text }: { icon: 'pin' | 'calendar'; text: string }) {
+  const { colors, spacing } = useTheme();
+  return (
+    <View
+      style={{ flexDirection: 'row', alignItems: 'center', gap: spacing.sm }}
+    >
+      <Icon name={icon} size={16} color={colors.textSecondary} />
+      <Text type="caption" variant="secondary" style={{ flex: 1 }}>
+        {text}
+      </Text>
+    </View>
+  );
+}
+
 // Upcoming meetups of the circle, each with an RSVP (MEET-03, MEET-04). The
 // going count is the only number shown, as the spec allows; no popularity.
-export function MeetupsView({ circleId, onPropose }: MeetupsViewProps) {
+export function MeetupsView({
+  circleId,
+  currentUserId,
+  onPropose,
+  onOpen,
+}: MeetupsViewProps) {
   const repo = useDependency(meetupRepositoryToken);
   const { colors, spacing } = useTheme();
   const { state, reload } = useLoad(
@@ -128,6 +174,8 @@ export function MeetupsView({ circleId, onPropose }: MeetupsViewProps) {
         <MeetupCard
           key={meetup.id}
           meetup={meetup}
+          currentUserId={currentUserId}
+          onOpen={onOpen}
           onAnswer={(id, rsvp) => void run(id, rsvp)}
         />
       ))}

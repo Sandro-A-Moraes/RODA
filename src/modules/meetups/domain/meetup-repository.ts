@@ -4,6 +4,11 @@ import type { Result } from '@/core/errors';
 
 export type Rsvp = 'going' | 'not_going';
 
+export interface Attendee {
+  userId: string;
+  name: string;
+}
+
 export interface Meetup {
   id: string;
   circleId: string;
@@ -12,8 +17,8 @@ export interface Meetup {
   /** Absolute instant; shown in the device's local time. */
   startsAt: Date;
   createdBy: string;
-  /** Names of the members going; the count going is its length. */
-  goingNames: string[];
+  /** Members going, in the order they answered; the count is its length. */
+  going: Attendee[];
   /** The current user's answer, null until they answer. */
   myRsvp: Rsvp | null;
 }
