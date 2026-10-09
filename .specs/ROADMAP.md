@@ -2,7 +2,7 @@
 
 Este roadmap substitui `docs/PLANO.md` como plano de trabalho. O `PLANO.md` fica como referência histórica (gerado em outra LLM). Fonte de verdade: `.specs/features/*/spec.md`. Decisões de projeto: `.specs/STATE.md`. Contexto do produto: `docs/PROJECT_CONTEXT.md`.
 
-Entrega: **08/10/2026**. Hoje: **07/10/2026**. O prazo é de cerca de um dia útil, então a ordem abaixo importa mais que a completude.
+Entrega: **08/10/2026**, adiada para **09/10/2026**. Todas as features, incluindo `meetups`, estão implementadas; restam a checagem manual e a demo.
 
 ## Ciclo por feature (TLC Spec-Driven)
 

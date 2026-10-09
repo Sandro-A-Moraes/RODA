@@ -87,13 +87,13 @@ The app's purpose is to send people back to real life. Members need to propose a
 
 | Requirement ID | Story | Phase | Status |
 | -------------- | ----- | ----- | ------ |
-| MEET-01 | P2: Propose (AC 1) | Specify | Pending |
-| MEET-02 | P2: Propose (AC 2-5) | Specify | Pending |
-| MEET-03 | P2: List and RSVP (AC 1, 4-5) | Specify | Pending |
-| MEET-04 | P2: List and RSVP (AC 2-3) | Specify | Pending |
-| MEET-05 | P2: List and RSVP (AC 6-7) | Specify | Pending |
+| MEET-01 | P2: Propose (AC 1) | Execute | Implemented |
+| MEET-02 | P2: Propose (AC 2-5) | Execute | Implemented |
+| MEET-03 | P2: List and RSVP (AC 1, 4-5) | Execute | Implemented |
+| MEET-04 | P2: List and RSVP (AC 2-3) | Execute | Implemented |
+| MEET-05 | P2: List and RSVP (AC 6-7) | Execute | Implemented |
 
-**Coverage:** 5 total, 0 mapped to tasks, 5 unmapped ⚠️
+**Coverage:** 5 total, 5 mapped to tasks (`tasks.md` T1-T9)
 
 ---
 
