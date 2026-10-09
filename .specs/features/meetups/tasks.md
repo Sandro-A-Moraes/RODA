@@ -218,12 +218,12 @@ T7 → T8
 
 **Done when**:
 
-- [ ] The placeholder "Em breve" is gone
-- [ ] Build gate green
+- [x] The placeholder "Em breve" is gone
+- [x] Build gate green
 
 **Tests**: none
 **Gate**: build
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): wire meetups into the circle screen
 
 ---

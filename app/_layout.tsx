@@ -15,6 +15,10 @@ import {
   SupabaseCircleRepository,
 } from '@/modules/circles';
 import {
+  meetupRepositoryToken,
+  SupabaseMeetupRepository,
+} from '@/modules/meetups';
+import {
   AsyncStorageOnboardingStore,
   LaunchNavigator,
   OnboardingProvider,
@@ -32,6 +36,7 @@ const provisions = [
   provide(circleRepositoryToken, new SupabaseCircleRepository(supabase)),
   provide(pactRepositoryToken, new SupabasePactRepository(supabase)),
   provide(storyRepositoryToken, new SupabaseStoryRepository(supabase)),
+  provide(meetupRepositoryToken, new SupabaseMeetupRepository(supabase)),
   provide(onboardingStoreToken, new AsyncStorageOnboardingStore(AsyncStorage)),
 ];
 

@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { useSession } from '@/modules/auth';
 import { CircleShell, MembersView, parseCircleTab } from '@/modules/circles';
 import type { CircleTab } from '@/modules/circles';
+import { MeetupsView } from '@/modules/meetups';
 import { PactsView } from '@/modules/pacts';
 import { StoriesView } from '@/modules/stories';
-import { EmptyState } from '@/shared/ui';
 
 export default function CircleRoute() {
   const { id, tab: initialTab } = useLocalSearchParams<{
@@ -21,9 +21,15 @@ export default function CircleRoute() {
     router.push({ pathname: '/circles/[id]/pacts/new', params: { id } });
   const newStory = () =>
     router.push({ pathname: '/circles/[id]/stories/new', params: { id } });
-  // Only pacts has a header action (Figma 07, 18); stories writes from the feed (17, 19).
+  const newMeetup = () =>
+    router.push({ pathname: '/circles/[id]/meetups/new', params: { id } });
+  // Pacts and meetups have a header action (Figma 07, 18); stories writes from the feed (17, 19).
   const addAction =
-    tab === 'pacts' ? { label: 'Novo pacto', onPress: newPact } : undefined;
+    tab === 'pacts'
+      ? { label: 'Novo pacto', onPress: newPact }
+      : tab === 'meetups'
+        ? { label: 'Propor encontro', onPress: newMeetup }
+        : undefined;
 
   return (
     <CircleShell
@@ -52,10 +58,7 @@ export default function CircleRoute() {
         <StoriesView circleId={id} onWrite={newStory} />
       ) : null}
       {tab === 'meetups' ? (
-        <EmptyState
-          title="Em breve"
-          body="Esta área ainda está em construção."
-        />
+        <MeetupsView circleId={id} onPropose={newMeetup} />
       ) : null}
     </CircleShell>
   );
