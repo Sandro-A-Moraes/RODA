@@ -161,12 +161,12 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Mapper never leaks backend text
-- [ ] Repository uses the FK hint on the profiles embed
+- [x] Mapper never leaks backend text
+- [x] Repository uses the FK hint on the profiles embed
 
 **Tests**: unit (mapper)
 **Gate**: full
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): add the Supabase meetup repository
 
 ---
