@@ -180,12 +180,12 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Each AC has a test
-- [ ] No popularity metric beyond the going count the spec allows (AD-005)
+- [x] Each AC has a test
+- [x] No popularity metric beyond the going count the spec allows (AD-005)
 
 **Tests**: unit (RNTL)
 **Gate**: quick
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): list upcoming meetups with RSVP
 
 ---
