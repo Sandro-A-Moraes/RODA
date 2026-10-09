@@ -199,12 +199,12 @@ T7 → T8
 
 **Done when**:
 
-- [ ] Each validation message shown under its field
-- [ ] Submit is single-flight (shared `useAsyncAction`)
+- [x] Each validation message shown under its field
+- [x] Submit is single-flight (shared `useAsyncAction`)
 
 **Tests**: unit (RNTL)
 **Gate**: quick
-**Status**: Pending
+**Status**: Done
 **Commit**: feat(meetups): add the propose meetup form
 
 ---
